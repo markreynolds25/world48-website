@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  background-color: #0a0c10;
+  color: #f5f7fb;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Thin scrollbars on dark surfaces */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #10141b;
+}
+::-webkit-scrollbar-thumb {
+  background: #262c38;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #384150;
+}
+
+/* Utility: subtle noise texture for premium feel on hero */
+.bg-noise {
+  background-image:
+    radial-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 3px 3px;
+}
+
+/* Utility: brand gradient text */
+.text-gradient-brand {
+  background: linear-gradient(135deg, #00d9ff 0%, #00d98e 55%, #ffb74d 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}

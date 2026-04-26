@@ -1,40 +1,7 @@
-import { google } from "googleapis";
-import fs from "fs";
-import path from "path";
-
-const sheets = google.sheets("v4");
-
-/**
- * Look in /public/players for a local image matching this player's slug.
- * Supports .jpg/.jpeg/.png/.webp. Returns a web path (e.g. "/players/slug.jpg")
- * or undefined if no file is found. This lets Mark drop a JPG into
- * /public/players/<slug>.jpg without having to edit the Google Sheet.
- */
-function findLocalPhoto(slug: string): string | undefined {
-  try {
-    const dir = path.join(process.cwd(), "public", "players");
-    if (!fs.existsSync(dir)) return undefined;
-    const exts = ["jpg", "jpeg", "png", "webp"];
-    for (const ext of exts) {
-      const file = `${slug}.${ext}`;
-      if (fs.existsSync(path.join(dir, file))) {
-        return `/players/${file}`;
-      }
-    }
-    return undefined;
-  } catch {
-    return undefined;
-  }
-}
-
-/**
- * Shape of a player record after we read it from the Google Sheet.
- * Keep this in sync with the column order in your sheet header row.
- */
-export interface PlayerData {
-  id: string; // stable-ish ID derived from name (slug)
+import { google } from 'googleapis';
+import { JWT } from 'google-auth-library';
+interface PlayerData {
   name: string;
-  event_number?: number; // jersey # for the event (column P)
   position?: string;
   country?: string;
   school?: string;
@@ -49,133 +16,87 @@ export interface PlayerData {
   bio?: string;
   instagram_url?: string;
   highlight_url?: string;
-  photo_url?: string; // local path like "/players/name.jpg" or a full https URL
 }
-
-function slugify(input: string): string {
-  return input
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-}
-
-function parseNumber(raw: unknown): number | undefined {
-  if (raw === undefined || raw === null || raw === "") return undefined;
-  const n = typeof raw === "number" ? raw : parseFloat(String(raw));
-  return Number.isFinite(n) ? n : undefined;
-}
-
-function parseInteger(raw: unknown): number | undefined {
-  if (raw === undefined || raw === null || raw === "") return undefined;
-  const n = typeof raw === "number" ? raw : parseInt(String(raw), 10);
-  return Number.isFinite(n) ? n : undefined;
-}
-
-function getAuthClient() {
+// Get JWT auth client
+function getAuthClient(): JWT | null {
   try {
-    const raw = process.env.GOOGLE_SHEETS_CREDENTIALS;
-    if (!raw) {
-      console.warn(
-        "[googleSheets] GOOGLE_SHEETS_CREDENTIALS not set. Returning null auth."
-      );
-      return null;
-    }
-    const credentials = JSON.parse(raw);
-    return new google.auth.GoogleAuth({
-      credentials,
-      scopes: ["https://www.googleapis.com/auth/spreadsheets.readonly"],
+    const credentials = JSON.parse(
+      process.env.GOOGLE_SHEETS_CREDENTIALS || '{}'
+    );
+
+    const auth = new JWT({
+      email: credentials.client_email,
+      key: credentials.private_key,
+      scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
     });
+    return auth;
   } catch (error) {
-    console.error("[googleSheets] Failed to parse credentials:", error);
+    console.error('Failed to parse Google credentials:', error);
     return null;
   }
 }
-
+// Fetch all players from Google Sheet
 export async function getPlayersFromSheet(): Promise<PlayerData[]> {
   try {
     const auth = getAuthClient();
-    if (!auth) return [];
-
-    const sheetId = process.env.GOOGLE_SHEETS_ID;
-    const range = process.env.GOOGLE_SHEETS_RANGE || "Players!A:Q";
-
-    if (!sheetId) {
-      console.warn("[googleSheets] GOOGLE_SHEETS_ID not set.");
+    if (!auth) {
+      console.warn('Google Sheets auth not available, returning empty array');
       return [];
     }
-
+    const sheetId = process.env.GOOGLE_SHEETS_ID;
+    const range = process.env.GOOGLE_SHEETS_RANGE || 'Sheet1!A:O';
+    const sheets = google.sheets({ version: 'v4', auth });
     const response = await sheets.spreadsheets.values.get({
-      auth,
       spreadsheetId: sheetId,
       range,
     });
-
     const rows = response.data.values || [];
     if (rows.length === 0) return [];
-
-    // Skip the header row. We rely on column order A..O as documented in
-    // lib/googleSheets.ts header comment.
     const players: PlayerData[] = [];
-    const seenIds = new Set<string>();
-
+    // Process each row (skip header at index 0)
     for (let i = 1; i < rows.length; i++) {
       const row = rows[i];
+
+      // Skip empty rows
       if (!row || !row[0]) continue;
-
-      const name = String(row[0]).trim();
-      let id = slugify(name);
-      // Avoid duplicate slugs (two players with same name)
-      if (seenIds.has(id)) id = `${id}-${i}`;
-      seenIds.add(id);
-
-      players.push({
-        id,
-        name,
-        position: row[1] ? String(row[1]).trim() : undefined,
-        country: row[2] ? String(row[2]).trim() : undefined,
-        school: row[3] ? String(row[3]).trim() : undefined,
-        height_cm: parseInteger(row[4]),
-        weight_kg: parseInteger(row[5]),
-        ppg: parseNumber(row[6]),
-        rpg: parseNumber(row[7]),
-        apg: parseNumber(row[8]),
-        fg_percentage: parseNumber(row[9]),
-        three_p_percentage: parseNumber(row[10]),
-        ft_percentage: parseNumber(row[11]),
-        bio: row[12] ? String(row[12]).trim() : undefined,
-        instagram_url: row[13] ? String(row[13]).trim() : undefined,
-        highlight_url: row[14] ? String(row[14]).trim() : undefined,
-        event_number: parseInteger(row[15]),
-        photo_url:
-          (row[16] ? String(row[16]).trim() : "") || findLocalPhoto(id),
-      });
+      const player: PlayerData = {
+        name: row[0] || '',
+        position: row[1] || undefined,
+        country: row[2] || undefined,
+        school: row[3] || undefined,
+        height_cm: row[4] ? parseInt(row[4]) : undefined,
+        weight_kg: row[5] ? parseInt(row[5]) : undefined,
+        ppg: row[6] ? parseFloat(row[6]) : undefined,
+        rpg: row[7] ? parseFloat(row[7]) : undefined,
+        apg: row[8] ? parseFloat(row[8]) : undefined,
+        fg_percentage: row[9] ? parseFloat(row[9]) : undefined,
+        three_p_percentage: row[10] ? parseFloat(row[10]) : undefined,
+        ft_percentage: row[11] ? parseFloat(row[11]) : undefined,
+        bio: row[12] || undefined,
+        instagram_url: row[13] || undefined,
+        highlight_url: row[14] || undefined,
+      };
+      players.push(player);
     }
-
-    console.log(`[googleSheets] Fetched ${players.length} players`);
+    console.log(`Fetched ${players.length} players from Google Sheets`);
     return players;
   } catch (error) {
-    console.error("[googleSheets] Error fetching:", error);
+    console.error('Error fetching from Google Sheets:', error);
     return [];
   }
 }
-
-// Simple in-memory cache so we don't hammer the Sheets API on every request.
+// Cache players data (for performance)
 let cachedPlayers: PlayerData[] | null = null;
 let cacheTimestamp = 0;
-const CACHE_DURATION_MS = 5 * 60 * 1000;
+const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 
 export async function getPlayersWithCache(): Promise<PlayerData[]> {
   const now = Date.now();
-  if (cachedPlayers && now - cacheTimestamp < CACHE_DURATION_MS) {
+
+  if (cachedPlayers && now - cacheTimestamp < CACHE_DURATION) {
     return cachedPlayers;
   }
   cachedPlayers = await getPlayersFromSheet();
   cacheTimestamp = now;
   return cachedPlayers;
-}
-
-export async function getPlayerById(id: string): Promise<PlayerData | null> {
-  const players = await getPlayersWithCache();
-  return players.find((p) => p.id === id) ?? null;
 }

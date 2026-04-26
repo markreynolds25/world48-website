@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { google } from "googleapis";
+import { JWT } from "google-auth-library";
 
 // Diagnostic endpoint — visit /api/debug-sheet in the browser to see
 // exactly why the roster isn't loading. Safe to delete once everything
@@ -18,7 +19,7 @@ export async function GET() {
   let tabNames: string[] = [];
   let rowsPreview: unknown[] = [];
   const rangeConfigured =
-    process.env.GOOGLE_SHEETS_RANGE || "(not set; lib default: Sheet1!A:O)";
+    process.env.GOOGLE_SHEETS_RANGE || "(not set; lib default: Players!A:Q)";
   const sheetId = process.env.GOOGLE_SHEETS_ID;
 
   // 1. Env vars present
@@ -66,15 +67,18 @@ export async function GET() {
   }
 
   // 3. Sheet metadata (confirms sharing + lists tabs)
-  let auth: InstanceType<typeof google.auth.GoogleAuth> | null = null;
+  let auth: JWT | null = null;
   if (creds && sheetId) {
     try {
-      auth = new google.auth.GoogleAuth({
-        credentials: creds,
+      auth = new JWT({
+        email: creds.client_email,
+        key: creds.private_key,
         scopes: ["https://www.googleapis.com/auth/spreadsheets.readonly"],
       });
-      const api = google.sheets("v4");
-      const meta = await api.spreadsheets.get({ auth, spreadsheetId: sheetId });
+      // Attach auth to the client so every call inherits it — avoids type errors
+      // when passing auth inline with the newer googleapis type signatures.
+      const api = google.sheets({ version: "v4", auth });
+      const meta = await api.spreadsheets.get({ spreadsheetId: sheetId });
       tabNames = (meta.data.sheets ?? [])
         .map((s) => s.properties?.title)
         .filter((t): t is string => Boolean(t));
@@ -105,9 +109,8 @@ export async function GET() {
   // 4. Read current range
   if (auth && sheetId) {
     try {
-      const api = google.sheets("v4");
+      const api = google.sheets({ version: "v4", auth });
       const resp = await api.spreadsheets.values.get({
-        auth,
         spreadsheetId: sheetId,
         range: rangeConfigured,
       });

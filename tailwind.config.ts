@@ -14,6 +14,7 @@ const config: Config = {
           cyan: "#00D9FF",
           green: "#00D98E",
           gold: "#FFB74D",
+          red: "#E53E3E",
         },
         // Surface palette for dark-first premium feel
         surface: {
@@ -24,23 +25,8 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: [
-          "Inter",
-          "ui-sans-serif",
-          "system-ui",
-          "-apple-system",
-          "Segoe UI",
-          "Roboto",
-          "Helvetica Neue",
-          "Arial",
-          "sans-serif",
-        ],
-        display: [
-          "Inter",
-          "ui-sans-serif",
-          "system-ui",
-          "sans-serif",
-        ],
+        sans: ["var(--font-inter)", "ui-sans-serif", "system-ui", "sans-serif"],
+        display: ["var(--font-bebas)", "ui-sans-serif", "system-ui", "sans-serif"],
       },
       backgroundImage: {
         "brand-gradient":
@@ -51,6 +37,15 @@ const config: Config = {
       boxShadow: {
         glow: "0 0 40px -10px rgba(0, 217, 255, 0.35)",
         "card-hover": "0 20px 40px -20px rgba(0, 217, 255, 0.25)",
+      },
+      keyframes: {
+        marquee: {
+          "0%": { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
+      },
+      animation: {
+        marquee: "marquee 30s linear infinite",
       },
     },
   },

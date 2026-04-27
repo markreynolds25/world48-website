@@ -1,0 +1,78 @@
+// CSS-driven infinite marquee — no JS library needed.
+// Logos are rendered twice side-by-side so the loop is seamless.
+
+const PARTNERS = [
+  {
+    name: "SDCC",
+    url: "https://sdcc.ie/en/",
+    logo: "https://logo.clearbit.com/sdcc.ie",
+    abbr: "SDCC",
+  },
+  {
+    name: "Resync Physiotherapy",
+    url: "https://resyncphysiotherapy.ie/",
+    logo: "https://logo.clearbit.com/resyncphysiotherapy.ie",
+    abbr: "Resync",
+  },
+  {
+    name: "People Playbook",
+    url: "https://www.peopleplaybook.com/",
+    logo: "https://logo.clearbit.com/peopleplaybook.com",
+    abbr: "People Playbook",
+  },
+  {
+    name: "Weave Agency",
+    url: "https://weave.agency/",
+    logo: "https://logo.clearbit.com/weave.agency",
+    abbr: "Weave",
+  },
+  {
+    name: "Get Recruited Hoops",
+    url: "https://getrecruitedhoops.com/",
+    logo: "https://logo.clearbit.com/getrecruitedhoops.com",
+    abbr: "Get Recruited",
+  },
+];
+
+function PartnerLogo({ partner }: { partner: typeof PARTNERS[number] }) {
+  return (
+    <a
+      href={partner.url}
+      target="_blank"
+      rel="noreferrer"
+      title={partner.name}
+      className="group mx-6 flex shrink-0 items-center justify-center"
+    >
+      <div className="flex h-14 w-36 items-center justify-center rounded-lg border border-surface-3/60 bg-surface-1/80 px-4 transition duration-200 group-hover:border-white/20 group-hover:bg-surface-2">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={partner.logo}
+          alt={partner.name}
+          className="max-h-8 max-w-[7rem] object-contain opacity-70 grayscale transition duration-200 group-hover:opacity-100 group-hover:grayscale-0"
+          onError={(e) => {
+            // Fallback to text if logo doesn't load
+            const target = e.currentTarget;
+            target.style.display = "none";
+            const parent = target.parentElement;
+            if (parent) {
+              parent.innerHTML = `<span class="text-xs font-semibold uppercase tracking-wider text-white/60 group-hover:text-white">${partner.abbr}</span>`;
+            }
+          }}
+        />
+      </div>
+    </a>
+  );
+}
+
+export default function PartnersCarousel() {
+  return (
+    <div className="overflow-hidden">
+      {/* Double the list for seamless infinite loop */}
+      <div className="flex animate-marquee items-center will-change-transform">
+        {[...PARTNERS, ...PARTNERS].map((partner, i) => (
+          <PartnerLogo key={`${partner.name}-${i}`} partner={partner} />
+        ))}
+      </div>
+    </div>
+  );
+}

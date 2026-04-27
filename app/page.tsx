@@ -1,4 +1,6 @@
 import Link from "next/link";
+import Image from "next/image";
+import PartnersCarousel from "@/components/PartnersCarousel";
 
 export default function HomePage() {
   return (
@@ -9,10 +11,34 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-noise opacity-50" aria-hidden />
 
         <div className="relative mx-auto flex max-w-7xl flex-col items-start gap-10 px-6 pb-24 pt-20 md:pt-28">
-          <span className="inline-flex items-center gap-2 rounded-full border border-surface-3 bg-surface-1/60 px-3 py-1 text-xs font-medium uppercase tracking-[0.2em] text-white/70">
-            <span className="h-1.5 w-1.5 rounded-full bg-brand-cyan" />
-            Undiscovered · Invitation-only
-          </span>
+          {/* Top badge row — event tag + NCAA badge */}
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="inline-flex items-center gap-2 rounded-full border border-surface-3 bg-surface-1/60 px-3 py-1 text-xs font-medium uppercase tracking-[0.2em] text-white/70">
+              <span className="h-1.5 w-1.5 rounded-full bg-brand-cyan" />
+              Undiscovered · Invitation-only
+            </span>
+
+            {/* NCAA Certified Event badge */}
+            <a
+              href="https://www.ncaa.com/"
+              target="_blank"
+              rel="noreferrer"
+              title="NCAA Certified Event"
+              className="group inline-flex items-center gap-2 rounded-full border border-brand-gold/30 bg-surface-1/60 px-3 py-1 transition hover:border-brand-gold/60"
+            >
+              {/* NCAA logo via Clearbit */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="https://logo.clearbit.com/ncaa.com"
+                alt="NCAA"
+                className="h-4 w-4 object-contain opacity-80 group-hover:opacity-100"
+                onError={(e) => { e.currentTarget.style.display = "none"; }}
+              />
+              <span className="text-xs font-semibold uppercase tracking-[0.15em] text-brand-gold/80 group-hover:text-brand-gold">
+                NCAA Certified Event
+              </span>
+            </a>
+          </div>
 
           <h1 className="font-display text-5xl font-black leading-[1.02] tracking-tight md:text-7xl lg:text-[5.5rem]">
             The next wave of{" "}
@@ -66,24 +92,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Partner strip */}
-      <section className="border-y border-surface-3/60 bg-surface-1/40">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 py-8 md:flex-row">
-          <p className="text-xs font-medium uppercase tracking-[0.25em] text-white/50">
-            In partnership with
-          </p>
-          <a
-            href="https://weave.agency"
-            target="_blank"
-            rel="noreferrer"
-            className="font-display text-xl font-semibold text-white/80 transition hover:text-white"
-          >
-            Weave Agency
-          </a>
-          <p className="text-xs text-white/50">
-            The leading international recruiting agency in US college basketball.
+      {/* Partners carousel */}
+      <section className="border-y border-surface-3/60 bg-surface-1/40 py-8">
+        <div className="mx-auto mb-5 max-w-7xl px-6">
+          <p className="text-center text-xs font-semibold uppercase tracking-[0.25em] text-white/40">
+            Partners &amp; Supporters
           </p>
         </div>
+        <PartnersCarousel />
       </section>
     </div>
   );

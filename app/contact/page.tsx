@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import ContactForm from "@/components/ContactForm";
 
 export const metadata: Metadata = {
   title: "Contact — World 48",
@@ -25,41 +26,33 @@ export default function ContactPage() {
         or media — we read every message.
       </p>
 
-      {/* Email card */}
+      {/* Contact form */}
       <div className="mt-12 overflow-hidden rounded-2xl border border-surface-3/70 bg-surface-1 p-8 md:p-10">
-        <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+        <h2 className="mb-6 font-display text-xl font-bold tracking-tight">
+          Send us a message
+        </h2>
+        <ContactForm />
+      </div>
+
+      {/* Direct email card */}
+      <div className="mt-6 overflow-hidden rounded-2xl border border-surface-3/70 bg-surface-1/50 p-6 md:p-8">
+        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
             <div className="text-[10px] font-semibold uppercase tracking-widest text-brand-cyan">
-              Email
+              Or email directly
             </div>
             <a
               href={mailto}
-              className="mt-2 block break-all font-display text-2xl font-bold tracking-tight text-white hover:text-brand-cyan md:text-3xl"
+              className="mt-2 block break-all font-display text-xl font-bold tracking-tight text-white hover:text-brand-cyan"
             >
               {CONTACT_EMAIL}
             </a>
-            <p className="mt-3 max-w-lg text-sm text-white/60">
-              Direct line to the team. We aim to reply within 48 hours on
-              business days.
-            </p>
           </div>
           <a
             href={mailto}
-            className="inline-flex shrink-0 items-center justify-center rounded-md bg-white px-6 py-3 text-sm font-semibold text-surface-0 transition hover:bg-white/90"
+            className="inline-flex shrink-0 items-center justify-center rounded-md border border-surface-3 bg-surface-2/60 px-5 py-2.5 text-sm font-semibold text-white/80 transition hover:border-white/30 hover:text-white"
           >
-            Send Email
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              className="ml-2 h-4 w-4"
-            >
-              <path
-                fillRule="evenodd"
-                d="M7.21 14.77a.75.75 0 0 1 0-1.06L10.94 10 7.21 6.29a.75.75 0 1 1 1.06-1.06l4.25 4.24a.75.75 0 0 1 0 1.06l-4.25 4.24a.75.75 0 0 1-1.06 0Z"
-                clipRule="evenodd"
-              />
-            </svg>
+            Open Mail App
           </a>
         </div>
       </div>
@@ -106,9 +99,7 @@ function Lane({
 }) {
   return (
     <div className="rounded-xl border border-surface-3/70 bg-surface-1 p-5">
-      <div
-        className={`text-[10px] font-semibold uppercase tracking-widest ${accent}`}
-      >
+      <div className={`text-[10px] font-semibold uppercase tracking-widest ${accent}`}>
         {title}
       </div>
       <p className="mt-2 text-sm leading-relaxed text-white/75">{body}</p>

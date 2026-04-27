@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { getPlayerById, getPlayersWithCache } from "@/lib/googleSheets";
 import type { PlayerData } from "@/lib/googleSheets";
 import { countryFlag } from "@/lib/country";
+import PlayerContactForm from "@/components/PlayerContactForm";
 
 export const revalidate = 300;
 
@@ -149,17 +150,7 @@ export default async function PlayerProfilePage({
 
             {/* Actions */}
             <div className="mt-8 flex flex-wrap gap-3">
-              <button
-                type="button"
-                disabled
-                title="Coming soon — contact flow is being built"
-                className="inline-flex items-center justify-center rounded-md bg-white px-5 py-3 text-sm font-semibold text-surface-0 opacity-50"
-              >
-                Request Contact
-                <span className="ml-2 rounded-full bg-surface-2 px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wide text-white/70">
-                  Soon
-                </span>
-              </button>
+              <PlayerContactForm playerName={player.name} />
 
               {player.instagram_url && (
                 <a

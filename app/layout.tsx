@@ -1,7 +1,21 @@
 import type { Metadata } from "next";
+import { Bebas_Neue, Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const bebasNeue = Bebas_Neue({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-bebas",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "World 48 — Undiscovered Basketball Showcase",
@@ -19,8 +33,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark">
-      <body className="min-h-screen bg-surface-0 text-white antialiased flex flex-col">
+    <html lang="en" className={`dark ${inter.variable} ${bebasNeue.variable}`}>
+      <body className="min-h-screen bg-surface-0 text-white antialiased flex flex-col font-sans">
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

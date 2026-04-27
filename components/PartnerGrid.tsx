@@ -69,7 +69,7 @@ export default function PartnerGrid() {
             <img
               src={partner.logo}
               alt={partner.name}
-              className="max-h-10 max-w-[7rem] object-contain opacity-90 grayscale transition group-hover:opacity-100 group-hover:grayscale-0"
+              className="max-h-10 max-w-[7rem] object-contain opacity-100 transition"
               onError={(e) => {
                 const target = e.currentTarget;
                 target.style.display = "none";

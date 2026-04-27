@@ -65,7 +65,7 @@ function PartnerLogo({ partner }: { partner: typeof PARTNERS[number] }) {
         <img
           src={partner.logo}
           alt={partner.name}
-          className="max-h-8 max-w-[8rem] object-contain opacity-90 grayscale transition duration-200 group-hover:opacity-100 group-hover:grayscale-0"
+          className="max-h-8 max-w-[8rem] object-contain opacity-100 transition duration-200"
           onError={(e) => {
             const target = e.currentTarget;
             target.style.display = "none";

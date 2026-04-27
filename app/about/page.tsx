@@ -48,13 +48,7 @@ export default function AboutPage() {
         </p>
       </div>
 
-      <div className="mt-12 flex flex-wrap gap-3">
-        <Link
-          href="/players"
-          className="inline-flex items-center justify-center rounded-md bg-white px-5 py-3 text-sm font-semibold text-surface-0 transition hover:bg-white/90"
-        >
-          Browse the Roster
-        </Link>
+      <div className="mt-12">
         <Link
           href="/contact"
           className="inline-flex items-center justify-center rounded-md border border-surface-3 bg-surface-2/60 px-5 py-3 text-sm font-semibold text-white/80 transition hover:border-white/30 hover:text-white"

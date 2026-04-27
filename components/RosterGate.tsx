@@ -92,14 +92,8 @@ export default function RosterGate({ players }: { players: PlayerData[] }) {
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-3">
-          <div className="rounded-lg border border-surface-3/70 bg-surface-1/50 px-4 py-2 text-xs text-white/60">
-            <span className="font-semibold text-white">{players.length}</span>{" "}
-            {players.length === 1 ? "player" : "players"} live
-          </div>
-          <div className="rounded-full border border-brand-cyan/30 bg-brand-cyan/10 px-3 py-1.5 text-xs font-semibold text-brand-cyan">
-            {registration.role} ✓
-          </div>
+        <div className="rounded-full border border-brand-cyan/30 bg-brand-cyan/10 px-3 py-1.5 text-xs font-semibold text-brand-cyan">
+          {registration.role} ✓
         </div>
       </div>
 

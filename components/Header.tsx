@@ -50,9 +50,6 @@ export default function Header() {
               priority
               className="h-8 w-auto"
             />
-            <span className="text-xl font-black tracking-widest text-white select-none">
-              48
-            </span>
           </Link>
 
           {/* Desktop nav */}

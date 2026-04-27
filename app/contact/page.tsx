@@ -34,29 +34,6 @@ export default function ContactPage() {
         <ContactForm />
       </div>
 
-      {/* Direct email card */}
-      <div className="mt-6 overflow-hidden rounded-2xl border border-surface-3/70 bg-surface-1/50 p-6 md:p-8">
-        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <div>
-            <div className="text-[10px] font-semibold uppercase tracking-widest text-brand-cyan">
-              Or email directly
-            </div>
-            <a
-              href={mailto}
-              className="mt-2 block break-all font-display text-xl font-bold tracking-tight text-white hover:text-brand-cyan"
-            >
-              {CONTACT_EMAIL}
-            </a>
-          </div>
-          <a
-            href={mailto}
-            className="inline-flex shrink-0 items-center justify-center rounded-md border border-surface-3 bg-surface-2/60 px-5 py-2.5 text-sm font-semibold text-white/80 transition hover:border-white/30 hover:text-white"
-          >
-            Open Mail App
-          </a>
-        </div>
-      </div>
-
       {/* Who should write */}
       <div className="mt-10 grid gap-4 md:grid-cols-3">
         <Lane

@@ -27,21 +27,17 @@ export default function HomePage() {
         <div className="relative mx-auto w-full max-w-7xl px-6 pb-20 pt-16 md:pt-24">
           <div className="max-w-3xl">
 
-            {/* Badge row */}
-            <div className="mb-8 flex flex-wrap items-center gap-3">
-              <NcaaBadge />
-              <span className="inline-flex items-center gap-2 rounded-full border border-surface-3 bg-surface-1/60 px-3 py-1 text-xs font-medium uppercase tracking-[0.2em] text-white/70">
-                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-brand-red" />
-                Tickets on sale now
-              </span>
-            </div>
-
             {/* Title */}
             <h1 className="text-5xl font-black leading-[1.01] tracking-tight md:text-7xl lg:text-[5.25rem]">
               Undiscovered
               <br />
               <span className="text-gradient-brand">World 48</span>
             </h1>
+
+            {/* NCAA badge — below title */}
+            <div className="mt-5">
+              <NcaaBadge />
+            </div>
 
             {/* Tagline */}
             <p className="mt-5 max-w-xl text-lg text-white/65 md:text-xl">
@@ -84,15 +80,16 @@ export default function HomePage() {
               </Link>
             </div>
 
-            {/* Instagram link */}
+            {/* Instagram link — prominent */}
             <a
               href="https://www.instagram.com/undiscoveredworld48"
               target="_blank"
               rel="noreferrer"
-              className="mt-6 inline-flex items-center gap-2 text-sm text-white/40 transition hover:text-white/80"
+              className="mt-5 inline-flex items-center gap-2.5 rounded-lg border border-surface-3/80 bg-surface-1/60 px-4 py-2.5 text-sm font-medium text-white/70 transition hover:border-white/20 hover:bg-surface-2 hover:text-white"
             >
-              <InstagramIcon />
+              <InstagramIcon className="h-4 w-4 shrink-0" />
               @undiscoveredworld48
+              <ExternalLinkIcon className="ml-0.5 h-3 w-3 shrink-0 text-white/30" />
             </a>
 
             {/* NCAA Eligibility note for players */}
@@ -138,6 +135,16 @@ export default function HomePage() {
             </div>
           ))}
         </dl>
+      </section>
+
+      {/* ─── PARTNERS ──────────────────────────────────────────────────── */}
+      <section className="border-y border-surface-3/60 py-8">
+        <div className="mx-auto mb-5 max-w-7xl px-6">
+          <p className="text-center text-xs font-semibold uppercase tracking-[0.25em] text-white/35">
+            Partners &amp; Supporters
+          </p>
+        </div>
+        <PartnersCarousel />
       </section>
 
       {/* ─── EVENT DETAILS ─────────────────────────────────────────────── */}
@@ -225,13 +232,25 @@ export default function HomePage() {
               <span className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-red">
                 Tickets available now
               </span>
-              <h3 className="mt-2 text-2xl font-bold text-white">
-                Family Bundle — €20
-              </h3>
-              <p className="mt-1.5 text-sm text-white/55">
-                2 adults + up to 3 children. Refunds available up to 7 days
-                before the event.
-              </p>
+
+              {/* Ticket tiers */}
+              <div className="mt-4 space-y-3">
+                <div className="flex items-center justify-between rounded-lg border border-surface-3/60 bg-surface-2/60 px-4 py-3">
+                  <div>
+                    <p className="text-sm font-semibold text-white">General Entry</p>
+                    <p className="text-xs text-white/45">Single admission · May 16 showcase</p>
+                  </div>
+                  <span className="text-lg font-black text-white">€10</span>
+                </div>
+                <div className="flex items-center justify-between rounded-lg border border-brand-red/30 bg-brand-red/5 px-4 py-3">
+                  <div>
+                    <p className="text-sm font-semibold text-white">Family Bundle</p>
+                    <p className="text-xs text-white/45">2 adults + up to 3 children</p>
+                  </div>
+                  <span className="text-lg font-black text-white">€20</span>
+                </div>
+              </div>
+
               <a
                 href={EVENTBRITE_URL}
                 target="_blank"
@@ -242,7 +261,7 @@ export default function HomePage() {
                 Buy on Eventbrite
               </a>
               <p className="mt-3 text-center text-xs text-white/30">
-                Powered by Eventbrite · Secure checkout
+                Refunds available up to 7 days before the event · Secure checkout
               </p>
             </div>
 
@@ -250,41 +269,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── INSTAGRAM ─────────────────────────────────────────────────── */}
-      <section className="border-t border-surface-3/60 py-14">
-        <div className="mx-auto flex max-w-7xl flex-col items-center gap-5 px-6 text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-white/35">
-            Follow the journey
-          </p>
-          <a
-            href="https://www.instagram.com/undiscoveredworld48"
-            target="_blank"
-            rel="noreferrer"
-            className="group flex items-center gap-4 rounded-2xl border border-surface-3/70 bg-surface-1 px-8 py-5 transition hover:border-white/20 hover:bg-surface-2"
-          >
-            <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-surface-3/60 bg-surface-2 text-white/50 transition group-hover:border-white/20 group-hover:text-white">
-              <InstagramIcon className="h-5 w-5" />
-            </div>
-            <div className="text-left">
-              <p className="font-semibold text-white">@undiscoveredworld48</p>
-              <p className="text-sm text-white/45">
-                Behind the scenes, player highlights, and event updates
-              </p>
-            </div>
-            <ExternalLinkIcon className="ml-2 text-white/25 transition group-hover:text-white/60" />
-          </a>
-        </div>
-      </section>
-
-      {/* ─── PARTNERS ──────────────────────────────────────────────────── */}
-      <section className="border-t border-surface-3/60 py-8">
-        <div className="mx-auto mb-5 max-w-7xl px-6">
-          <p className="text-center text-xs font-semibold uppercase tracking-[0.25em] text-white/35">
-            Partners &amp; Supporters
-          </p>
-        </div>
-        <PartnersCarousel />
-      </section>
 
     </div>
   );

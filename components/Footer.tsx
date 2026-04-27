@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 
 export default function Footer() {
@@ -8,12 +7,11 @@ export default function Footer() {
     <footer className="border-t border-surface-3/60 bg-surface-0">
       <div className="mx-auto flex max-w-7xl flex-col gap-6 px-6 py-10 md:flex-row md:items-center md:justify-between">
         <div className="flex items-center gap-3">
-          <Image
-            src="/logos/world48-icon-sm.png"
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/logos/world48-logo.svg"
             alt="World 48"
-            width={56}
-            height={30}
-            className="h-6 w-auto opacity-80"
+            className="h-6 w-auto opacity-70"
           />
           <span className="text-sm text-white/60">
             © {year} World 48. Undiscovered international basketball talent.
@@ -30,12 +28,6 @@ export default function Footer() {
           <Link href="/contact" className="hover:text-white">
             Contact
           </Link>
-          <a
-            href="mailto:mark.reynolds25@gmail.com"
-            className="hover:text-white"
-          >
-            mark.reynolds25@gmail.com
-          </a>
           <span className="text-white/30">
             In partnership with{" "}
             <a

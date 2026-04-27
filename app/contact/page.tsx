@@ -22,8 +22,8 @@ export default function ContactPage() {
         Let&apos;s talk.
       </h1>
       <p className="mt-6 max-w-2xl text-lg text-white/70">
-        Whether you&apos;re a Division I coach, a prospect, a potential sponsor,
-        or media — we read every message.
+        Whether you&apos;re a US college coach, a prospect, a potential sponsor
+        or media, we read every message.
       </p>
 
       {/* Contact form */}

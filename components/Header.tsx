@@ -1,10 +1,12 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useRegistration } from "@/hooks/useRegistration";
 import RegisterModal from "@/components/RegisterModal";
+
+const EVENTBRITE_URL =
+  "https://www.eventbrite.ie/e/undiscovered-world-48-tickets-1988109094821";
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
@@ -41,19 +43,27 @@ export default function Header() {
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
 
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5" onClick={close}>
-            <Image
-              src="/logos/world48-icon-sm.png"
+          <Link href="/" className="flex items-center" onClick={close}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/logos/world48-logo.svg"
               alt="World 48"
-              width={56}
-              height={30}
-              priority
-              className="h-8 w-auto"
+              className="h-9 w-auto"
             />
           </Link>
 
           {/* Desktop nav */}
           <nav className="hidden items-center gap-1 md:flex">
+            {/* Tickets badge — left of Home */}
+            <a
+              href={EVENTBRITE_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="mr-1 inline-flex items-center gap-1.5 rounded-full border border-brand-red/40 bg-brand-red/10 px-2.5 py-1 text-[11px] font-semibold text-brand-red transition hover:bg-brand-red/20"
+            >
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-brand-red" />
+              Tickets on sale now
+            </a>
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
@@ -68,8 +78,11 @@ export default function Header() {
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-3">
             {loaded && registration ? (
-              <span className="rounded-full border border-brand-cyan/30 bg-brand-cyan/10 px-3 py-1.5 text-xs font-semibold text-brand-cyan">
-                {registration.role} ✓
+              <span className="inline-flex items-center gap-2 rounded-full border border-surface-3 bg-surface-1 px-3 py-1.5 text-xs font-semibold text-white/80">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4 text-brand-cyan/70">
+                  <path fillRule="evenodd" d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-5.5-2.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0ZM10 12a5.99 5.99 0 0 0-4.793 2.39A6.483 6.483 0 0 0 10 16.5a6.483 6.483 0 0 0 4.793-2.11A5.99 5.99 0 0 0 10 12Z" clipRule="evenodd" />
+                </svg>
+                {registration.name.split(" ")[0]}
               </span>
             ) : (
               <button
@@ -161,8 +174,11 @@ export default function Header() {
         {/* Drawer CTA */}
         <div className="mt-auto border-t border-surface-3/60 p-4">
           {loaded && registration ? (
-            <div className="rounded-full border border-brand-cyan/30 bg-brand-cyan/10 px-4 py-3 text-center text-sm font-semibold text-brand-cyan">
-              {registration.role} ✓
+            <div className="flex items-center justify-center gap-2 rounded-full border border-surface-3 bg-surface-2 px-4 py-3 text-sm font-semibold text-white/80">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4 text-brand-cyan/70">
+                <path fillRule="evenodd" d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-5.5-2.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0ZM10 12a5.99 5.99 0 0 0-4.793 2.39A6.483 6.483 0 0 0 10 16.5a6.483 6.483 0 0 0 4.793-2.11A5.99 5.99 0 0 0 10 12Z" clipRule="evenodd" />
+              </svg>
+              {registration.name.split(" ")[0]}
             </div>
           ) : (
             <button

@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 140" fill="none">
+  <defs>
+    <linearGradient id="wg" x1="130" y1="0" x2="130" y2="78" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00D9FF"/>
+      <stop offset="48%" stop-color="#00D98E"/>
+      <stop offset="100%" stop-color="#FFB74D"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Outer W frame (top line) -->
+  <polyline
+    points="8,24 46,24 88,68 108,44 130,68 152,44 172,68 214,24 252,24"
+    stroke="url(#wg)" stroke-width="4.5" stroke-linejoin="miter" stroke-linecap="square" fill="none"/>
+
+  <!-- Inner parallel W (lower line, ~7px offset) -->
+  <polyline
+    points="8,31 43,31 83,68 108,50 130,68 152,50 177,68 217,31 252,31"
+    stroke="url(#wg)" stroke-width="4.5" stroke-linejoin="miter" stroke-linecap="square" fill="none"/>
+
+  <!-- Left wing tip cap -->
+  <line x1="8" y1="24" x2="8" y2="31" stroke="url(#wg)" stroke-width="4.5" stroke-linecap="square"/>
+  <!-- Right wing tip cap -->
+  <line x1="252" y1="24" x2="252" y2="31" stroke="url(#wg)" stroke-width="4.5" stroke-linecap="square"/>
+
+  <!-- Center crown notch (small upward chevron at top center) -->
+  <polyline
+    points="120,44 130,30 140,44"
+    stroke="url(#wg)" stroke-width="4.5" stroke-linejoin="miter" stroke-linecap="square" fill="none"/>
+
+  <!-- WORLD 48 text -->
+  <text
+    x="130"
+    y="120"
+    text-anchor="middle"
+    fill="white"
+    font-family="'Arial Black', 'Impact', sans-serif"
+    font-weight="900"
+    font-size="24"
+    letter-spacing="9"
+  >WORLD 48</text>
+</svg>

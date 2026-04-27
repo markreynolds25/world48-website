@@ -43,6 +43,12 @@ const PARTNERS = [
     logo: "https://logo.clearbit.com/sportradar.com",
     abbr: "Sportradar",
   },
+  {
+    name: "The Catering Company",
+    url: "https://www.thecateringcompany.ie/",
+    logo: "https://www.thecateringcompany.ie/uploads/logo-1644585227-2826.svg",
+    abbr: "Catering Co.",
+  },
 ];
 
 function PartnerLogo({ partner }: { partner: typeof PARTNERS[number] }) {

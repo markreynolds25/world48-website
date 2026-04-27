@@ -3,9 +3,9 @@ import Link from "next/link";
 import PartnerGrid from "@/components/PartnerGrid";
 
 export const metadata: Metadata = {
-  title: "Sponsors & Partnerships — World 48",
+  title: "Sponsors & Partnerships · World 48",
   description:
-    "Partnership opportunities with World 48 — an NCAA D1-focused showcase of elite international basketball talent.",
+    "Partnership opportunities with World 48, a curated showcase of elite international basketball talent for top US college coaches.",
 };
 
 export default function SponsorsPage() {
@@ -20,8 +20,8 @@ export default function SponsorsPage() {
       </h1>
       <p className="mt-6 max-w-2xl text-lg text-white/70">
         World 48 brings together elite international basketball prospects and
-        NCAA Division I coaching staffs. A small number of partners come along
-        for the ride — on-site, on-roster, and in the room.
+        top US college coaching staffs. A small number of partners come along
+        for the ride: on-site, on-roster, and in the room.
       </p>
 
       {/* Current Partners */}
@@ -46,12 +46,12 @@ export default function SponsorsPage() {
           <Pillar
             accent="text-brand-green"
             title="Access"
-            body="Direct line to D1 coaches, players, and the scouts who curate the roster. Attend the showcase in person."
+            body="Direct line to top US college coaches, players, and the scouts who curate the roster. Attend the showcase in person."
           />
           <Pillar
             accent="text-brand-gold"
             title="Storytelling"
-            body="Co-branded content with the prospects — a uniquely ownable angle on the global development pipeline."
+            body="Co-branded content with the prospects. A uniquely ownable angle on the global development pipeline."
           />
         </div>
       </div>

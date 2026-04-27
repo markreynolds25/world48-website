@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "About — World 48",
+  title: "About · World 48",
   description:
-    "World 48 is a curated showcase of undiscovered international basketball talent, built for NCAA Division I coaches.",
+    "World 48 is a curated showcase of undiscovered international basketball talent, built for top US college coaches.",
 };
 
 export default function AboutPage() {
@@ -13,7 +13,7 @@ export default function AboutPage() {
       <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-brand-cyan">
         About
       </p>
-      <h1 className="font-display text-4xl font-black leading-[1.05] tracking-tight md:text-6xl">
+      <h1 className="text-4xl font-black leading-[1.05] tracking-tight md:text-6xl">
         Elite international talent,{" "}
         <span className="text-gradient-brand">one shortlist.</span>
       </h1>
@@ -21,16 +21,17 @@ export default function AboutPage() {
       <div className="mt-8 max-w-none text-white/75">
         <p className="text-lg leading-relaxed">
           World 48 is a curated showcase of 48 undiscovered international
-          basketball prospects, built for NCAA Division I coaches. We travel,
+          basketball prospects, built for top US college coaches. We travel,
           evaluate, and validate each player so that every name on the roster
-          is a real recruiting opportunity — not noise.
+          is a real recruiting opportunity, not noise.
         </p>
 
         <p className="mt-6 leading-relaxed">
           The program is run by a team of scouts, coaches, and recruiters with
-          direct experience at European academies, NCAA programs, and overseas
-          professional leagues. Our job is to save Division I staffs hundreds
-          of hours of travel and film review by doing the groundwork first.
+          direct experience at European academies, US college programs, and
+          overseas professional leagues. Our job is to save top US college
+          coaching staffs hundreds of hours of travel and film review by doing
+          the groundwork first.
         </p>
 
         <p className="mt-6 leading-relaxed">

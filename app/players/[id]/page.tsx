@@ -20,10 +20,10 @@ export async function generateMetadata({
   params: { id: string };
 }) {
   const player = await getPlayerById(params.id);
-  if (!player) return { title: "Player not found — World 48" };
+  if (!player) return { title: "Player not found · World 48" };
   const metaParts = [player.position, player.country].filter(Boolean);
   return {
-    title: `${player.name} — World 48`,
+    title: `${player.name} · World 48`,
     description: `${player.name}${metaParts.length ? " · " + metaParts.join(" · ") : ""}`,
   };
 }

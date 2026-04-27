@@ -37,6 +37,13 @@ body {
   background-size: 3px 3px;
 }
 
+/* Utility: basketball seam pattern overlay for hero */
+.bg-basketball-seams {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Ccircle cx='80' cy='80' r='72' fill='none' stroke='rgba(255,140,0,1)' stroke-width='1.5'/%3E%3Cpath d='M8 80 C28 20,52 20,80 80 C108 140,132 140,152 80' fill='none' stroke='rgba(255,140,0,1)' stroke-width='1.5'/%3E%3Cpath d='M80 8 C20 28,20 52,80 80 C140 108,140 132,80 152' fill='none' stroke='rgba(255,140,0,1)' stroke-width='1.5'/%3E%3Cline x1='8' y1='80' x2='152' y2='80' stroke='rgba(255,140,0,0.5)' stroke-width='0.75'/%3E%3Cline x1='80' y1='8' x2='80' y2='152' stroke='rgba(255,140,0,0.5)' stroke-width='0.75'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+  background-repeat: repeat;
+}
+
 /* Utility: brand gradient text */
 .text-gradient-brand {
   background: linear-gradient(135deg, #00d9ff 0%, #00d98e 55%, #ffb74d 100%);

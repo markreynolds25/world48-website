@@ -80,7 +80,7 @@ function getAuthClient(): JWT | null {
     const auth = new JWT({
       email: credentials.client_email,
       key: credentials.private_key,
-      scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
+      scopes: ['https://www.googleapis.com/auth/spreadsheets'],
     });
     return auth;
   } catch (error) {
@@ -99,6 +99,7 @@ export async function getPlayersFromSheet(): Promise<PlayerData[]> {
     }
 
     const sheetId = process.env.GOOGLE_SHEETS_ID;
+    // Column Q (index 16) holds the roster status: "yes" | "pending" | blank/no
     const range = process.env.GOOGLE_SHEETS_RANGE || 'Players!A:Q';
 
     if (!sheetId) {
@@ -125,6 +126,10 @@ export async function getPlayersFromSheet(): Promise<PlayerData[]> {
       // Skip empty rows
       if (!row || !row[0]) continue;
 
+      // Column Q (index 16) — only include players with status "yes" or "pending"
+      const status = (row[16] ? String(row[16]).trim().toLowerCase() : '');
+      if (status !== 'yes' && status !== 'pending') continue;
+
       const name = String(row[0]).trim();
       let id = slugify(name);
       // Avoid duplicate slugs (two players with same name)
@@ -149,8 +154,7 @@ export async function getPlayersFromSheet(): Promise<PlayerData[]> {
         instagram_url: row[13] ? String(row[13]).trim() : undefined,
         highlight_url: row[14] ? String(row[14]).trim() : undefined,
         event_number: parseInteger(row[15]),
-        photo_url:
-          (row[16] ? String(row[16]).trim() : '') || findLocalPhoto(id),
+        photo_url: findLocalPhoto(id),
       });
     }
 
@@ -181,4 +185,42 @@ export async function getPlayersWithCache(): Promise<PlayerData[]> {
 export async function getPlayerById(id: string): Promise<PlayerData | null> {
   const players = await getPlayersWithCache();
   return players.find((p) => p.id === id) ?? null;
+}
+
+// Append a new registration row to the "Registrations" tab.
+export async function addRegistration(data: {
+  name: string;
+  email: string;
+  role: string;
+}): Promise<void> {
+  try {
+    const auth = getAuthClient();
+    if (!auth) {
+      console.warn('[googleSheets] Auth not available — skipping registration write.');
+      return;
+    }
+
+    const sheetId = process.env.GOOGLE_SHEETS_ID;
+    if (!sheetId) {
+      console.warn('[googleSheets] GOOGLE_SHEETS_ID not set — skipping registration write.');
+      return;
+    }
+
+    const sheets = google.sheets({ version: 'v4', auth });
+    const timestamp = new Date().toISOString();
+
+    await sheets.spreadsheets.values.append({
+      spreadsheetId: sheetId,
+      range: 'Registrations!A:D',
+      valueInputOption: 'USER_ENTERED',
+      requestBody: {
+        values: [[timestamp, data.name, data.email, data.role]],
+      },
+    });
+
+    console.log(`[googleSheets] Registration saved: ${data.email}`);
+  } catch (error) {
+    console.error('[googleSheets] Failed to save registration:', error);
+    // Don't throw — the caller handles best-effort behaviour
+  }
 }

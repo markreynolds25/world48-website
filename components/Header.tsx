@@ -3,9 +3,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { useRegistration } from "@/hooks/useRegistration";
+import RegisterModal from "@/components/RegisterModal";
 
 const NAV_LINKS = [
-  { href: "/players", label: "Roster" },
+  { href: "/", label: "Home" },
+  { href: "/players", label: "Players" },
   { href: "/about", label: "About" },
   { href: "/sponsors", label: "Sponsors" },
   { href: "/contact", label: "Contact" },
@@ -13,22 +16,31 @@ const NAV_LINKS = [
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [registerOpen, setRegisterOpen] = useState(false);
+  const { registration, register, loaded } = useRegistration();
 
   // Lock body scroll when menu is open
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [menuOpen]);
 
-  // Close on route change (click)
   const close = () => setMenuOpen(false);
 
   return (
     <>
+      <RegisterModal
+        open={registerOpen}
+        onClose={() => setRegisterOpen(false)}
+        onSuccess={(data) => register(data)}
+      />
+
       <header className="sticky top-0 z-40 border-b border-surface-3/60 bg-surface-0/80 backdrop-blur-md">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
 
-          {/* Logo — image only, no text, links home */}
+          {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5" onClick={close}>
             <Image
               src="/logos/world48-icon-sm.png"
@@ -38,7 +50,7 @@ export default function Header() {
               priority
               className="h-8 w-auto"
             />
-            <span className="font-display text-2xl tracking-widest text-white select-none">
+            <span className="text-xl font-black tracking-widest text-white select-none">
               48
             </span>
           </Link>
@@ -57,12 +69,20 @@ export default function Header() {
           </nav>
 
           {/* Desktop CTA */}
-          <Link
-            href="/players"
-            className="hidden rounded-md bg-white px-4 py-2 text-sm font-semibold text-surface-0 transition hover:bg-white/90 md:inline-flex"
-          >
-            Browse Players
-          </Link>
+          <div className="hidden md:flex items-center gap-3">
+            {loaded && registration ? (
+              <span className="rounded-full border border-brand-cyan/30 bg-brand-cyan/10 px-3 py-1.5 text-xs font-semibold text-brand-cyan">
+                {registration.role} ✓
+              </span>
+            ) : (
+              <button
+                onClick={() => setRegisterOpen(true)}
+                className="rounded-md bg-brand-red px-4 py-2 text-sm font-semibold text-white transition hover:bg-brand-red/90"
+              >
+                Register
+              </button>
+            )}
+          </div>
 
           {/* Mobile hamburger */}
           <button
@@ -91,7 +111,7 @@ export default function Header() {
         </div>
       </header>
 
-      {/* Mobile drawer overlay */}
+      {/* Mobile overlay */}
       <div
         aria-hidden={!menuOpen}
         onClick={close}
@@ -100,7 +120,7 @@ export default function Header() {
         }`}
       />
 
-      {/* Mobile side drawer */}
+      {/* Mobile drawer */}
       <aside
         aria-label="Navigation menu"
         className={`fixed right-0 top-0 z-50 flex h-full w-72 flex-col bg-surface-1 shadow-2xl transition-transform duration-300 ease-in-out md:hidden ${
@@ -109,22 +129,25 @@ export default function Header() {
       >
         {/* Drawer header */}
         <div className="flex h-16 items-center justify-between border-b border-surface-3/60 px-6">
-          <span className="font-display text-xl tracking-widest text-white">
-            Menu
-          </span>
+          <span className="text-lg font-bold tracking-widest text-white">Menu</span>
           <button
             type="button"
             aria-label="Close menu"
             onClick={close}
             className="flex h-8 w-8 items-center justify-center rounded-md text-white/60 hover:text-white"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              className="h-5 w-5"
+            >
               <path d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
             </svg>
           </button>
         </div>
 
-        {/* Drawer nav links */}
+        {/* Drawer nav */}
         <nav className="flex flex-col gap-1 p-4">
           {NAV_LINKS.map((link) => (
             <Link
@@ -140,13 +163,21 @@ export default function Header() {
 
         {/* Drawer CTA */}
         <div className="mt-auto border-t border-surface-3/60 p-4">
-          <Link
-            href="/players"
-            onClick={close}
-            className="block w-full rounded-md bg-white py-3 text-center text-sm font-semibold text-surface-0 transition hover:bg-white/90"
-          >
-            Browse Players
-          </Link>
+          {loaded && registration ? (
+            <div className="rounded-full border border-brand-cyan/30 bg-brand-cyan/10 px-4 py-3 text-center text-sm font-semibold text-brand-cyan">
+              {registration.role} ✓
+            </div>
+          ) : (
+            <button
+              onClick={() => {
+                setRegisterOpen(true);
+                close();
+              }}
+              className="block w-full rounded-md bg-brand-red py-3 text-center text-sm font-semibold text-white transition hover:bg-brand-red/90"
+            >
+              Register
+            </button>
+          )}
         </div>
       </aside>
     </>

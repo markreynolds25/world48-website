@@ -3,21 +3,21 @@
 const PARTNERS = [
   {
     name: "SDCC",
-    description: "Sport Development Club Cork",
-    url: "https://sdcc.ie/en/",
-    logo: "https://logo.clearbit.com/sdcc.ie",
+    description: "South Dublin County Council",
+    url: "https://www.sdcc.ie/en/",
+    logo: "https://www.sdcc.ie/en/files/images/sdcc-logo-2025.png",
   },
   {
     name: "Resync Physiotherapy",
     description: "Elite sports physiotherapy & rehabilitation",
     url: "https://resyncphysiotherapy.ie/",
-    logo: "https://logo.clearbit.com/resyncphysiotherapy.ie",
+    logo: "https://resyncphysiotherapy.ie/wp-content/uploads/2023/09/ReSync-Physiotherapy-Logo.webp",
   },
   {
     name: "People Playbook",
     description: "Leadership & performance consulting",
     url: "https://www.peopleplaybook.com/",
-    logo: "https://logo.clearbit.com/peopleplaybook.com",
+    logo: "/partners/people-playbook.svg",
   },
   {
     name: "Weave Agency",
@@ -30,6 +30,18 @@ const PARTNERS = [
     description: "Connecting international players with US college programs",
     url: "https://getrecruitedhoops.com/",
     logo: "https://logo.clearbit.com/getrecruitedhoops.com",
+  },
+  {
+    name: "Draft Express",
+    description: "The global authority on basketball prospect evaluation",
+    url: "https://www.draftexpress.com/about-us",
+    logo: "https://logo.clearbit.com/draftexpress.com",
+  },
+  {
+    name: "Sportradar",
+    description: "World-leading sports data and technology company",
+    url: "https://sportradar.com/",
+    logo: "https://logo.clearbit.com/sportradar.com",
   },
 ];
 

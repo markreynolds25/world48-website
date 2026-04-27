@@ -12,7 +12,7 @@ export default function SponsorsPage() {
   return (
     <div className="mx-auto max-w-5xl px-6 py-16 md:py-24">
       <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-brand-cyan">
-        Sponsors &amp; Partnerships
+        Partners
       </p>
       <h1 className="font-display text-4xl font-black leading-[1.05] tracking-tight md:text-6xl">
         Put your brand in front of the{" "}

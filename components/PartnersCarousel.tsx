@@ -60,7 +60,7 @@ function PartnerLogo({ partner }: { partner: typeof PARTNERS[number] }) {
       title={partner.name}
       className="group mx-6 flex shrink-0 items-center justify-center"
     >
-      <div className="flex h-14 w-40 items-center justify-center rounded-lg border border-white/10 bg-white/10 px-4 transition duration-200 group-hover:border-white/25 group-hover:bg-white/15">
+      <div className="flex h-14 w-40 items-center justify-center rounded-lg border border-white/25 bg-white/20 px-4 transition duration-200 group-hover:border-white/40 group-hover:bg-white/30">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={partner.logo}

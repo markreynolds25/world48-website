@@ -115,8 +115,18 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ─── PARTNERS ──────────────────────────────────────────────────── */}
+      <section className="border-b border-surface-3/60 py-8">
+        <div className="mx-auto mb-5 max-w-7xl px-6">
+          <p className="text-center text-xs font-semibold uppercase tracking-[0.25em] text-white/35">
+            Partners &amp; Supporters
+          </p>
+        </div>
+        <PartnersCarousel />
+      </section>
+
       {/* ─── STATS STRIP ───────────────────────────────────────────────── */}
-      <section className="border-y border-surface-3/60 bg-surface-1/40">
+      <section className="border-b border-surface-3/60 bg-surface-1/40">
         <dl className="mx-auto grid max-w-7xl grid-cols-2 overflow-hidden md:grid-cols-4">
           {[
             { k: "48", l: "Prospects" },
@@ -135,16 +145,6 @@ export default function HomePage() {
             </div>
           ))}
         </dl>
-      </section>
-
-      {/* ─── PARTNERS ──────────────────────────────────────────────────── */}
-      <section className="border-y border-surface-3/60 py-8">
-        <div className="mx-auto mb-5 max-w-7xl px-6">
-          <p className="text-center text-xs font-semibold uppercase tracking-[0.25em] text-white/35">
-            Partners &amp; Supporters
-          </p>
-        </div>
-        <PartnersCarousel />
       </section>
 
       {/* ─── EVENT DETAILS ─────────────────────────────────────────────── */}

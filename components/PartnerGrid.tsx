@@ -63,7 +63,7 @@ export default function PartnerGrid() {
             target="_blank"
             rel="noreferrer"
             title={partner.name}
-            className="group flex h-20 items-center justify-center rounded-xl border border-white/10 bg-white/10 px-4 transition hover:border-white/25 hover:bg-white/15"
+            className="group flex h-20 items-center justify-center rounded-xl border border-white/25 bg-white/20 px-4 transition hover:border-white/40 hover:bg-white/30"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img

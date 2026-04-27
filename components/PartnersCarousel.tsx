@@ -1,3 +1,5 @@
+"use client";
+
 // CSS-driven infinite marquee — no JS library needed.
 // Logos are rendered twice side-by-side so the loop is seamless.
 

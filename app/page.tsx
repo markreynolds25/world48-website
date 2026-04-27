@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import PartnersCarousel from "@/components/PartnersCarousel";
+import NcaaBadge from "@/components/NcaaBadge";
 
 export default function HomePage() {
   return (
@@ -18,26 +19,8 @@ export default function HomePage() {
               Undiscovered · Invitation-only
             </span>
 
-            {/* NCAA Certified Event badge */}
-            <a
-              href="https://www.ncaa.com/"
-              target="_blank"
-              rel="noreferrer"
-              title="NCAA Certified Event"
-              className="group inline-flex items-center gap-2 rounded-full border border-brand-gold/30 bg-surface-1/60 px-3 py-1 transition hover:border-brand-gold/60"
-            >
-              {/* NCAA logo via Clearbit */}
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="https://logo.clearbit.com/ncaa.com"
-                alt="NCAA"
-                className="h-4 w-4 object-contain opacity-80 group-hover:opacity-100"
-                onError={(e) => { e.currentTarget.style.display = "none"; }}
-              />
-              <span className="text-xs font-semibold uppercase tracking-[0.15em] text-brand-gold/80 group-hover:text-brand-gold">
-                NCAA Certified Event
-              </span>
-            </a>
+            {/* NCAA Certified Event badge — client component (needs onError handler) */}
+            <NcaaBadge />
           </div>
 
           <h1 className="font-display text-5xl font-black leading-[1.02] tracking-tight md:text-7xl lg:text-[5.5rem]">

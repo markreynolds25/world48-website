@@ -7,18 +7,18 @@ export default function NcaaBadge() {
       target="_blank"
       rel="noreferrer"
       title="NCAA Certified Event"
-      className="group inline-flex items-center gap-2.5 rounded-full border border-brand-gold/40 bg-surface-1/70 px-3 py-1.5 transition hover:border-brand-gold/70"
+      className="group inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/15 px-3 py-1 transition hover:bg-white/20"
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src="https://d67oz7qfnvgpz.cloudfront.net/img/main_logo.17e742a1.svg"
         alt="NCAA"
-        className="h-6 w-auto object-contain brightness-[0.9] sepia saturate-[3] hue-rotate-[5deg] group-hover:brightness-100"
+        className="h-5 w-auto object-contain brightness-0 invert"
         onError={(e) => {
           e.currentTarget.style.display = "none";
         }}
       />
-      <span className="text-xs font-semibold uppercase tracking-[0.15em] text-brand-gold group-hover:text-brand-gold/90">
+      <span className="text-[10px] font-semibold uppercase tracking-[0.15em] text-white/70">
         Certified Event
       </span>
     </a>

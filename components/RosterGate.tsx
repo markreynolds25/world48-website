@@ -86,14 +86,9 @@ export default function RosterGate({ players }: { players: PlayerData[] }) {
             <span className="text-gradient-brand"> One shortlist.</span>
           </h1>
           <p className="mt-4 max-w-xl text-white/60">
-            Elite international basketball talent curated for top US college
-            programs. Click any player to open a full profile with bio, stats,
-            and game film.
+            Elite international basketball talent for top US college programs.
+            Click any player to open a full profile with bio, stats and game film.
           </p>
-        </div>
-
-        <div className="rounded-full border border-brand-cyan/30 bg-brand-cyan/10 px-3 py-1.5 text-xs font-semibold text-brand-cyan">
-          {registration.role} ✓
         </div>
       </div>
 

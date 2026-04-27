@@ -19,9 +19,9 @@ export default function SponsorsPage() {
         <span className="text-gradient-brand">next wave.</span>
       </h1>
       <p className="mt-6 max-w-2xl text-lg text-white/70">
-        World 48 brings together elite international basketball prospects and
-        top US college coaching staffs. A small number of partners come along
-        for the ride: on-site, on-roster, and in the room.
+        World 48 connects elite international basketball prospects with top US
+        college coaches. A select few partners are part of the journey too,
+        on-site, on-roster, and in the room.
       </p>
 
       {/* Current Partners */}

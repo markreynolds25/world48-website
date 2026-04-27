@@ -43,12 +43,12 @@ export default function Header() {
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
 
           {/* Logo */}
-          <Link href="/" className="flex items-center" onClick={close}>
+          <Link href="/" className="flex items-center gap-2.5" onClick={close}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/logos/world48-logo.svg"
+              src="/logos/world48-icon-sm.png"
               alt="World 48"
-              className="h-9 w-auto"
+              className="h-8 w-auto"
             />
           </Link>
 
@@ -59,10 +59,10 @@ export default function Header() {
               href={EVENTBRITE_URL}
               target="_blank"
               rel="noreferrer"
-              className="mr-1 inline-flex items-center gap-1.5 rounded-full border border-brand-red/40 bg-brand-red/10 px-2.5 py-1 text-[11px] font-semibold text-brand-red transition hover:bg-brand-red/20"
+              className="mr-1 inline-flex items-center gap-1 rounded-full border border-brand-red/35 bg-brand-red/8 px-2 py-0.5 text-[10px] font-semibold text-brand-red/80 transition hover:bg-brand-red/15 hover:text-brand-red"
             >
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-brand-red" />
-              Tickets on sale now
+              <span className="h-1 w-1 animate-pulse rounded-full bg-brand-red/80" />
+              Tickets on sale
             </a>
             {NAV_LINKS.map((link) => (
               <Link

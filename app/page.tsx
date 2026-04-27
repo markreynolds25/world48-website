@@ -171,8 +171,8 @@ export default function HomePage() {
                   </div>
                   <p className="text-xs text-white/40">Friday, May 15, 2026</p>
                   <p className="mt-1.5 text-sm leading-relaxed text-white/60">
-                    Private evaluation sessions for NCAA-accredited coaching
-                    staff. Full player assessments with coaches in the room.
+                    Private evaluation sessions for invited NCAA coaches. Up
+                    close player sessions with coaches in the room.
                   </p>
                 </div>
               </div>

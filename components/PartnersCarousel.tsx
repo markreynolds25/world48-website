@@ -60,12 +60,12 @@ function PartnerLogo({ partner }: { partner: typeof PARTNERS[number] }) {
       title={partner.name}
       className="group mx-6 flex shrink-0 items-center justify-center"
     >
-      <div className="flex h-14 w-40 items-center justify-center rounded-lg border border-surface-3/60 bg-surface-1/80 px-4 transition duration-200 group-hover:border-white/20 group-hover:bg-surface-2">
+      <div className="flex h-14 w-40 items-center justify-center rounded-lg border border-white/10 bg-white/10 px-4 transition duration-200 group-hover:border-white/25 group-hover:bg-white/15">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={partner.logo}
           alt={partner.name}
-          className="max-h-8 max-w-[8rem] object-contain opacity-70 grayscale transition duration-200 group-hover:opacity-100 group-hover:grayscale-0"
+          className="max-h-8 max-w-[8rem] object-contain opacity-90 grayscale transition duration-200 group-hover:opacity-100 group-hover:grayscale-0"
           onError={(e) => {
             const target = e.currentTarget;
             target.style.display = "none";

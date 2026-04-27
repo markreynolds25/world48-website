@@ -9,9 +9,9 @@ export default function Footer() {
         <div className="flex items-center gap-3">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/logos/world48-logo.svg"
+            src="/logos/world48-icon-sm.png"
             alt="World 48"
-            className="h-6 w-auto opacity-70"
+            className="h-6 w-auto opacity-80"
           />
           <span className="text-sm text-white/60">
             © {year} World 48. Undiscovered international basketball talent.

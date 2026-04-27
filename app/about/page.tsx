@@ -20,18 +20,15 @@ export default function AboutPage() {
 
       <div className="mt-8 max-w-none text-white/75">
         <p className="text-lg leading-relaxed">
-          World 48 is a curated showcase of 48 undiscovered international
-          basketball prospects, built for top US college coaches. We travel,
-          evaluate, and validate each player so that every name on the roster
-          is a real recruiting opportunity, not noise.
+          World 48 showcases 48 international prospects for top US college
+          coaches. We travel, evaluate, and vet each player so you save time
+          and get real recruiting opportunities.
         </p>
 
         <p className="mt-6 leading-relaxed">
-          The program is run by a team of scouts, coaches, and recruiters with
-          direct experience at European academies, US college programs, and
-          overseas professional leagues. Our job is to save top US college
-          coaching staffs hundreds of hours of travel and film review by doing
-          the groundwork first.
+          Built by scouts, coaches, and recruiters with real experience across
+          Europe, US colleges, and pro basketball. We save top staffs hours of
+          travel and film work.
         </p>
 
         <p className="mt-6 leading-relaxed">

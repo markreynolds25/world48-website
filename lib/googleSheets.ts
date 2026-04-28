@@ -10,13 +10,13 @@ import path from 'path';
  */
 function findLocalPhoto(slug: string): string | undefined {
   try {
-    const dir = path.join(process.cwd(), 'public', 'players');
+    const dir = path.join(process.cwd(), 'public', 'Players');
     if (!fs.existsSync(dir)) return undefined;
     const exts = ['jpg', 'jpeg', 'png', 'webp'];
     for (const ext of exts) {
       const file = `${slug}.${ext}`;
       if (fs.existsSync(path.join(dir, file))) {
-        return `/players/${file}`;
+        return `/Players/${file}`;
       }
     }
     return undefined;

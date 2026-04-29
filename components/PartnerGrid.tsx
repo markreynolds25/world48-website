@@ -44,6 +44,12 @@ const PARTNERS = [
     logo: "/partners/SR.png",
   },
   {
+    name: "Juco Advocate",
+    description: "Junior college basketball scouting and advocacy",
+    url: "https://www.instagram.com/juco_advocate/",
+    logo: "/partners/JA.jpg",
+  },
+  {
     name: "The Catering Company",
     description: "Award-winning catering & event hospitality",
     url: "https://www.thecateringcompany.ie/",

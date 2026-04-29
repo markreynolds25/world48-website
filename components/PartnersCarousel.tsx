@@ -34,13 +34,13 @@ const PARTNERS = [
   {
     name: "Draft Express",
     url: "https://www.draftexpress.com/about-us",
-    logo: "https://logo.clearbit.com/draftexpress.com",
+    logo: "/partners/DX.jpg",
     abbr: "DraftExpress",
   },
   {
     name: "Sportradar",
     url: "https://sportradar.com/",
-    logo: "https://logo.clearbit.com/sportradar.com",
+    logo: "/partners/SR.png",
     abbr: "Sportradar",
   },
   {

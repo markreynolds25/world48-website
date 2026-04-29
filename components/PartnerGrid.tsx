@@ -35,13 +35,13 @@ const PARTNERS = [
     name: "Draft Express",
     description: "The global authority on basketball prospect evaluation",
     url: "https://www.draftexpress.com/about-us",
-    logo: "https://logo.clearbit.com/draftexpress.com",
+    logo: "/partners/DX.jpg",
   },
   {
     name: "Sportradar",
     description: "World-leading sports data and technology company",
     url: "https://sportradar.com/",
-    logo: "https://logo.clearbit.com/sportradar.com",
+    logo: "/partners/SR.png",
   },
   {
     name: "The Catering Company",

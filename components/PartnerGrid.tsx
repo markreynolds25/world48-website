@@ -69,13 +69,13 @@ export default function PartnerGrid() {
             target="_blank"
             rel="noreferrer"
             title={partner.name}
-            className="group flex h-20 items-center justify-center rounded-xl border border-white/10 bg-white px-4 shadow-sm transition hover:shadow-md"
+            className="group flex h-20 items-center justify-center rounded-xl border border-black/8 bg-gray-100 px-4 shadow-sm transition hover:shadow-md"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={partner.logo}
               alt={partner.name}
-              className="max-h-10 max-w-[7rem] object-contain opacity-100 transition"
+              className="h-11 w-auto max-w-[8rem] object-contain transition"
               onError={(e) => {
                 const target = e.currentTarget;
                 target.style.display = "none";

@@ -24,6 +24,7 @@ const PARTNERS = [
     url: "https://weave.agency/",
     logo: "/partners/Weave.jpg",
     abbr: "Weave",
+    imgFilter: "brightness(0.45) saturate(3)",
   },
   {
     name: "Get Recruited Hoops",
@@ -72,6 +73,7 @@ function PartnerLogo({ partner }: { partner: typeof PARTNERS[number] }) {
           src={partner.logo}
           alt={partner.name}
           className="h-9 w-auto max-w-[9rem] object-contain transition duration-200"
+          style={partner.imgFilter ? { filter: partner.imgFilter } : undefined}
           onError={(e) => {
             const target = e.currentTarget;
             target.style.display = "none";

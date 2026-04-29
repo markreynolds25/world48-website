@@ -24,6 +24,7 @@ const PARTNERS = [
     description: "The leading international recruiting agency in US college basketball",
     url: "https://weave.agency/",
     logo: "/partners/Weave.jpg",
+    imgFilter: "brightness(0.45) saturate(3)",
   },
   {
     name: "Get Recruited Hoops",
@@ -76,6 +77,7 @@ export default function PartnerGrid() {
               src={partner.logo}
               alt={partner.name}
               className="h-11 w-auto max-w-[8rem] object-contain transition"
+              style={partner.imgFilter ? { filter: partner.imgFilter } : undefined}
               onError={(e) => {
                 const target = e.currentTarget;
                 target.style.display = "none";

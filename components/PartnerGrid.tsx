@@ -23,13 +23,13 @@ const PARTNERS = [
     name: "Weave Agency",
     description: "The leading international recruiting agency in US college basketball",
     url: "https://weave.agency/",
-    logo: "https://logo.clearbit.com/weave.agency",
+    logo: "/partners/Weave.jpg",
   },
   {
     name: "Get Recruited Hoops",
     description: "Connecting international players with US college programs",
     url: "https://getrecruitedhoops.com/",
-    logo: "https://logo.clearbit.com/getrecruitedhoops.com",
+    logo: "/partners/get-recruited.png",
   },
   {
     name: "Draft Express",

@@ -22,13 +22,13 @@ const PARTNERS = [
   {
     name: "Weave Agency",
     url: "https://weave.agency/",
-    logo: "https://logo.clearbit.com/weave.agency",
+    logo: "/partners/Weave.jpg",
     abbr: "Weave",
   },
   {
     name: "Get Recruited Hoops",
     url: "https://getrecruitedhoops.com/",
-    logo: "https://logo.clearbit.com/getrecruitedhoops.com",
+    logo: "/partners/get-recruited.png",
     abbr: "Get Recruited",
   },
   {

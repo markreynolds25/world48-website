@@ -56,6 +56,12 @@ const PARTNERS = [
     logo: "https://www.thecateringcompany.ie/uploads/logo-1644585227-2826.svg",
     abbr: "Catering Co.",
   },
+  {
+    name: "River City Printing",
+    url: "https://rivercityprinting.org/",
+    logo: "/partners/RCP.png",
+    abbr: "River City",
+  },
 ];
 
 function PartnerLogo({ partner }: { partner: typeof PARTNERS[number] }) {

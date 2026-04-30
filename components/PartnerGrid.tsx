@@ -56,6 +56,12 @@ const PARTNERS = [
     url: "https://www.thecateringcompany.ie/",
     logo: "https://www.thecateringcompany.ie/uploads/logo-1644585227-2826.svg",
   },
+  {
+    name: "River City Printing",
+    description: "Custom printing & branded merchandise",
+    url: "https://rivercityprinting.org/",
+    logo: "/partners/RCP.png",
+  },
 ];
 
 export default function PartnerGrid() {

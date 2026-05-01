@@ -60,7 +60,7 @@ export default function Header() {
               href={EVENTBRITE_URL}
               target="_blank"
               rel="noreferrer"
-              className="mr-1 inline-flex items-center gap-1 rounded-full border border-brand-red/35 bg-brand-red/8 px-2 py-0.5 text-[10px] font-semibold text-brand-red/80 transition hover:bg-brand-red/15 hover:text-brand-red"
+              className="mr-2 inline-flex items-center gap-1 rounded-full border border-brand-red/35 bg-brand-red/8 px-2 py-0.5 text-[10px] font-semibold text-brand-red/80 transition hover:bg-brand-red/15 hover:text-brand-red"
             >
               <span className="h-1 w-1 animate-pulse rounded-full bg-brand-red/80" />
               Tickets on sale

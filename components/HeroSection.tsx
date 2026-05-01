@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import NcaaBadge from "@/components/NcaaBadge";
-import EventInfoStrip from "@/components/EventInfoStrip";
+import CoachingClinicCard from "@/components/CoachingClinicCard";
 
 const PLAYERS = [
   {
@@ -138,9 +138,11 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* ── Event info strip — full width, above dots ────────────────── */}
+        {/* ── Coaching clinic card — left column only ──────────────────── */}
         <div className="relative z-10 mx-auto w-full max-w-7xl px-6">
-          <EventInfoStrip />
+          <div className="w-full md:max-w-[46%]">
+            <CoachingClinicCard />
+          </div>
         </div>
 
         {/* ── Carousel dots — bottom-centre ────────────────────────────── */}

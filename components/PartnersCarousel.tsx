@@ -56,12 +56,14 @@ const PARTNERS = [
     url: "https://www.thecateringcompany.ie/",
     logo: "https://www.thecateringcompany.ie/uploads/logo-1644585227-2826.svg",
     abbr: "Catering Co.",
+    tileBg: "bg-slate-800",
   },
   {
     name: "River City Printing",
     url: "https://rivercityprinting.org/",
     logo: "/partners/RCP.png",
     abbr: "River City",
+    logoClass: "h-12 w-auto",
   },
 ];
 
@@ -74,7 +76,7 @@ function PartnerLogo({ partner }: { partner: typeof PARTNERS[number] }) {
       title={partner.name}
       className="group mx-6 flex shrink-0 items-center justify-center"
     >
-      <div className="flex h-14 w-44 items-center justify-center rounded-lg border border-black/8 bg-white px-4 shadow-sm transition duration-200 group-hover:shadow-md">
+      <div className={`flex h-14 w-44 items-center justify-center rounded-lg border border-black/8 ${partner.tileBg ?? "bg-white"} px-4 shadow-sm transition duration-200 group-hover:shadow-md`}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={partner.logo}

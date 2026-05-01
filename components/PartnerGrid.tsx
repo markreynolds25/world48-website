@@ -56,12 +56,14 @@ const PARTNERS = [
     description: "Award-winning catering & event hospitality",
     url: "https://www.thecateringcompany.ie/",
     logo: "https://www.thecateringcompany.ie/uploads/logo-1644585227-2826.svg",
+    tileBg: "bg-slate-800",
   },
   {
     name: "River City Printing",
     description: "Custom printing & branded merchandise",
     url: "https://rivercityprinting.org/",
     logo: "/partners/RCP.png",
+    logoClass: "h-14 w-auto",
   },
 ];
 
@@ -77,7 +79,7 @@ export default function PartnerGrid() {
             target="_blank"
             rel="noreferrer"
             title={partner.name}
-            className="group flex h-20 items-center justify-center rounded-xl border border-black/8 bg-white px-4 shadow-sm transition hover:shadow-md"
+            className={`group flex h-20 items-center justify-center rounded-xl border border-black/8 ${partner.tileBg ?? "bg-white"} px-4 shadow-sm transition hover:shadow-md`}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img

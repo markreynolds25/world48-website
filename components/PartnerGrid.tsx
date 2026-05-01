@@ -12,6 +12,7 @@ const PARTNERS = [
     description: "Elite sports physiotherapy & rehabilitation",
     url: "https://resyncphysiotherapy.ie/",
     logo: "https://resyncphysiotherapy.ie/wp-content/uploads/2023/09/ReSync-Physiotherapy-Logo.webp",
+    logoClass: "h-14 w-auto max-w-[9rem]",
   },
   {
     name: "People Playbook",
@@ -76,20 +77,20 @@ export default function PartnerGrid() {
             target="_blank"
             rel="noreferrer"
             title={partner.name}
-            className="group flex h-20 items-center justify-center rounded-xl border border-black/8 bg-gray-100 px-4 shadow-sm transition hover:shadow-md"
+            className="group flex h-20 items-center justify-center rounded-xl border border-black/8 bg-white px-4 shadow-sm transition hover:shadow-md"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={partner.logo}
               alt={partner.name}
-              className="h-11 w-auto max-w-[8rem] object-contain transition"
+              className={`${partner.logoClass ?? "h-11 w-auto max-w-[8rem]"} object-contain transition`}
               style={partner.imgFilter ? { filter: partner.imgFilter } : undefined}
               onError={(e) => {
                 const target = e.currentTarget;
                 target.style.display = "none";
                 const parent = target.parentElement;
                 if (parent) {
-                  parent.innerHTML = `<span class="text-xs font-semibold uppercase tracking-wider text-white/60">${partner.name}</span>`;
+                  parent.innerHTML = `<span class="text-xs font-semibold uppercase tracking-wider text-gray-700">${partner.name}</span>`;
                 }
               }}
             />

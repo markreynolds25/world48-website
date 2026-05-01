@@ -12,6 +12,7 @@ const PARTNERS = [
     url: "https://resyncphysiotherapy.ie/",
     logo: "https://resyncphysiotherapy.ie/wp-content/uploads/2023/09/ReSync-Physiotherapy-Logo.webp",
     abbr: "Resync",
+    logoClass: "h-12 w-auto max-w-[10rem]",
   },
   {
     name: "People Playbook",
@@ -73,19 +74,19 @@ function PartnerLogo({ partner }: { partner: typeof PARTNERS[number] }) {
       title={partner.name}
       className="group mx-6 flex shrink-0 items-center justify-center"
     >
-      <div className="flex h-14 w-44 items-center justify-center rounded-lg border border-black/8 bg-gray-100 px-4 shadow-sm transition duration-200 group-hover:shadow-md">
+      <div className="flex h-14 w-44 items-center justify-center rounded-lg border border-black/8 bg-white px-4 shadow-sm transition duration-200 group-hover:shadow-md">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={partner.logo}
           alt={partner.name}
-          className="h-9 w-auto max-w-[9rem] object-contain transition duration-200"
+          className={`${partner.logoClass ?? "h-9 w-auto max-w-[9rem]"} object-contain transition duration-200`}
           style={partner.imgFilter ? { filter: partner.imgFilter } : undefined}
           onError={(e) => {
             const target = e.currentTarget;
             target.style.display = "none";
             const parent = target.parentElement;
             if (parent) {
-              parent.innerHTML = `<span class="text-xs font-semibold uppercase tracking-wider text-white/60">${partner.abbr}</span>`;
+              parent.innerHTML = `<span class="text-xs font-semibold uppercase tracking-wider text-gray-700">${partner.abbr}</span>`;
             }
           }}
         />

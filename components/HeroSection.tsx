@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import NcaaBadge from "@/components/NcaaBadge";
+import EventInfoStrip from "@/components/EventInfoStrip";
 
 const PLAYERS = [
   {
@@ -51,7 +52,7 @@ export default function HeroSection() {
         }
       `}</style>
 
-      <section className="relative flex min-h-[92vh] items-center overflow-hidden">
+      <section className="relative flex min-h-[92vh] flex-col justify-between overflow-hidden pb-16 pt-16 md:pt-24">
 
         {/* ── Background gradients ─────────────────────────────────────── */}
         <div
@@ -97,12 +98,12 @@ export default function HeroSection() {
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(90deg, #0A0C10 0%, rgba(10,12,16,0.93) 14%, rgba(10,12,16,0.42) 40%, transparent 72%), linear-gradient(0deg, rgba(10,12,16,0.60) 0%, transparent 22%)",
+                "linear-gradient(90deg, #0A0C10 0%, rgba(10,12,16,0.93) 14%, rgba(10,12,16,0.42) 40%, transparent 72%), linear-gradient(0deg, rgba(10,12,16,0.75) 0%, transparent 28%)",
             }}
           />
 
-          {/* Player name tag — bottom-right */}
-          <div className="absolute bottom-16 right-7 text-right">
+          {/* Player name tag — above the strip */}
+          <div className="absolute bottom-24 right-7 text-right">
             <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-white/35">
               {player.country}
             </p>
@@ -113,7 +114,7 @@ export default function HeroSection() {
         </div>
 
         {/* ── Left content panel ────────────────────────────────────────── */}
-        <div className="relative z-10 mx-auto w-full max-w-7xl px-6 py-20 md:py-28">
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-6">
           <div className="w-full md:max-w-[46%]">
 
             {/* Headline */}
@@ -134,27 +135,16 @@ export default function HeroSection() {
               showcase in Dublin.
             </p>
 
-            {/* Event meta */}
-            <dl className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm">
-              <div className="flex items-center gap-2 text-white/70">
-                <CalendarIcon />
-                <span>May 15 &amp; 16, 2026</span>
-              </div>
-              <div className="flex items-center gap-2 text-white/70">
-                <LocationIcon />
-                <span>National Basketball Arena, Dublin</span>
-              </div>
-              <div className="flex items-center gap-2 text-white/70">
-                <ClockIcon />
-                <span>Doors 1PM · Showcase 1:30PM</span>
-              </div>
-            </dl>
-
           </div>
         </div>
 
-        {/* ── Carousel dots — absolute bottom-centre ───────────────────── */}
-        <div className="absolute bottom-6 left-0 right-0 z-10 flex items-center justify-center gap-3">
+        {/* ── Event info strip — full width, above dots ────────────────── */}
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-6">
+          <EventInfoStrip />
+        </div>
+
+        {/* ── Carousel dots — bottom-centre ────────────────────────────── */}
+        <div className="relative z-10 flex items-center justify-center gap-3 pb-1">
           {PLAYERS.map((p, i) => (
             <button
               key={p.name}
@@ -171,58 +161,5 @@ export default function HeroSection() {
 
       </section>
     </>
-  );
-}
-
-/* ─── Icon helpers ─────────────────────────────────────────────────────────── */
-
-function CalendarIcon() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 20 20"
-      fill="currentColor"
-      className="h-4 w-4 shrink-0 text-brand-cyan/70"
-    >
-      <path
-        fillRule="evenodd"
-        d="M5.75 2a.75.75 0 0 1 .75.75V4h7V2.75a.75.75 0 0 1 1.5 0V4h.25A2.75 2.75 0 0 1 18 6.75v8.5A2.75 2.75 0 0 1 15.25 18H4.75A2.75 2.75 0 0 1 2 15.25v-8.5A2.75 2.75 0 0 1 4.75 4H5V2.75A.75.75 0 0 1 5.75 2Zm-1 5.5c-.69 0-1.25.56-1.25 1.25v6.5c0 .69.56 1.25 1.25 1.25h10.5c.69 0 1.25-.56 1.25-1.25v-6.5c0-.69-.56-1.25-1.25-1.25H4.75Z"
-        clipRule="evenodd"
-      />
-    </svg>
-  );
-}
-
-function LocationIcon() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 20 20"
-      fill="currentColor"
-      className="h-4 w-4 shrink-0 text-brand-gold/70"
-    >
-      <path
-        fillRule="evenodd"
-        d="m9.69 18.933.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 0 0 .281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 15.1 17 12.462 17 9A7 7 0 1 0 3 9c0 3.462 1.698 6.1 3.354 7.584a13.731 13.731 0 0 0 2.274 1.765 11.842 11.842 0 0 0 1.037.573l.018.008.006.003ZM10 11.25a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z"
-        clipRule="evenodd"
-      />
-    </svg>
-  );
-}
-
-function ClockIcon() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 20 20"
-      fill="currentColor"
-      className="h-4 w-4 shrink-0 text-brand-green/70"
-    >
-      <path
-        fillRule="evenodd"
-        d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm.75-13a.75.75 0 0 0-1.5 0v5c0 .414.336.75.75.75h4a.75.75 0 0 0 0-1.5h-3.25V5Z"
-        clipRule="evenodd"
-      />
-    </svg>
   );
 }

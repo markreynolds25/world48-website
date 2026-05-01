@@ -3,34 +3,29 @@ const CLINIC_URL =
 
 export default function CoachingClinicCard() {
   return (
-    <div className="relative mt-8 w-full overflow-hidden rounded-xl border border-white/10">
+    <div
+      className="mt-8 w-full overflow-hidden rounded-xl border border-white/10"
+      style={{ background: "rgba(10,12,16,0.82)", backdropFilter: "blur(12px)" }}
+    >
+      {/* ── Flyer image — clipped just above the yellow band (~34% height) ── */}
+      <div className="h-[242px] w-full overflow-hidden">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/partners/coaching-clinic.jpeg"
+          alt="International Coaching Clinic & Networking"
+          className="w-full object-cover object-top"
+        />
+      </div>
 
-      {/* ── Full flyer image ── */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src="/partners/coaching-clinic.jpeg"
-        alt="International Coaching Clinic & Networking"
-        className="w-full object-cover"
-      />
-
-      {/* ── Gradient overlay — bottom half ── */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(180deg, transparent 35%, rgba(5,8,12,0.72) 58%, rgba(5,8,12,0.95) 100%)",
-        }}
-      />
-
-      {/* ── Text + CTA overlaid at bottom ── */}
-      <div className="absolute bottom-0 left-0 right-0 flex items-end justify-between gap-3 p-5">
-        <div className="flex flex-col gap-1">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-brand-cyan drop-shadow">
+      {/* ── Info + CTA — flows directly below the cut ── */}
+      <div className="flex items-center justify-between gap-4 px-5 py-4">
+        <div className="flex flex-col gap-0.5">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-brand-cyan">
             Coaching Clinic
           </p>
-          <p className="text-sm font-black text-white drop-shadow">May 14, 2026</p>
-          <p className="text-xs font-medium text-white/80 drop-shadow">
-            6:00 PM – 10:00 PM · National Basketball Arena
+          <p className="text-sm font-black text-white">May 14, 2026</p>
+          <p className="text-xs text-white/60">
+            6:00 PM – 10:00 PM · National Basketball Arena, Dublin
           </p>
         </div>
 
@@ -43,7 +38,6 @@ export default function CoachingClinicCard() {
           Register Now
         </a>
       </div>
-
     </div>
   );
 }

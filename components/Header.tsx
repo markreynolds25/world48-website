@@ -53,18 +53,19 @@ export default function Header() {
             />
           </Link>
 
+          {/* Get Tickets CTA — desktop only, between logo and nav */}
+          <a
+            href={EVENTBRITE_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="hidden md:inline-flex items-center gap-1.5 rounded-md bg-brand-red px-4 py-1.5 text-xs font-semibold text-white shadow-md shadow-brand-red/25 transition hover:bg-brand-red/90"
+          >
+            <TicketIcon />
+            Get Tickets
+          </a>
+
           {/* Desktop nav */}
           <nav className="hidden items-center gap-1 md:flex">
-            {/* Tickets badge — left of Home */}
-            <a
-              href={EVENTBRITE_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="mr-2 inline-flex items-center gap-1 rounded-full border border-brand-red/35 bg-brand-red/8 px-2 py-0.5 text-[10px] font-semibold text-brand-red/80 transition hover:bg-brand-red/15 hover:text-brand-red"
-            >
-              <span className="h-1 w-1 animate-pulse rounded-full bg-brand-red/80" />
-              Tickets on sale
-            </a>
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
@@ -195,5 +196,20 @@ export default function Header() {
         </div>
       </aside>
     </>
+  );
+}
+
+/* ─── Icon helpers ─────────────────────────────────────────────────────────── */
+
+function TicketIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 20 20"
+      fill="currentColor"
+      className="h-3.5 w-3.5 shrink-0"
+    >
+      <path d="M 2 7 C 2 5.895 2.895 5 4 5 H 16 C 17.105 5 18 5.895 18 7 V 9 C 17.448 9 17 9.448 17 10 C 17 10.552 17.448 11 18 11 V 13 C 18 14.105 17.105 15 16 15 H 4 C 2.895 15 2 14.105 2 13 V 11 C 2.552 11 3 10.552 3 10 C 3 9.448 2.552 9 2 9 V 7 Z" />
+    </svg>
   );
 }

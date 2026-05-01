@@ -1,11 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useState, useEffect, useCallback } from "react";
 import NcaaBadge from "@/components/NcaaBadge";
-
-const EVENTBRITE_URL =
-  "https://www.eventbrite.ie/e/undiscovered-world-48-tickets-1988109094821";
 
 const PLAYERS = [
   {
@@ -89,7 +85,6 @@ export default function HeroSection() {
           className="absolute bottom-0 right-0 top-0 z-0 hidden w-[52%] md:block"
           aria-hidden
         >
-          {/* key change triggers animation on each slide switch */}
           <img
             key={`${player.name}-${current}`}
             src={player.image}
@@ -107,7 +102,7 @@ export default function HeroSection() {
           />
 
           {/* Player name tag — bottom-right */}
-          <div className="absolute bottom-10 right-7 text-right">
+          <div className="absolute bottom-16 right-7 text-right">
             <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-white/35">
               {player.country}
             </p>
@@ -120,12 +115,6 @@ export default function HeroSection() {
         {/* ── Left content panel ────────────────────────────────────────── */}
         <div className="relative z-10 mx-auto w-full max-w-7xl px-6 py-20 md:py-28">
           <div className="w-full md:max-w-[46%]">
-
-            {/* Eyebrow pill */}
-            <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-brand-cyan/25 bg-brand-cyan/8 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-brand-cyan">
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-brand-cyan" />
-              Dublin · May 15–16, 2026
-            </p>
 
             {/* Headline */}
             <h1 className="font-display text-5xl font-black leading-[1.01] tracking-tight text-white md:text-7xl lg:text-[5.25rem]">
@@ -161,46 +150,25 @@ export default function HeroSection() {
               </div>
             </dl>
 
-            {/* CTAs */}
-            <div className="mt-7 flex flex-wrap items-center gap-3">
-              <a
-                href={EVENTBRITE_URL}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-md bg-brand-red px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-brand-red/25 transition hover:bg-brand-red/90"
-              >
-                <TicketIcon />
-                Get Tickets
-              </a>
-              <Link
-                href="/players"
-                className="inline-flex items-center justify-center rounded-md border border-surface-3 bg-surface-1/60 px-6 py-3 text-sm font-semibold text-white/80 transition hover:border-white/30 hover:text-white"
-              >
-                Browse Roster
-              </Link>
-            </div>
-
-            {/* Slide indicators */}
-            <div className="mt-8 flex items-center gap-2.5">
-              {PLAYERS.map((p, i) => (
-                <button
-                  key={p.name}
-                  onClick={() => goTo(i)}
-                  aria-label={`View ${p.name}`}
-                  className={`h-1.5 rounded-full transition-all duration-500 ease-out focus:outline-none ${
-                    i === current
-                      ? "w-9 bg-brand-cyan"
-                      : "w-3 bg-white/25 hover:bg-white/50"
-                  }`}
-                />
-              ))}
-              <span className="ml-1 text-[11px] font-semibold tracking-wide text-white/45 transition-all duration-300">
-                {player.name.split(" ")[0]}
-              </span>
-            </div>
-
           </div>
         </div>
+
+        {/* ── Carousel dots — absolute bottom-centre ───────────────────── */}
+        <div className="absolute bottom-6 left-0 right-0 z-10 flex items-center justify-center gap-3">
+          {PLAYERS.map((p, i) => (
+            <button
+              key={p.name}
+              onClick={() => goTo(i)}
+              aria-label={`View ${p.name}`}
+              className={`h-3 w-3 rounded-full border-2 transition-all duration-500 ease-out focus:outline-none ${
+                i === current
+                  ? "border-white bg-white"
+                  : "border-white/60 bg-transparent hover:border-white"
+              }`}
+            />
+          ))}
+        </div>
+
       </section>
     </>
   );
@@ -255,19 +223,6 @@ function ClockIcon() {
         d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm.75-13a.75.75 0 0 0-1.5 0v5c0 .414.336.75.75.75h4a.75.75 0 0 0 0-1.5h-3.25V5Z"
         clipRule="evenodd"
       />
-    </svg>
-  );
-}
-
-function TicketIcon() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 20 20"
-      fill="currentColor"
-      className="h-4 w-4 shrink-0"
-    >
-      <path d="M 2 7 C 2 5.895 2.895 5 4 5 H 16 C 17.105 5 18 5.895 18 7 V 9 C 17.448 9 17 9.448 17 10 C 17 10.552 17.448 11 18 11 V 13 C 18 14.105 17.105 15 16 15 H 4 C 2.895 15 2 14.105 2 13 V 11 C 2.552 11 3 10.552 3 10 C 3 9.448 2.552 9 2 9 V 7 Z" />
     </svg>
   );
 }

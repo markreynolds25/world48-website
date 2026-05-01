@@ -11,9 +11,9 @@ const PLAYERS = [
     image: "/Players/colin-schroeder.jpg",
   },
   {
-    name: "Yannick Pinas",
+    name: "Jannick Pinas",
     country: "Netherlands",
-    image: "/Players/yannick-pinas.jpeg",
+    image: "/Players/jannick-pinas.jpeg",
   },
   {
     name: "Martin Minarovjech",

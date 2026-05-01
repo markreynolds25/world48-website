@@ -12,6 +12,7 @@ const NAV_LINKS = [
   { href: "/", label: "Home" },
   { href: "/players", label: "Players" },
   { href: "/about", label: "About" },
+  { href: "/ncaa-eligibility", label: "NCAA Eligibility" },
   { href: "/sponsors", label: "Partners" },
   { href: "/contact", label: "Contact" },
 ];

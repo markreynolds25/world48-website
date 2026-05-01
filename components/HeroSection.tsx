@@ -138,9 +138,9 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* ── Coaching clinic card — left column only ──────────────────── */}
+        {/* ── Coaching clinic card — half the left column ──────────────── */}
         <div className="relative z-10 mx-auto w-full max-w-7xl px-6">
-          <div className="w-full md:max-w-[46%]">
+          <div className="w-1/2 md:max-w-[23%]">
             <CoachingClinicCard />
           </div>
         </div>

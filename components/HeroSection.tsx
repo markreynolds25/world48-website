@@ -14,14 +14,14 @@ const PLAYERS = [
     image: "/Players/colin-schroeder.jpg",
   },
   {
-    name: "Markas Mikalickas",
-    country: "Lithuania",
-    image: "/Players/markas-mikalickas.jpg",
+    name: "Yannick Pinas",
+    country: "Netherlands",
+    image: "/Players/yannick-pinas.jpg",
   },
   {
-    name: "Adrien Chammartin",
-    country: "Switzerland",
-    image: "/Players/adrien-chammartin.jpg",
+    name: "Martin Minarovjech",
+    country: "Slovakia",
+    image: "/Players/martin-minarovjech.jpg",
   },
 ];
 

@@ -20,6 +20,11 @@ const PLAYERS = [
     country: "Slovakia",
     image: "/Players/martin-minarovjech.jpeg",
   },
+  {
+    name: "Mark Burns",
+    country: "Ireland",
+    image: "/Players/mark-burns.jpeg",
+  },
 ];
 
 const INTERVAL = 5000;

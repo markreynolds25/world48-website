@@ -16,12 +16,12 @@ const PLAYERS = [
   {
     name: "Yannick Pinas",
     country: "Netherlands",
-    image: "/Players/yannick-pinas.jpg",
+    image: "/Players/yannick-pinas.jpeg",
   },
   {
     name: "Martin Minarovjech",
     country: "Slovakia",
-    image: "/Players/martin-minarovjech.jpg",
+    image: "/Players/martin-minarovjech.jpeg",
   },
 ];
 

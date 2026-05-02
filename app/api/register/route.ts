@@ -17,7 +17,15 @@ export async function POST(request: Request) {
       );
     }
 
-    await addRegistration({ name, email, role });
+    const result = await addRegistration({ name, email, role });
+
+    if (!result.ok) {
+      console.error("[api/register] Sheet write failed:", result.error);
+      return NextResponse.json(
+        { success: false, sheetError: result.error },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json({ success: true });
   } catch (error) {

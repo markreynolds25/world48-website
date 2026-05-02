@@ -192,18 +192,20 @@ export async function addRegistration(data: {
   name: string;
   email: string;
   role: string;
-}): Promise<void> {
+}): Promise<{ ok: boolean; error?: string }> {
   try {
     const auth = getAuthClient();
     if (!auth) {
-      console.warn('[googleSheets] Auth not available — skipping registration write.');
-      return;
+      const msg = 'Auth not available — check GOOGLE_SHEETS_CREDENTIALS env var.';
+      console.warn('[googleSheets]', msg);
+      return { ok: false, error: msg };
     }
 
     const sheetId = process.env.GOOGLE_SHEETS_ID;
     if (!sheetId) {
-      console.warn('[googleSheets] GOOGLE_SHEETS_ID not set — skipping registration write.');
-      return;
+      const msg = 'GOOGLE_SHEETS_ID not set.';
+      console.warn('[googleSheets]', msg);
+      return { ok: false, error: msg };
     }
 
     const sheets = google.sheets({ version: 'v4', auth });
@@ -219,8 +221,10 @@ export async function addRegistration(data: {
     });
 
     console.log(`[googleSheets] Registration saved: ${data.email}`);
+    return { ok: true };
   } catch (error) {
+    const msg = error instanceof Error ? error.message : String(error);
     console.error('[googleSheets] Failed to save registration:', error);
-    // Don't throw — the caller handles best-effort behaviour
+    return { ok: false, error: msg };
   }
 }

@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import NcaaBadge from "@/components/NcaaBadge";
-import CoachingClinicCard from "@/components/CoachingClinicCard";
+import SponsorCard from "@/components/SponsorCard";
 
 const PLAYERS = [
   {
@@ -143,10 +143,10 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* ── Coaching clinic card — half the left column ──────────────── */}
+        {/* ── Sponsor card — half the left column ──────────────────────── */}
         <div className="relative z-10 mx-auto w-full max-w-7xl px-6">
           <div className="w-1/2 md:max-w-[23%]">
-            <CoachingClinicCard />
+            <SponsorCard />
           </div>
         </div>
 

@@ -57,7 +57,7 @@ export default function PrivacyPage() {
       <h1 className="font-display text-4xl font-black leading-[1.05] tracking-tight md:text-5xl">
         Privacy policy
       </h1>
-      <p className="mt-4 text-sm text-white/45">Last updated: July 2026</p>
+      <p className="mt-4 text-sm text-ink-faint">Last updated: July 2026</p>
 
       <div className="mt-10 space-y-10">
         {SECTIONS.map((s) => (

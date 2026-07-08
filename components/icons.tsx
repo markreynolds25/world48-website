@@ -123,6 +123,40 @@ export function ChevronRight({ className }: IconProps) {
   );
 }
 
+export function WarningMark({ className }: IconProps) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.25"
+      className={className ?? "h-4 w-4 shrink-0"}
+      aria-hidden
+    >
+      <path d="M12 4 3 19h18L12 4Z" />
+      <path d="M12 10v4M12 16.5v.01" />
+    </svg>
+  );
+}
+
+export function ClockMark({ className }: IconProps) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.25"
+      className={className ?? "h-4 w-4 shrink-0"}
+      aria-hidden
+    >
+      <circle cx="12" cy="12" r="8.5" />
+      <path d="M12 7.5V12l3 2" />
+    </svg>
+  );
+}
+
 export function TrophyMark({ className }: IconProps) {
   return (
     <svg

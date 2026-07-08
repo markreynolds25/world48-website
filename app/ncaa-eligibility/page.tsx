@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import ContactForm from "@/components/ContactForm";
-import { ArrowUpRight } from "@/components/icons";
+import { ArrowUpRight, WarningMark, ClockMark } from "@/components/icons";
 
 export const metadata: Metadata = {
   title: "NCAA Eligibility | World 48",
@@ -158,8 +158,9 @@ export default function NcaaEligibilityPage() {
 
                 {/* Warning */}
                 {step.warning && (
-                  <p className="mt-3 rounded-lg border border-brand-gold/25 bg-brand-gold/8 px-3 py-2 text-xs font-semibold text-brand-gold">
-                    ⚠️ {step.warning}
+                  <p className="mt-3 flex items-start gap-2 rounded-lg border border-brand-gold/25 bg-brand-gold/8 px-3 py-2 text-xs font-semibold text-brand-gold">
+                    <WarningMark className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+                    <span>{step.warning}</span>
                   </p>
                 )}
 
@@ -174,8 +175,9 @@ export default function NcaaEligibilityPage() {
                 </a>
 
                 {/* Time estimate */}
-                <p className="mt-2.5 text-center text-[11px] text-white/35">
-                  ⏱ {step.time}
+                <p className="mt-2.5 flex items-center justify-center gap-1.5 text-[11px] text-ink-faint">
+                  <ClockMark className="h-3 w-3" />
+                  {step.time}
                 </p>
               </div>
             ))}

@@ -28,6 +28,9 @@ export default function Footer() {
           <Link href="/contact" className="hover:text-white">
             Contact
           </Link>
+          <Link href="/privacy" className="hover:text-white">
+            Privacy
+          </Link>
           {/* Instagram icon */}
           <a
             href="https://www.instagram.com/undiscoveredworld48"

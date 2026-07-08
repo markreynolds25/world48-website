@@ -2,11 +2,10 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { useRegistration } from "@/hooks/useRegistration";
-import RegisterModal from "@/components/RegisterModal";
+import WaitlistModal from "@/components/WaitlistModal";
+import { InstagramMark } from "@/components/icons";
 
-const EVENTBRITE_URL =
-  "https://www.eventbrite.ie/e/undiscovered-world-48-tickets-1988109094821";
+const INSTAGRAM_URL = "https://www.instagram.com/undiscoveredworld48/";
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
@@ -19,8 +18,7 @@ const NAV_LINKS = [
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [registerOpen, setRegisterOpen] = useState(false);
-  const { registration, register, loaded } = useRegistration();
+  const [waitlistOpen, setWaitlistOpen] = useState(false);
 
   // Lock body scroll when menu is open
   useEffect(() => {
@@ -34,11 +32,7 @@ export default function Header() {
 
   return (
     <>
-      <RegisterModal
-        open={registerOpen}
-        onClose={() => setRegisterOpen(false)}
-        onSuccess={(data) => register(data)}
-      />
+      <WaitlistModal open={waitlistOpen} onClose={() => setWaitlistOpen(false)} />
 
       <header className="sticky top-0 z-40 border-b border-surface-3/60 bg-surface-0/80 backdrop-blur-md">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
@@ -53,17 +47,6 @@ export default function Header() {
             />
           </Link>
 
-          {/* Get Tickets CTA — desktop only, between logo and nav */}
-          <a
-            href={EVENTBRITE_URL}
-            target="_blank"
-            rel="noreferrer"
-            className="hidden md:inline-flex items-center gap-1.5 rounded-md bg-brand-red px-4 py-1.5 text-xs font-semibold text-white shadow-md shadow-brand-red/25 transition hover:bg-brand-red/90"
-          >
-            <TicketIcon />
-            Get Tickets
-          </a>
-
           {/* Desktop nav */}
           <nav className="hidden items-center gap-1 md:flex">
             {NAV_LINKS.map((link) => (
@@ -77,23 +60,24 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* Desktop CTA */}
-          <div className="hidden md:flex items-center gap-3">
-            {loaded && registration ? (
-              <span className="inline-flex items-center gap-2 rounded-full border border-surface-3 bg-surface-1 px-3 py-1.5 text-xs font-semibold text-white/80">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4 text-brand-cyan/70">
-                  <path fillRule="evenodd" d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-5.5-2.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0ZM10 12a5.99 5.99 0 0 0-4.793 2.39A6.483 6.483 0 0 0 10 16.5a6.483 6.483 0 0 0 4.793-2.11A5.99 5.99 0 0 0 10 12Z" clipRule="evenodd" />
-                </svg>
-                {registration.name.split(" ")[0]}
-              </span>
-            ) : (
-              <button
-                onClick={() => setRegisterOpen(true)}
-                className="rounded-md bg-brand-red px-4 py-2 text-sm font-semibold text-white transition hover:bg-brand-red/90"
-              >
-                Register
-              </button>
-            )}
+          {/* Desktop CTAs */}
+          <div className="hidden items-center gap-3 md:flex">
+            <a
+              href={INSTAGRAM_URL}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="World 48 on Instagram"
+              title="@undiscoveredworld48"
+              className="flex h-9 w-9 items-center justify-center rounded-md text-white/60 transition hover:bg-surface-1 hover:text-white"
+            >
+              <InstagramMark className="h-[18px] w-[18px]" />
+            </a>
+            <button
+              onClick={() => setWaitlistOpen(true)}
+              className="rounded-md bg-brand-red px-4 py-2 text-sm font-semibold text-white shadow-md shadow-brand-red/25 transition hover:bg-brand-red/90"
+            >
+              Join 2027 Waitlist
+            </button>
           </div>
 
           {/* Mobile hamburger */}
@@ -146,7 +130,7 @@ export default function Header() {
             type="button"
             aria-label="Close menu"
             onClick={close}
-            className="flex h-8 w-8 items-center justify-center rounded-md text-white/60 hover:text-white"
+            className="flex h-10 w-10 items-center justify-center rounded-md text-white/60 hover:text-white"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -171,45 +155,31 @@ export default function Header() {
               {link.label}
             </Link>
           ))}
+          <a
+            href={INSTAGRAM_URL}
+            target="_blank"
+            rel="noreferrer"
+            onClick={close}
+            className="flex items-center gap-2.5 rounded-lg px-4 py-3 text-base font-medium text-white/70 transition hover:bg-surface-2 hover:text-white"
+          >
+            <InstagramMark className="h-[18px] w-[18px]" />
+            @undiscoveredworld48
+          </a>
         </nav>
 
-        {/* Drawer CTA */}
+        {/* Drawer CTA — persistent primary action on mobile */}
         <div className="mt-auto border-t border-surface-3/60 p-4">
-          {loaded && registration ? (
-            <div className="flex items-center justify-center gap-2 rounded-full border border-surface-3 bg-surface-2 px-4 py-3 text-sm font-semibold text-white/80">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4 text-brand-cyan/70">
-                <path fillRule="evenodd" d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-5.5-2.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0ZM10 12a5.99 5.99 0 0 0-4.793 2.39A6.483 6.483 0 0 0 10 16.5a6.483 6.483 0 0 0 4.793-2.11A5.99 5.99 0 0 0 10 12Z" clipRule="evenodd" />
-              </svg>
-              {registration.name.split(" ")[0]}
-            </div>
-          ) : (
-            <button
-              onClick={() => {
-                setRegisterOpen(true);
-                close();
-              }}
-              className="block w-full rounded-md bg-brand-red py-3 text-center text-sm font-semibold text-white transition hover:bg-brand-red/90"
-            >
-              Register
-            </button>
-          )}
+          <button
+            onClick={() => {
+              setWaitlistOpen(true);
+              close();
+            }}
+            className="block w-full rounded-md bg-brand-red py-3 text-center text-sm font-semibold text-white transition hover:bg-brand-red/90"
+          >
+            Join 2027 Waitlist
+          </button>
         </div>
       </aside>
     </>
-  );
-}
-
-/* ─── Icon helpers ─────────────────────────────────────────────────────────── */
-
-function TicketIcon() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 20 20"
-      fill="currentColor"
-      className="h-3.5 w-3.5 shrink-0"
-    >
-      <path d="M 2 7 C 2 5.895 2.895 5 4 5 H 16 C 17.105 5 18 5.895 18 7 V 9 C 17.448 9 17 9.448 17 10 C 17 10.552 17.448 11 18 11 V 13 C 18 14.105 17.105 15 16 15 H 4 C 2.895 15 2 14.105 2 13 V 11 C 2.552 11 3 10.552 3 10 C 3 9.448 2.552 9 2 9 V 7 Z" />
-    </svg>
   );
 }

@@ -15,7 +15,7 @@ const STEPS = [
     title: "Register with NCAA",
     description:
       "Create or renew your account in the Basketball Certification System (BBCS). This is the mandatory first step for all international players.",
-    url: "http://bbcs.ncaa.org",
+    url: "https://bbcs.ncaa.org",
     urlLabel: "Open BBCS →",
     time: "15–20 minutes",
     warning:
@@ -67,7 +67,7 @@ const RESOURCES = [
   },
   {
     title: "Basketball Certification System (BBCS)",
-    url: "http://bbcs.ncaa.org",
+    url: "https://bbcs.ncaa.org",
     description: "Register or renew your certification account here.",
   },
   {

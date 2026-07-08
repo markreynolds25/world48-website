@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { getPlayerById, getPlayersWithCache } from "@/lib/googleSheets";
+import { getPlayerById, getPlayersWithCache, getPlacements, slugify } from "@/lib/googleSheets";
 import type { PlayerData } from "@/lib/googleSheets";
 import { countryFlag } from "@/lib/country";
 import PlayerContactForm from "@/components/PlayerContactForm";
@@ -22,9 +22,15 @@ export async function generateMetadata({
   const player = await getPlayerById(params.id);
   if (!player) return { title: "Player not found · World 48" };
   const metaParts = [player.position, player.country].filter(Boolean);
+  const description = `${player.name}${metaParts.length ? " · " + metaParts.join(" · ") : ""} — World 48 prospect profile with stats and game film.`;
   return {
     title: `${player.name} · World 48`,
-    description: `${player.name}${metaParts.length ? " · " + metaParts.join(" · ") : ""}`,
+    description,
+    openGraph: {
+      title: `${player.name} · World 48`,
+      description,
+      images: player.photo_url ? [player.photo_url] : undefined,
+    },
   };
 }
 
@@ -35,6 +41,15 @@ export default async function PlayerProfilePage({
 }) {
   const player = await getPlayerById(params.id);
   if (!player) notFound();
+
+  // Match this player against the 2026 placements list (by name slug).
+  const placements = await getPlacements();
+  const offer = placements.find((p) => slugify(p.player) === player.id);
+
+  const hasPrimaryStats =
+    player.ppg !== undefined ||
+    player.rpg !== undefined ||
+    player.apg !== undefined;
 
   const highlightEmbed = toEmbedUrl(player.highlight_url);
   const initials = getInitials(player.name);
@@ -109,6 +124,23 @@ export default async function PlayerProfilePage({
                   </span>
                 </div>
               )}
+
+              {/* Offer banner — integrated into the photo bottom edge */}
+              {offer && (
+                <div className="absolute inset-x-0 bottom-0 border-t-2 border-brand-gold bg-surface-0/85 px-4 py-3 backdrop-blur-md md:px-6">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-gold/80">
+                    Offer received
+                  </p>
+                  <p className="mt-0.5 truncate font-display text-lg font-black tracking-tight text-white">
+                    {offer.school}
+                    {offer.level ? (
+                      <span className="ml-2 text-sm font-bold text-brand-gold">
+                        {offer.level.trim().toUpperCase() === "D1" ? "NCAA D1" : offer.level}
+                      </span>
+                    ) : null}
+                  </p>
+                </div>
+              )}
             </div>
           </div>
 
@@ -131,12 +163,14 @@ export default async function PlayerProfilePage({
               </p>
             )}
 
-            {/* Primary stats */}
-            <div className="mt-8 grid grid-cols-3 gap-3">
-              <PrimaryStat label="PPG" value={player.ppg} accent="text-brand-cyan" />
-              <PrimaryStat label="RPG" value={player.rpg} accent="text-brand-green" />
-              <PrimaryStat label="APG" value={player.apg} accent="text-brand-gold" />
-            </div>
+            {/* Primary stats — hidden entirely when none are on file */}
+            {hasPrimaryStats && (
+              <div className="mt-8 grid grid-cols-3 gap-3">
+                <PrimaryStat label="PPG" value={player.ppg} accent="text-brand-cyan" />
+                <PrimaryStat label="RPG" value={player.rpg} accent="text-brand-green" />
+                <PrimaryStat label="APG" value={player.apg} accent="text-brand-gold" />
+              </div>
+            )}
 
             {/* Secondary stats */}
             <SecondaryStats player={player} />

@@ -15,7 +15,19 @@ import { countryFlag } from "@/lib/country";
  *
  * Falls back to a brand-gradient + monogram when no photo is set.
  */
-export default function PlayerCard({ player }: { player: PlayerData }) {
+
+export interface PlayerOffer {
+  school: string;
+  level: string;
+}
+
+export default function PlayerCard({
+  player,
+  offer,
+}: {
+  player: PlayerData;
+  offer?: PlayerOffer;
+}) {
   const initials = getInitials(player.name);
   const flag = countryFlag(player.country);
   const countryDisplay = player.country
@@ -66,6 +78,15 @@ export default function PlayerCard({ player }: { player: PlayerData }) {
               <div className="absolute left-2.5 top-2.5 flex items-baseline gap-0.5 rounded-md bg-surface-0/75 px-2.5 py-1 font-display font-black leading-none tracking-tight text-white backdrop-blur-md">
                 <span className="text-sm text-white/50">#</span>
                 <span className="text-lg">{player.event_number}</span>
+              </div>
+            )}
+
+            {/* Offer banner — integrated into the photo bottom edge */}
+            {offer && (
+              <div className="absolute inset-x-0 bottom-0 border-t-2 border-brand-gold bg-surface-0/80 px-3 py-2 backdrop-blur-md">
+                <p className="truncate text-[10px] font-bold uppercase tracking-widest text-brand-gold">
+                  Offer received · {offer.school}
+                </p>
               </div>
             )}
           </div>

@@ -26,7 +26,7 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["var(--font-inter)", "ui-sans-serif", "system-ui", "sans-serif"],
-        display: ["var(--font-inter)", "ui-sans-serif", "system-ui", "sans-serif"],
+        display: ["var(--font-anton)", "var(--font-inter)", "ui-sans-serif", "system-ui", "sans-serif"],
       },
       backgroundImage: {
         "brand-gradient":

@@ -50,8 +50,10 @@ export interface PlayerData {
   photo_url?: string;    // local path like "/players/name.jpg" or a full https URL
 }
 
-function slugify(input: string): string {
+export function slugify(input: string): string {
   return input
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '') // strip diacritics: Rūdis → Rudis
     .toLowerCase()
     .trim()
     .replace(/[^a-z0-9]+/g, '-')
@@ -185,6 +187,126 @@ export async function getPlayersWithCache(): Promise<PlayerData[]> {
 export async function getPlayerById(id: string): Promise<PlayerData | null> {
   const players = await getPlayersWithCache();
   return players.find((p) => p.id === id) ?? null;
+}
+
+/**
+ * Shape of a placement row from the "Placements" tab.
+ * Columns: Player | School | Level | Country | Note
+ * Level is one of D1, D2, JUCO, NAIA, Prep.
+ */
+export interface Placement {
+  player: string;
+  school: string;
+  level: string;
+  country?: string;
+  note?: string;
+}
+
+let cachedPlacements: Placement[] | null = null;
+let placementsTimestamp = 0;
+
+export async function getPlacements(): Promise<Placement[]> {
+  const now = Date.now();
+  if (cachedPlacements && now - placementsTimestamp < CACHE_DURATION) {
+    return cachedPlacements;
+  }
+  try {
+    const auth = getAuthClient();
+    const sheetId = process.env.GOOGLE_SHEETS_ID;
+    if (!auth || !sheetId) return cachedPlacements ?? [];
+
+    const sheets = google.sheets({ version: 'v4', auth });
+    const response = await sheets.spreadsheets.values.get({
+      spreadsheetId: sheetId,
+      range: 'Placements!A:E',
+    });
+
+    const rows = response.data.values || [];
+    const placements: Placement[] = [];
+    for (let i = 1; i < rows.length; i++) {
+      const row = rows[i];
+      if (!row || !row[0] || !row[1]) continue;
+      placements.push({
+        player: String(row[0]).trim(),
+        school: String(row[1]).trim(),
+        level: row[2] ? String(row[2]).trim() : '',
+        country: row[3] ? String(row[3]).trim() : undefined,
+        note: row[4] ? String(row[4]).trim() : undefined,
+      });
+    }
+    cachedPlacements = placements;
+    placementsTimestamp = now;
+    return placements;
+  } catch (error) {
+    console.error('[googleSheets] Failed to read Placements:', error);
+    return cachedPlacements ?? [];
+  }
+}
+
+// Append a 2027 waitlist signup to the "Waitlist" tab.
+export async function addWaitlist(data: {
+  name: string;
+  email: string;
+  role: string;
+}): Promise<{ ok: boolean; error?: string }> {
+  try {
+    const auth = getAuthClient();
+    const sheetId = process.env.GOOGLE_SHEETS_ID;
+    if (!auth) return { ok: false, error: 'Auth not available.' };
+    if (!sheetId) return { ok: false, error: 'GOOGLE_SHEETS_ID not set.' };
+
+    const sheets = google.sheets({ version: 'v4', auth });
+    await sheets.spreadsheets.values.append({
+      spreadsheetId: sheetId,
+      range: 'Waitlist!A:D',
+      valueInputOption: 'USER_ENTERED',
+      requestBody: {
+        values: [[new Date().toISOString(), data.name, data.email, data.role]],
+      },
+    });
+    return { ok: true };
+  } catch (error) {
+    const msg = error instanceof Error ? error.message : String(error);
+    console.error('[googleSheets] Failed to save waitlist signup:', error);
+    return { ok: false, error: msg };
+  }
+}
+
+// Persist a contact/request-contact message to the "Registrations" tab so no
+// message is ever lost, even while the email service is unconfigured.
+export async function addContactMessage(data: {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}): Promise<{ ok: boolean; error?: string }> {
+  try {
+    const auth = getAuthClient();
+    const sheetId = process.env.GOOGLE_SHEETS_ID;
+    if (!auth) return { ok: false, error: 'Auth not available.' };
+    if (!sheetId) return { ok: false, error: 'GOOGLE_SHEETS_ID not set.' };
+
+    const sheets = google.sheets({ version: 'v4', auth });
+    await sheets.spreadsheets.values.append({
+      spreadsheetId: sheetId,
+      range: 'Registrations!A:E',
+      valueInputOption: 'USER_ENTERED',
+      requestBody: {
+        values: [[
+          new Date().toISOString(),
+          data.name,
+          data.email,
+          `Message: ${data.subject}`,
+          data.message,
+        ]],
+      },
+    });
+    return { ok: true };
+  } catch (error) {
+    const msg = error instanceof Error ? error.message : String(error);
+    console.error('[googleSheets] Failed to save contact message:', error);
+    return { ok: false, error: msg };
+  }
 }
 
 // Append a new registration row to the "Registrations" tab.

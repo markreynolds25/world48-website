@@ -10,6 +10,7 @@ const INSTAGRAM_URL = "https://www.instagram.com/undiscoveredworld48/";
 const NAV_LINKS = [
   { href: "/", label: "Home" },
   { href: "/players", label: "Players" },
+  { href: "/register", label: "Register 2027" },
   { href: "/about", label: "About" },
   { href: "/ncaa-eligibility", label: "NCAA Eligibility" },
   { href: "/sponsors", label: "Partners" },

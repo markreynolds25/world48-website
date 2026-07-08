@@ -309,6 +309,213 @@ export async function addContactMessage(data: {
   }
 }
 
+/* ─── 2027 registrations (CoachRegistrations / PlayerRegistrations tabs) ─── */
+
+export type RegistrationTab = 'CoachRegistrations' | 'PlayerRegistrations';
+
+// Column layout per tab. MUST match the sheet header rows exactly.
+const TAB_LAYOUT: Record<
+  RegistrationTab,
+  {
+    range: string;
+    nameCol: number;
+    emailCol: number;
+    ccCol?: number;
+    statusCol: number;
+    sentCol: number;
+    sentColLetter: string;
+  }
+> = {
+  CoachRegistrations: {
+    range: 'CoachRegistrations!A:O',
+    nameCol: 1,
+    emailCol: 4,
+    statusCol: 13,
+    sentCol: 14,
+    sentColLetter: 'O',
+  },
+  PlayerRegistrations: {
+    range: 'PlayerRegistrations!A:U',
+    nameCol: 1,
+    emailCol: 2,
+    ccCol: 17,
+    statusCol: 19,
+    sentCol: 20,
+    sentColLetter: 'U',
+  },
+};
+
+async function appendRow(
+  range: string,
+  values: string[]
+): Promise<{ ok: boolean; error?: string }> {
+  try {
+    const auth = getAuthClient();
+    if (!auth) {
+      return { ok: false, error: 'Auth not available — check GOOGLE_SHEETS_CREDENTIALS.' };
+    }
+    const sheetId = process.env.GOOGLE_SHEETS_ID;
+    if (!sheetId) {
+      return { ok: false, error: 'GOOGLE_SHEETS_ID not set.' };
+    }
+    const sheets = google.sheets({ version: 'v4', auth });
+    await sheets.spreadsheets.values.append({
+      spreadsheetId: sheetId,
+      range,
+      valueInputOption: 'USER_ENTERED',
+      requestBody: { values: [values] },
+    });
+    return { ok: true };
+  } catch (error) {
+    const msg = error instanceof Error ? error.message : String(error);
+    console.error(`[googleSheets] Append to ${range} failed:`, error);
+    return { ok: false, error: msg };
+  }
+}
+
+export async function addCoachRegistration(d: {
+  name: string;
+  title: string;
+  institution?: string;
+  email: string;
+  attendance: string;
+  bioLink?: string;
+  accommodation: string;
+  recruitingFocus?: string;
+  social?: string;
+  days: string;
+  dietary: string;
+  irishNight?: string;
+}): Promise<{ ok: boolean; error?: string }> {
+  return appendRow('CoachRegistrations!A:O', [
+    new Date().toISOString(),
+    d.name,
+    d.title,
+    d.institution ?? '',
+    d.email,
+    d.attendance,
+    d.bioLink ?? '',
+    d.accommodation,
+    d.recruitingFocus ?? '',
+    d.social ?? '',
+    d.days,
+    d.dietary,
+    d.irishNight ?? '',
+    'pending',
+    '',
+  ]);
+}
+
+export async function addPlayerRegistration(d: {
+  name: string;
+  email: string;
+  whatsapp?: string;
+  dob: string;
+  gradYear: string;
+  country: string;
+  headshotUrl?: string;
+  highlightUrl?: string;
+  statsLink?: string;
+  twitter?: string;
+  instagram?: string;
+  agent?: string;
+  days: string;
+  jerseyNumber?: string;
+  jerseySize?: string;
+  parentName?: string;
+  parentEmail?: string;
+}): Promise<{ ok: boolean; error?: string }> {
+  return appendRow('PlayerRegistrations!A:U', [
+    new Date().toISOString(),
+    d.name,
+    d.email,
+    d.whatsapp ?? '',
+    d.dob,
+    d.gradYear,
+    d.country,
+    d.headshotUrl ?? '',
+    d.highlightUrl ?? '',
+    d.statsLink ?? '',
+    d.twitter ?? '',
+    d.instagram ?? '',
+    d.agent ?? '',
+    d.days,
+    d.jerseyNumber ?? '',
+    d.jerseySize ?? '',
+    d.parentName ?? '',
+    d.parentEmail ?? '',
+    'yes',
+    'pending',
+    '',
+  ]);
+}
+
+export interface RegistrationRow {
+  rowNumber: number; // 1-indexed sheet row (header = 1)
+  name: string;
+  email: string;
+  ccEmail?: string;
+  status: string;
+  emailSentAt: string;
+}
+
+export async function getRegistrationRows(
+  tab: RegistrationTab
+): Promise<RegistrationRow[]> {
+  try {
+    const auth = getAuthClient();
+    if (!auth) return [];
+    const sheetId = process.env.GOOGLE_SHEETS_ID;
+    if (!sheetId) return [];
+
+    const layout = TAB_LAYOUT[tab];
+    const sheets = google.sheets({ version: 'v4', auth });
+    const response = await sheets.spreadsheets.values.get({
+      spreadsheetId: sheetId,
+      range: layout.range,
+    });
+
+    const rows = response.data.values || [];
+    const out: RegistrationRow[] = [];
+    for (let i = 1; i < rows.length; i++) {
+      const row = rows[i];
+      if (!row || !row[layout.nameCol] || !row[layout.emailCol]) continue;
+      out.push({
+        rowNumber: i + 1,
+        name: String(row[layout.nameCol]).trim(),
+        email: String(row[layout.emailCol]).trim(),
+        ccEmail:
+          layout.ccCol !== undefined && row[layout.ccCol]
+            ? String(row[layout.ccCol]).trim()
+            : undefined,
+        status: row[layout.statusCol] ? String(row[layout.statusCol]).trim() : '',
+        emailSentAt: row[layout.sentCol] ? String(row[layout.sentCol]).trim() : '',
+      });
+    }
+    return out;
+  } catch (error) {
+    console.error(`[googleSheets] Reading ${tab} failed:`, error);
+    return [];
+  }
+}
+
+export async function markRegistrationEmailSent(
+  tab: RegistrationTab,
+  rowNumber: number
+): Promise<void> {
+  const auth = getAuthClient();
+  const sheetId = process.env.GOOGLE_SHEETS_ID;
+  if (!auth || !sheetId) throw new Error('Sheets not configured');
+  const layout = TAB_LAYOUT[tab];
+  const sheets = google.sheets({ version: 'v4', auth });
+  await sheets.spreadsheets.values.update({
+    spreadsheetId: sheetId,
+    range: `${tab}!${layout.sentColLetter}${rowNumber}`,
+    valueInputOption: 'USER_ENTERED',
+    requestBody: { values: [[new Date().toISOString()]] },
+  });
+}
+
 // Append a new registration row to the "Registrations" tab.
 export async function addRegistration(data: {
   name: string;

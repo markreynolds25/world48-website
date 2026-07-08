@@ -1,3 +1,4 @@
+import Link from "next/link";
 import HeroSection from "@/components/HeroSection";
 import PartnersCarousel from "@/components/PartnersCarousel";
 import PlacementsShowcase from "@/components/PlacementsShowcase";
@@ -76,8 +77,17 @@ export default async function HomePage() {
             tickets land with the waitlist first — coaches, players, parents
             and fans all welcome.
           </p>
-          <div className="mt-6">
+          <div className="mt-6 flex flex-wrap items-center gap-4">
             <WaitlistCTA />
+            <span className="text-sm text-white/60">
+              Playing or coaching in 2027?{" "}
+              <Link
+                href="/register"
+                className="font-semibold text-brand-cyan underline-offset-2 hover:underline"
+              >
+                Register here
+              </Link>
+            </span>
           </div>
         </div>
       </section>

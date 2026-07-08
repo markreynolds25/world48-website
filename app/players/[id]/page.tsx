@@ -5,6 +5,7 @@ import { getPlayerById, getPlayersWithCache, getPlacements, slugify } from "@/li
 import type { PlayerData } from "@/lib/googleSheets";
 import { countryFlag } from "@/lib/country";
 import PlayerContactForm from "@/components/PlayerContactForm";
+import { ChevronLeft, ArrowUpRight } from "@/components/icons";
 
 export const revalidate = 300;
 
@@ -68,20 +69,9 @@ export default async function PlayerProfilePage({
       {/* Back link */}
       <Link
         href="/players"
-        className="mb-8 inline-flex items-center gap-2 text-sm text-white/60 transition hover:text-white"
+        className="mb-8 inline-flex items-center gap-1.5 text-sm text-ink-muted transition hover:text-white"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-          className="h-4 w-4"
-        >
-          <path
-            fillRule="evenodd"
-            d="M12.79 5.23a.75.75 0 0 1 0 1.06L9.06 10l3.72 3.71a.75.75 0 1 1-1.06 1.06l-4.25-4.24a.75.75 0 0 1 0-1.06l4.25-4.24a.75.75 0 0 1 1.06 0Z"
-            clipRule="evenodd"
-          />
-        </svg>
+        <ChevronLeft className="h-4 w-4" />
         Back to roster
       </Link>
 
@@ -220,9 +210,10 @@ export default async function PlayerProfilePage({
               href={player.highlight_url}
               target="_blank"
               rel="noreferrer"
-              className="text-sm text-white/60 transition hover:text-white"
+              className="inline-flex items-center gap-1.5 text-sm text-ink-muted transition hover:text-white"
             >
-              Open in new tab →
+              Open in new tab
+              <ArrowUpRight className="h-3.5 w-3.5" />
             </a>
           )}
         </div>
@@ -266,10 +257,10 @@ function PrimaryStat({
 }) {
   return (
     <div className="rounded-xl border border-surface-3/70 bg-surface-2/50 px-4 py-4 text-center">
-      <div className={`font-display text-3xl font-black leading-none md:text-4xl ${accent}`}>
-        {value !== undefined ? formatStat(value) : "—"}
+      <div className={`stat-nums font-display text-3xl font-black leading-none md:text-4xl ${accent}`}>
+        {value !== undefined ? formatStat(value) : "·"}
       </div>
-      <div className="mt-1.5 text-[10px] font-semibold uppercase tracking-widest text-white/50">
+      <div className="mt-1.5 text-[10px] font-semibold uppercase tracking-widest text-ink-faint">
         {label}
       </div>
     </div>

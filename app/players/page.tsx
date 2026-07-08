@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import RosterGrid from "@/components/RosterGrid";
+import RosterExplorer from "@/components/RosterExplorer";
 import type { PlayerOffer } from "@/components/PlayerCard";
 import { getPlayersWithCache, getPlacements, slugify } from "@/lib/googleSheets";
 
@@ -24,5 +24,5 @@ export default async function PlayersPage() {
     offers[slugify(p.player)] = { school: p.school, level: p.level };
   }
 
-  return <RosterGrid players={players} offers={offers} />;
+  return <RosterExplorer players={players} offers={offers} />;
 }

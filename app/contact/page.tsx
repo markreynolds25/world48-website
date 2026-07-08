@@ -1,23 +1,18 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import ContactForm from "@/components/ContactForm";
+import { ChevronLeft } from "@/components/icons";
 
 export const metadata: Metadata = {
-  title: "Contact — World 48",
+  title: "Contact",
   description:
-    "Get in touch with World 48 — for D1 coaches, prospects, sponsors, and media.",
+    "Get in touch with World 48 for D1 coaches, prospects, sponsors and media.",
 };
 
-const CONTACT_EMAIL = "mark.reynolds25@gmail.com";
-
 export default function ContactPage() {
-  const mailto = `mailto:${CONTACT_EMAIL}`;
-
   return (
     <div className="mx-auto max-w-4xl px-6 py-16 md:py-24">
-      <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-brand-cyan">
-        Contact
-      </p>
+      <p className="eyebrow mb-3 text-brand-cyan">Contact</p>
       <h1 className="font-display text-4xl font-black leading-[1.05] tracking-tight md:text-6xl">
         Let&apos;s talk.
       </h1>
@@ -44,21 +39,22 @@ export default function ContactPage() {
         <Lane
           accent="text-brand-green"
           title="Prospects"
-          body="Nominations, evaluation inquiries, and representation."
+          body="Nominations, evaluation inquiries and representation."
         />
         <Lane
           accent="text-brand-gold"
           title="Sponsors & Media"
-          body="Partnership opportunities, press requests, and co-branded content."
+          body="Partnership opportunities, press requests and co-branded content."
         />
       </div>
 
       <div className="mt-12">
         <Link
           href="/players"
-          className="text-sm text-white/60 transition hover:text-white"
+          className="inline-flex items-center gap-1.5 text-sm text-ink-muted transition hover:text-white"
         >
-          ← Back to the roster
+          <ChevronLeft className="h-3.5 w-3.5" />
+          Back to the roster
         </Link>
       </div>
     </div>
@@ -76,9 +72,7 @@ function Lane({
 }) {
   return (
     <div className="rounded-xl border border-surface-3/70 bg-surface-1 p-5">
-      <div className={`text-[10px] font-semibold uppercase tracking-widest ${accent}`}>
-        {title}
-      </div>
+      <div className={`eyebrow text-[10px] ${accent}`}>{title}</div>
       <p className="mt-2 text-sm leading-relaxed text-white/75">{body}</p>
     </div>
   );

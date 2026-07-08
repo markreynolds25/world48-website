@@ -516,6 +516,100 @@ export async function markRegistrationEmailSent(
   });
 }
 
+/* ─── Reminder engine (Emailschedule tab) ────────────────────────────────── */
+
+export interface ScheduledEmail {
+  rowNumber: number;
+  key: string;
+  audience: string; // players | coaches | both
+  sendOn: string; // YYYY-MM-DD
+  subject: string;
+  heading: string;
+  body: string;
+  buttonLabel?: string;
+  buttonUrl?: string;
+  paymentLink?: string;
+  sentAt: string;
+}
+
+const EMAIL_SCHEDULE_TAB = 'Emailschedule';
+
+export async function getEmailSchedule(): Promise<ScheduledEmail[]> {
+  try {
+    const auth = getAuthClient();
+    const sheetId = process.env.GOOGLE_SHEETS_ID;
+    if (!auth || !sheetId) return [];
+    const sheets = google.sheets({ version: 'v4', auth });
+    const response = await sheets.spreadsheets.values.get({
+      spreadsheetId: sheetId,
+      range: `${EMAIL_SCHEDULE_TAB}!A:J`,
+    });
+    const rows = response.data.values || [];
+    const out: ScheduledEmail[] = [];
+    for (let i = 1; i < rows.length; i++) {
+      const r = rows[i];
+      if (!r || !r[0] || !r[3]) continue; // need Key + Subject
+      out.push({
+        rowNumber: i + 1,
+        key: String(r[0]).trim(),
+        audience: (r[1] ? String(r[1]) : 'both').trim().toLowerCase(),
+        sendOn: r[2] ? String(r[2]).trim() : '',
+        subject: String(r[3]).trim(),
+        heading: r[4] ? String(r[4]).trim() : '',
+        body: r[5] ? String(r[5]).trim() : '',
+        buttonLabel: r[6] ? String(r[6]).trim() : undefined,
+        buttonUrl: r[7] ? String(r[7]).trim() : undefined,
+        paymentLink: r[8] ? String(r[8]).trim() : undefined,
+        sentAt: r[9] ? String(r[9]).trim() : '',
+      });
+    }
+    return out;
+  } catch (error) {
+    console.error('[googleSheets] Reading Emailschedule failed:', error);
+    return [];
+  }
+}
+
+export interface Recipient {
+  name: string;
+  email: string;
+  ccEmail?: string;
+}
+
+// Approved coach/player recipients for a reminder audience, de-duplicated by email.
+export async function getApprovedRecipients(audience: string): Promise<Recipient[]> {
+  const want = audience.trim().toLowerCase();
+  const tabs: RegistrationTab[] = [];
+  if (want === 'coaches' || want === 'both') tabs.push('CoachRegistrations');
+  if (want === 'players' || want === 'both') tabs.push('PlayerRegistrations');
+  const seen = new Set<string>();
+  const out: Recipient[] = [];
+  for (const tab of tabs) {
+    const rows = await getRegistrationRows(tab);
+    for (const row of rows) {
+      if (row.status.trim().toLowerCase() !== 'approved') continue;
+      const key = row.email.toLowerCase();
+      if (seen.has(key)) continue;
+      seen.add(key);
+      out.push({ name: row.name, email: row.email, ccEmail: row.ccEmail });
+    }
+  }
+  return out;
+}
+
+export async function markReminderSent(rowNumber: number, summary: string): Promise<void> {
+  const auth = getAuthClient();
+  const sheetId = process.env.GOOGLE_SHEETS_ID;
+  if (!auth || !sheetId) throw new Error('Sheets not configured');
+  const sheets = google.sheets({ version: 'v4', auth });
+  await sheets.spreadsheets.values.update({
+    spreadsheetId: sheetId,
+    range: `${EMAIL_SCHEDULE_TAB}!J${rowNumber}`,
+    valueInputOption: 'USER_ENTERED',
+    requestBody: { values: [[`${new Date().toISOString()} · ${summary}`]] },
+  });
+}
+
 // Append a new registration row to the "Registrations" tab.
 export async function addRegistration(data: {
   name: string;

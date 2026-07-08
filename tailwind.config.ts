@@ -23,6 +23,12 @@ const config: Config = {
           2: "#1A1F29", // elevated card / hover
           3: "#262C38", // border / divider
         },
+        // Two-tier ancillary text system — replaces ad-hoc white/xx greys
+        ink: {
+          muted: "rgba(255,255,255,0.62)", // load-bearing secondary: meta, labels, nav
+          faint: "rgba(255,255,255,0.40)", // decorative: eyebrows, footnotes
+          ghost: "rgba(255,255,255,0.28)", // non-load-bearing: credits, placeholders
+        },
       },
       fontFamily: {
         sans: ["var(--font-inter)", "ui-sans-serif", "system-ui", "sans-serif"],

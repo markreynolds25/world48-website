@@ -44,10 +44,59 @@ body {
   background-repeat: repeat;
 }
 
-/* Utility: brand gradient text */
+/* Utility: brand gradient text (approved brand treatment — mirrors the logo) */
 .text-gradient-brand {
   background: linear-gradient(135deg, #00d9ff 0%, #00d98e 55%, #ffb74d 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+/* Tabular figures for stats, jersey numbers and counts — box-score alignment */
+.stat-nums {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* Staggered card entrance — reused across the roster filter and media grids */
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.card-in {
+  animation: cardIn 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .card-in {
+    animation: none;
+  }
+}
+
+/* ─── Premium design system: one button set, one eyebrow, sitewide ───────── */
+@layer components {
+  /* Consistent eyebrow: 11px, 0.22em tracking, uppercase, semibold */
+  .eyebrow {
+    @apply text-[11px] font-semibold uppercase tracking-[0.22em];
+  }
+
+  /* Primary CTA — confident red pill with a designed lift-on-hover micro-interaction */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-brand-red px-6 py-3 text-sm font-semibold tracking-tight text-white shadow-lg shadow-brand-red/20 transition-all duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-[#F0524F] hover:shadow-xl hover:shadow-brand-red/30 active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red focus-visible:ring-offset-2 focus-visible:ring-offset-surface-0 disabled:pointer-events-none disabled:opacity-60;
+  }
+
+  /* Secondary CTA — outlined, same geometry and motion as primary */
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-surface-3 bg-surface-2/60 px-6 py-3 text-sm font-semibold tracking-tight text-white/85 transition-all duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-white/30 hover:bg-surface-2 hover:text-white active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-0 disabled:pointer-events-none disabled:opacity-60;
+  }
+
+  /* Compact variant for header / inline use */
+  .btn-sm {
+    @apply px-4 py-2 text-xs;
+  }
 }

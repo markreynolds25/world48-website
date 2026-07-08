@@ -18,10 +18,7 @@ export default function WaitlistCTA({
 }) {
   const [open, setOpen] = useState(false);
 
-  const base =
-    variant === "primary"
-      ? "inline-flex items-center justify-center gap-2 rounded-lg bg-brand-red px-6 py-3 text-sm font-semibold text-white shadow-md shadow-brand-red/20 transition hover:bg-brand-red/90"
-      : "inline-flex items-center justify-center gap-2 rounded-lg border border-surface-3 bg-surface-2/60 px-6 py-3 text-sm font-semibold text-white/80 transition hover:border-white/30 hover:text-white";
+  const base = variant === "primary" ? "btn-primary" : "btn-secondary";
 
   return (
     <>

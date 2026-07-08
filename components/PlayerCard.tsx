@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type { PlayerData } from "@/lib/googleSheets";
 import { countryFlag } from "@/lib/country";
+import { ArrowUpRight } from "@/components/icons";
 
 /**
  * Trading-card layout:
@@ -98,7 +99,7 @@ export default function PlayerCard({
             {player.name}
           </h3>
           {metaParts.length > 0 && (
-            <p className="mt-0.5 truncate text-xs font-medium uppercase tracking-wider text-white/50">
+            <p className="mt-0.5 truncate text-xs font-medium uppercase tracking-wider text-ink-muted">
               {metaParts.join(" · ")}
             </p>
           )}
@@ -148,19 +149,7 @@ export default function PlayerCard({
               className="inline-flex items-center gap-1 text-xs font-semibold text-brand-cyan transition hover:text-white"
             >
               Player Highlights
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                className="h-3 w-3"
-                aria-hidden
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M4.25 5.5a.75.75 0 0 0 0 1.5h8.69l-6.22 6.22a.75.75 0 1 0 1.06 1.06l6.22-6.22v8.69a.75.75 0 0 0 1.5 0V5.5H4.25Z"
-                  clipRule="evenodd"
-                />
-              </svg>
+              <ArrowUpRight className="h-3.5 w-3.5" />
             </a>
           )}
         </div>
@@ -182,10 +171,10 @@ function PrimaryStat({
   // standard trading-card hierarchy (value is what coaches scan for).
   return (
     <div className="flex flex-col items-center">
-      <span className={`font-display text-2xl font-black leading-none ${accent}`}>
-        {value !== undefined ? formatStat(value) : "—"}
+      <span className={`stat-nums font-display text-2xl font-black leading-none ${accent}`}>
+        {value !== undefined ? formatStat(value) : "·"}
       </span>
-      <span className="mt-1 text-[10px] font-semibold uppercase tracking-wider text-white/50">
+      <span className="mt-1 text-[10px] font-semibold uppercase tracking-wider text-ink-faint">
         {label}
       </span>
     </div>

@@ -9,21 +9,15 @@ export default function NotFound() {
       <h1 className="mt-2 font-display text-2xl font-black tracking-tight text-white md:text-3xl">
         Out of bounds.
       </h1>
-      <p className="mt-3 max-w-sm text-sm text-white/55">
-        That page doesn&apos;t exist — but the roster and the 2026 results are
+      <p className="mt-3 max-w-sm text-sm text-ink-muted">
+        That page doesn&apos;t exist. The roster and the 2026 results are
         very real.
       </p>
       <div className="mt-8 flex flex-wrap justify-center gap-3">
-        <Link
-          href="/"
-          className="inline-flex items-center justify-center rounded-lg bg-brand-red px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand-red/90"
-        >
+        <Link href="/" className="btn-primary">
           Back to the home page
         </Link>
-        <Link
-          href="/players"
-          className="inline-flex items-center justify-center rounded-lg border border-surface-3 bg-surface-2/60 px-6 py-3 text-sm font-semibold text-white/80 transition hover:border-white/30 hover:text-white"
-        >
+        <Link href="/players" className="btn-secondary">
           See the roster
         </Link>
       </div>

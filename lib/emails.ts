@@ -73,17 +73,51 @@ function button(href: string, label: string): string {
   return `<a href="${href}" style="display:inline-block;background:#E53E3E;color:#ffffff;text-decoration:none;font-weight:bold;font-size:14px;padding:12px 24px;border-radius:8px;margin:8px 0">${label}</a>`;
 }
 
+// Gold payment button, visually distinct from the red primary action.
+function goldButton(href: string, label: string): string {
+  return `<a href="${href}" style="display:inline-block;background:#FFB74D;color:#0A0C10;text-decoration:none;font-weight:bold;font-size:14px;padding:12px 24px;border-radius:8px;margin:8px 0">${label}</a>`;
+}
+
+// Scheduled reminder email (flights, accommodation, itinerary, payment).
+// {{firstName}} in heading/body is interpolated. Optional action + payment buttons.
+export function reminderEmail(opts: {
+  firstName: string;
+  heading: string;
+  body: string;
+  buttonLabel?: string;
+  buttonUrl?: string;
+  paymentLink?: string;
+}): string {
+  const interp = (s: string) => s.replace(/\{\{\s*firstName\s*\}\}/g, opts.firstName);
+  const paras = interp(opts.body)
+    .split(/\n+/)
+    .map((p) => p.trim())
+    .filter(Boolean)
+    .map((p) => `<p>${p}</p>`)
+    .join('');
+  const cta =
+    opts.buttonLabel && opts.buttonUrl ? button(opts.buttonUrl, opts.buttonLabel) : '';
+  const pay = opts.paymentLink ? goldButton(opts.paymentLink, 'Complete payment') : '';
+  return emailShell(`
+    ${opts.heading ? `<h1 style="margin:0 0 12px;font-size:22px;color:#0A0C10">${interp(opts.heading)}</h1>` : ''}
+    ${paras}
+    ${cta}
+    ${pay}
+    <p style="margin-top:16px">The World 48 team</p>
+  `);
+}
+
 export function coachApprovedEmail(firstName: string): { subject: string; html: string } {
   return {
     subject: "You're confirmed — World 48 2027 coach list",
     html: emailShell(`
       <h1 style="margin:0 0 12px;font-size:22px;color:#0A0C10">You're confirmed, ${firstName}.</h1>
-      <p>Your coach registration for <strong>World 48 2027</strong> has been approved. You're on the list that hears everything first — dates, the 2027 roster, film and evaluation-day logistics.</p>
+      <p>Your coach registration for <strong>World 48 2027</strong> has been approved. You're on the list that hears everything first: dates, the 2027 roster, film and evaluation-day logistics.</p>
       <p>If you registered for in-person attendance, payment details for the $350 registration fee will follow in a separate email.</p>
       <p>In the meantime, the full player roster with film is live on the site:</p>
       ${button(`${SITE}/players`, 'View the roster')}
-      <p style="margin-top:16px">Questions about travel, schedule or specific prospects — just reply to this email.</p>
-      <p style="margin-top:16px">— The World 48 team</p>
+      <p style="margin-top:16px">Questions about travel, schedule or specific prospects? Just reply to this email.</p>
+      <p style="margin-top:16px">The World 48 team</p>
     `),
   };
 }
@@ -102,8 +136,8 @@ export function playerApprovedEmail(firstName: string): { subject: string; html:
         <li style="margin-bottom:8px"><strong>Film</strong> — keep your highlight link current; coaches check it before the event.</li>
         <li><strong>Logistics</strong> — we'll follow up with event dates, travel and accommodation details as they're confirmed.</li>
       </ol>
-      <p style="margin-top:16px">Questions — reply to this email.</p>
-      <p style="margin-top:16px">— The World 48 team</p>
+      <p style="margin-top:16px">Questions? Just reply to this email.</p>
+      <p style="margin-top:16px">The World 48 team</p>
     `),
   };
 }
@@ -116,7 +150,7 @@ export function declinedEmail(firstName: string): { subject: string; html: strin
       <p>Thank you for applying to <strong>World 48 2027</strong>. Demand for the 48 spots is intense, and we're not able to offer you a place this cycle.</p>
       <p>Selections continue as the event approaches and rosters can change — we'll keep your application on file and contact you if a spot opens. You can also join the public list for dates and news:</p>
       ${button(SITE, 'undiscoveredworld48.com')}
-      <p style="margin-top:16px">— The World 48 team</p>
+      <p style="margin-top:16px">The World 48 team</p>
     `),
   };
 }

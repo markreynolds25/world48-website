@@ -5,6 +5,7 @@ import NcaaBadge from "@/components/NcaaBadge";
 import SponsorCard from "@/components/SponsorCard";
 import WaitlistModal from "@/components/WaitlistModal";
 import { ArrowDown } from "@/components/icons";
+import { getEventPhase, PHASE_COPY } from "@/lib/eventPhase";
 
 /**
  * Hero carousel players — all four earned college placements out of the
@@ -43,6 +44,7 @@ export default function HeroSection() {
   const [current, setCurrent] = useState(0);
   const [paused, setPaused] = useState(false);
   const [waitlistOpen, setWaitlistOpen] = useState(false);
+  const phase = getEventPhase();
 
   const goTo = useCallback((i: number) => setCurrent(i), []);
 
@@ -133,7 +135,7 @@ export default function HeroSection() {
 
           {/* Player name tag + offer credit — above the strip */}
           <div className="absolute bottom-24 right-7 text-right">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-white/35">
+            <p className="eyebrow text-[10px] text-ink-faint">
               {player.country}
             </p>
             <p className="mt-0.5 font-display text-xl font-black tracking-tight text-white/75">
@@ -149,9 +151,15 @@ export default function HeroSection() {
         <div className="relative z-10 mx-auto w-full max-w-7xl px-6">
           <div className="w-full md:max-w-[46%]">
 
-            {/* Eyebrow */}
-            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-brand-cyan">
-              2026 delivered · Returning 2027
+            {/* Eyebrow — driven by the lifecycle phase (pre / live / post) */}
+            <p className="eyebrow mb-4 flex items-center gap-2 text-brand-cyan">
+              {phase === "live" && (
+                <span className="relative flex h-2 w-2" aria-hidden>
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-red opacity-75 motion-reduce:hidden" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-brand-red" />
+                </span>
+              )}
+              {PHASE_COPY[phase].eyebrow}
             </p>
 
             {/* Headline */}
@@ -167,23 +175,17 @@ export default function HeroSection() {
             </div>
 
             {/* Tagline */}
-            <p className="mt-5 max-w-md text-base leading-relaxed text-white/65 md:text-lg">
+            <p className="mt-5 max-w-md text-base leading-relaxed text-white/75 md:text-lg">
               48 international prospects. 13 college placements across 9
-              countries — six of them NCAA Division I. The 2027 class is next.
+              countries. Six of them NCAA Division I. The 2027 class is next.
             </p>
 
             {/* CTAs */}
             <div className="mt-7 flex flex-wrap items-center gap-3">
-              <button
-                onClick={() => setWaitlistOpen(true)}
-                className="inline-flex items-center justify-center rounded-lg bg-brand-red px-6 py-3 text-sm font-semibold text-white shadow-md shadow-brand-red/25 transition hover:bg-brand-red/90"
-              >
+              <button onClick={() => setWaitlistOpen(true)} className="btn-primary">
                 Join the 2027 Waitlist
               </button>
-              <a
-                href="#results"
-                className="inline-flex items-center justify-center gap-2 rounded-lg border border-surface-3 bg-surface-2/40 px-6 py-3 text-sm font-semibold text-white/80 backdrop-blur-sm transition hover:border-white/30 hover:text-white"
-              >
+              <a href="#results" className="btn-secondary backdrop-blur-sm">
                 See the 2026 results
                 <ArrowDown className="h-3.5 w-3.5" />
               </a>

@@ -10,6 +10,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE}/register`, priority: 0.9 },
     { url: `${BASE}/register/player`, priority: 0.8 },
     { url: `${BASE}/register/coach`, priority: 0.8 },
+    { url: `${BASE}/media`, priority: 0.6 },
     { url: `${BASE}/about`, priority: 0.6 },
     { url: `${BASE}/ncaa-eligibility`, priority: 0.6 },
     { url: `${BASE}/sponsors`, priority: 0.6 },

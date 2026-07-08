@@ -42,24 +42,22 @@ export default function PlacementsShowcase({
   return (
     <section id="results" className="scroll-mt-20 border-b border-surface-3/60">
       <div className="mx-auto max-w-7xl px-6 py-16 md:py-24">
-        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-brand-gold">
-          2026 Results
-        </p>
+        <p className="eyebrow mb-3 text-brand-gold">2026 Results</p>
         <h2 className="font-display text-4xl font-black leading-[1.02] tracking-tight md:text-6xl">
           Dublin to <span className="text-gradient-brand">Division I.</span>
         </h2>
-        <p className="mt-4 max-w-2xl text-white/60">
+        <p className="mt-4 max-w-2xl text-white/70">
           {total} players from {countryCount} countries left the National
-          Basketball Arena with college opportunities — {d1Count} of them NCAA
-          Division I, with more at D2, NAIA, JUCO and prep level. This is what
+          Basketball Arena with college opportunities. {d1Count} of them NCAA
+          Division I, with more at D2, NAIA, JUCO and prep level. That is what
           one weekend in front of the right coaches does.
         </p>
 
         {placements.length === 0 ? (
           <div className="mt-12 flex flex-col items-center justify-center rounded-2xl border border-dashed border-surface-3 bg-surface-1/40 px-6 py-16 text-center">
             <TrophyMark className="h-8 w-8 text-brand-gold/60" />
-            <p className="mt-4 max-w-md text-sm text-white/60">
-              The full list of commitments — players, schools and levels — is
+            <p className="mt-4 max-w-md text-sm text-ink-muted">
+              The full list of commitments (players, schools and levels) is
               being finalised and lands here shortly.
             </p>
           </div>
@@ -84,7 +82,7 @@ export default function PlacementsShowcase({
                       {p.school}
                     </p>
                     {p.country && (
-                      <p className="mt-2 text-xs font-medium uppercase tracking-wider text-white/45">
+                      <p className="mt-2 text-xs font-medium uppercase tracking-wider text-ink-faint">
                         {countryFlag(p.country) ? countryFlag(p.country) + " " : ""}
                         {p.country}
                       </p>
@@ -117,7 +115,7 @@ export default function PlacementsShowcase({
                     </span>
                     <span className="text-sm text-white/60">{p.school}</span>
                     {p.country && (
-                      <span className="ml-auto text-xs font-medium uppercase tracking-wider text-white/40">
+                      <span className="ml-auto text-xs font-medium uppercase tracking-wider text-ink-faint">
                         {countryFlag(p.country) ? countryFlag(p.country) + " " : ""}
                         {p.country}
                       </span>

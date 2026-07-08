@@ -11,6 +11,7 @@ const NAV_LINKS = [
   { href: "/", label: "Home" },
   { href: "/players", label: "Players" },
   { href: "/register", label: "Register 2027" },
+  { href: "/media", label: "Media" },
   { href: "/about", label: "About" },
   { href: "/ncaa-eligibility", label: "NCAA Eligibility" },
   { href: "/sponsors", label: "Partners" },
@@ -73,10 +74,7 @@ export default function Header() {
             >
               <InstagramMark className="h-[18px] w-[18px]" />
             </a>
-            <button
-              onClick={() => setWaitlistOpen(true)}
-              className="rounded-md bg-brand-red px-4 py-2 text-sm font-semibold text-white shadow-md shadow-brand-red/25 transition hover:bg-brand-red/90"
-            >
+            <button onClick={() => setWaitlistOpen(true)} className="btn-primary btn-sm">
               Join 2027 Waitlist
             </button>
           </div>
@@ -175,7 +173,7 @@ export default function Header() {
               setWaitlistOpen(true);
               close();
             }}
-            className="block w-full rounded-md bg-brand-red py-3 text-center text-sm font-semibold text-white transition hover:bg-brand-red/90"
+            className="btn-primary w-full"
           >
             Join 2027 Waitlist
           </button>

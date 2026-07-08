@@ -27,11 +27,11 @@ export const metadata: Metadata = {
     template: "%s · World 48",
   },
   description:
-    "48 elite international basketball prospects. One showcase in Dublin. 13 college placements out of the 2026 event — six NCAA Division I.",
+    "48 elite international basketball prospects. One showcase in Dublin. 13 college placements out of the 2026 event. Six NCAA Division I.",
   openGraph: {
     title: "Undiscovered World 48",
     description:
-      "48 elite international prospects. NCAA coaches courtside in Dublin. 13 college placements out of the 2026 showcase — six NCAA Division I.",
+      "48 elite international prospects. NCAA coaches courtside in Dublin. 13 college placements out of the 2026 showcase. Six NCAA Division I.",
     url: "https://www.undiscoveredworld48.com",
     siteName: "Undiscovered World 48",
     type: "website",
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Undiscovered World 48",
     description:
-      "48 elite international prospects. NCAA coaches courtside in Dublin. 13 college placements out of the 2026 showcase — six NCAA Division I.",
+      "48 elite international prospects. NCAA coaches courtside in Dublin. 13 college placements out of the 2026 showcase. Six NCAA Division I.",
   },
   icons: {
     icon: "/logos/favicon-32.png",

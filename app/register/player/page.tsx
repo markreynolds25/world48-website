@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 
-const DAYS = ["Day 1 — Coaches Day", "Day 2 — Showcase Day"];
+const DAYS = ["Day 1 · Coaches Day", "Day 2 · Showcase Day"];
 const SIZES = ["S", "M", "L", "XL", "XXL", "XXXL"];
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -11,7 +11,7 @@ type Status = "idle" | "loading" | "success" | "error";
 
 const inputCls =
   "w-full rounded-lg border border-surface-3 bg-surface-2 px-4 py-3 text-sm text-white placeholder-white/25 outline-none transition focus:border-brand-cyan";
-const labelCls = "mb-1.5 block text-xs font-medium uppercase tracking-wider text-white/50";
+const labelCls = "mb-1.5 block text-xs font-medium uppercase tracking-wider text-ink-muted";
 const errCls = "mt-1.5 text-xs font-medium text-brand-red";
 const checkCls = (active: boolean) =>
   `flex cursor-pointer items-start gap-3 rounded-lg border px-4 py-3 text-sm transition ${
@@ -104,17 +104,14 @@ export default function PlayerRegisterPage() {
         <h1 className="mt-5 font-display text-3xl font-black tracking-tight text-white">
           Application received.
         </h1>
-        <p className="mt-3 text-white/60">
+        <p className="mt-3 text-ink-muted">
           The World 48 team reviews every application. You&apos;ll get a
           confirmation email if you&apos;re approved. One thing you can do
-          right now: start your NCAA eligibility registration — it&apos;s
+          right now: start your NCAA eligibility registration. It&apos;s
           mandatory to compete.
         </p>
-        <Link
-          href="/ncaa-eligibility"
-          className="mt-8 inline-flex items-center justify-center rounded-lg bg-brand-red px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand-red/90"
-        >
-          Start NCAA eligibility — 3 steps
+        <Link href="/ncaa-eligibility" className="btn-primary mt-8">
+          Start NCAA eligibility in 3 steps
         </Link>
       </div>
     );
@@ -122,13 +119,11 @@ export default function PlayerRegisterPage() {
 
   return (
     <div className="mx-auto max-w-xl px-6 py-16 md:py-20">
-      <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-brand-cyan">
-        World 48 · 2027 · Players
-      </p>
+      <p className="eyebrow mb-3 text-brand-cyan">World 48 · 2027 · Players</p>
       <h1 className="font-display text-4xl font-black leading-[1.05] tracking-tight text-white md:text-5xl">
         Apply to play
       </h1>
-      <p className="mt-4 text-white/60">
+      <p className="mt-4 text-ink-muted">
         48 spots. NCAA coaches courtside. Applications reviewed by the World 48
         team and confirmed by email.
       </p>
@@ -238,7 +233,7 @@ export default function PlayerRegisterPage() {
 
         <div className={`rounded-xl border p-5 ${under18 ? "border-brand-gold/40 bg-brand-gold/5" : "border-surface-3/60 bg-surface-1/40"}`}>
           <p className="text-xs font-semibold uppercase tracking-wider text-white/60">
-            Parent / guardian {under18 ? "(required — player is under 18)" : "(optional)"}
+            Parent / guardian {under18 ? "(required, player is under 18)" : "(optional)"}
           </p>
           <div className="mt-4 grid gap-5 sm:grid-cols-2">
             <div>
@@ -262,8 +257,8 @@ export default function PlayerRegisterPage() {
             className="mt-1 h-4 w-4 shrink-0 accent-[#E53E3E]"
           />
           <span>
-            I confirm this information is accurate and — if the player is under
-            18 — that a parent or guardian consents to this application and to
+            I confirm this information is accurate. If the player is under
+            18, a parent or guardian consents to this application and to
             World 48 processing the player&apos;s data as described in the{" "}
             <Link href="/privacy" className="underline underline-offset-2 hover:text-white">
               privacy policy
@@ -284,11 +279,7 @@ export default function PlayerRegisterPage() {
           </p>
         )}
 
-        <button
-          type="submit"
-          disabled={status === "loading"}
-          className="mt-2 w-full rounded-lg bg-brand-red px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-brand-red/90 disabled:opacity-60"
-        >
+        <button type="submit" disabled={status === "loading"} className="btn-primary mt-2 w-full">
           {status === "loading" ? "Submitting…" : "Submit application"}
         </button>
       </form>

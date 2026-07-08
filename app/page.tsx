@@ -28,7 +28,7 @@ export default async function HomePage() {
       {/* ─── PARTNERS ──────────────────────────────────────────────────── */}
       <section className="border-b border-surface-3/60 py-8">
         <div className="mx-auto mb-5 max-w-7xl px-6">
-          <p className="text-center text-xs font-semibold uppercase tracking-[0.25em] text-white/35">
+          <p className="eyebrow text-center text-ink-faint">
             Partners &amp; Supporters
           </p>
         </div>
@@ -48,10 +48,8 @@ export default async function HomePage() {
               key={s.l}
               className="flex flex-col gap-1 border-r border-surface-3/40 px-8 py-8 last:border-r-0"
             >
-              <dt className="text-xs font-semibold uppercase tracking-widest text-white/40">
-                {s.l}
-              </dt>
-              <dd className="font-display text-3xl font-black tracking-tight">{s.k}</dd>
+              <dt className="eyebrow text-ink-faint">{s.l}</dt>
+              <dd className="stat-nums font-display text-3xl font-black tracking-tight">{s.k}</dd>
             </div>
           ))}
         </dl>
@@ -66,15 +64,13 @@ export default async function HomePage() {
       {/* ─── 2027 CTA BAND ─────────────────────────────────────────────── */}
       <section className="mx-auto max-w-7xl px-6 py-16 md:py-24">
         <div className="overflow-hidden rounded-2xl border border-brand-red/25 bg-gradient-to-br from-surface-1 via-surface-1 to-surface-2 p-8 md:p-12">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-red">
-            World 48 · 2027
-          </p>
+          <p className="eyebrow text-brand-red">World 48 · 2027</p>
           <h2 className="mt-3 font-display text-3xl font-black tracking-tight md:text-4xl">
             The next 48 are coming.
           </h2>
-          <p className="mt-3 max-w-2xl text-white/65">
+          <p className="mt-3 max-w-2xl text-white/70">
             National Basketball Arena, Dublin. Dates, roster reveals and
-            tickets land with the waitlist first — coaches, players, parents
+            tickets land with the waitlist first. Coaches, players, parents
             and fans all welcome.
           </p>
           <div className="mt-6 flex flex-wrap items-center gap-4">

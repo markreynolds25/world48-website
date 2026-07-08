@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ContactForm from "@/components/ContactForm";
+import { ArrowUpRight } from "@/components/icons";
 
 export const metadata: Metadata = {
   title: "NCAA Eligibility | World 48",
@@ -16,7 +17,7 @@ const STEPS = [
     description:
       "Create or renew your account in the Basketball Certification System (BBCS). This is the mandatory first step for all international players.",
     url: "https://bbcs.ncaa.org",
-    urlLabel: "Open BBCS →",
+    urlLabel: "Open BBCS",
     time: "15–20 minutes",
     warning:
       "Returning athletes: RENEW your existing account — do not create a new one.",
@@ -30,7 +31,7 @@ const STEPS = [
     description:
       "Review NCAA guidelines and check the required documents. The FAQ and resource guides cover everything from amateur status to academic requirements.",
     url: "https://ncaa.egain.cloud/kb/ECAG/home",
-    urlLabel: "Open FAQ & Guides →",
+    urlLabel: "Open FAQ & Guides",
     time: "10 minutes",
     warning: null,
     accentColor: "text-brand-green",
@@ -43,7 +44,7 @@ const STEPS = [
     description:
       "Once registered, let us know and we'll verify your eligibility status. Drop us a message below with your name and BBCS confirmation.",
     url: "#contact",
-    urlLabel: "Send Confirmation ↓",
+    urlLabel: "Send Confirmation",
     time: "5 minutes",
     warning: null,
     accentColor: "text-brand-gold",
@@ -119,8 +120,8 @@ export default function NcaaEligibilityPage() {
             Returning coaches &amp; athletes:{" "}
             <span className="font-black uppercase tracking-wide">
               RENEW your existing account
-            </span>{" "}
-            — do not create a new one or your history will be lost.
+            </span>
+            . Do not create a new one or your history will be lost.
           </p>
         </div>
       </div>
@@ -230,10 +231,11 @@ export default function NcaaEligibilityPage() {
                 rel="noreferrer"
                 className="group flex flex-col gap-1.5 rounded-xl border border-surface-3/70 bg-surface-1 p-5 transition hover:border-brand-cyan/40 hover:bg-surface-2"
               >
-                <span className="text-sm font-semibold text-white transition group-hover:text-brand-cyan">
-                  {r.title} →
+                <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-white transition group-hover:text-brand-cyan">
+                  {r.title}
+                  <ArrowUpRight className="h-3.5 w-3.5 text-brand-cyan" />
                 </span>
-                <span className="text-xs leading-relaxed text-white/50">
+                <span className="text-xs leading-relaxed text-ink-muted">
                   {r.description}
                 </span>
               </a>

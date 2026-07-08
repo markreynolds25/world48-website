@@ -4,15 +4,15 @@ import { useState } from "react";
 import Link from "next/link";
 
 const ATTENDANCE = [
-  "In-person attendance — $350 registration fee",
-  "In-person attendance (JUCO) — free",
-  "Live stream — free",
+  "In-person attendance · $350 registration fee",
+  "In-person attendance (JUCO) · Free",
+  "Live stream · Free",
 ];
 const ACCOMMODATION = [
-  "Hotel partnership accommodation — 25% discount",
+  "Hotel partnership accommodation · 25% discount",
   "Arranging own accommodation",
 ];
-const DAYS = ["Day 1 — Coaches Day", "Day 2 — Showcase Day"];
+const DAYS = ["Day 1 · Coaches Day", "Day 2 · Showcase Day"];
 const DIETARY = ["None", "Vegetarian", "Vegan", "Kosher", "Gluten-free", "Other"];
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -20,7 +20,7 @@ type Status = "idle" | "loading" | "success" | "error";
 
 const inputCls =
   "w-full rounded-lg border border-surface-3 bg-surface-2 px-4 py-3 text-sm text-white placeholder-white/25 outline-none transition focus:border-brand-cyan";
-const labelCls = "mb-1.5 block text-xs font-medium uppercase tracking-wider text-white/50";
+const labelCls = "mb-1.5 block text-xs font-medium uppercase tracking-wider text-ink-muted";
 const errCls = "mt-1.5 text-xs font-medium text-brand-red";
 const radioCls = (active: boolean) =>
   `flex cursor-pointer items-start gap-3 rounded-lg border px-4 py-3 text-sm transition ${
@@ -95,15 +95,12 @@ export default function CoachRegisterPage() {
         <h1 className="mt-5 font-display text-3xl font-black tracking-tight text-white">
           Registration received.
         </h1>
-        <p className="mt-3 text-white/60">
+        <p className="mt-3 text-ink-muted">
           Every coach registration is reviewed by the World 48 team. You&apos;ll
-          get a confirmation email once you&apos;re approved — payment and
+          get a confirmation email once you&apos;re approved. Payment and
           travel details follow with it.
         </p>
-        <Link
-          href="/players"
-          className="mt-8 inline-flex items-center justify-center rounded-lg bg-brand-red px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand-red/90"
-        >
+        <Link href="/players" className="btn-primary mt-8">
           Browse the roster while you wait
         </Link>
       </div>
@@ -112,13 +109,13 @@ export default function CoachRegisterPage() {
 
   return (
     <div className="mx-auto max-w-xl px-6 py-16 md:py-20">
-      <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-brand-gold">
+      <p className="eyebrow mb-3 text-brand-gold">
         World 48 · 2027 · Coaches
       </p>
       <h1 className="font-display text-4xl font-black leading-[1.05] tracking-tight text-white md:text-5xl">
         Coach registration
       </h1>
-      <p className="mt-4 text-white/60">
+      <p className="mt-4 text-ink-muted">
         For college programs scouting Dublin in 2027. Reviewed and confirmed by
         email.
       </p>
@@ -206,7 +203,7 @@ export default function CoachRegisterPage() {
 
         <div className="grid gap-5 sm:grid-cols-2">
           <div>
-            <label htmlFor="c-dietary" className={labelCls}>Venue lunch — dietary needs *</label>
+            <label htmlFor="c-dietary" className={labelCls}>Venue lunch dietary needs *</label>
             <select id="c-dietary" value={form.dietary} onChange={set("dietary")} className={inputCls}>
               {DIETARY.map((d) => (
                 <option key={d} value={d}>{d}</option>
@@ -264,14 +261,10 @@ export default function CoachRegisterPage() {
           </p>
         )}
 
-        <button
-          type="submit"
-          disabled={status === "loading"}
-          className="mt-2 w-full rounded-lg bg-brand-red px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-brand-red/90 disabled:opacity-60"
-        >
+        <button type="submit" disabled={status === "loading"} className="btn-primary mt-2 w-full">
           {status === "loading" ? "Submitting…" : "Submit registration"}
         </button>
-        <p className="text-center text-xs text-white/50">
+        <p className="text-center text-xs text-ink-faint">
           By submitting you agree to our{" "}
           <Link href="/privacy" className="underline underline-offset-2 hover:text-white">
             privacy policy

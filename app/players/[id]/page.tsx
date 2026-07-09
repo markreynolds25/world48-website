@@ -107,9 +107,9 @@ export default async function PlayerProfilePage({
 
               {/* Jersey number overlay */}
               {player.event_number !== undefined && (
-                <div className="absolute left-4 top-4 flex items-baseline gap-1 rounded-lg bg-surface-0/75 px-3 py-2 font-display font-black leading-none tracking-tight text-white backdrop-blur-md md:left-6 md:top-6">
+                <div className="absolute left-4 top-4 flex items-baseline gap-1 rounded-lg bg-surface-0/75 px-3 py-2 font-numeral font-black leading-none tracking-tight text-white backdrop-blur-md md:left-6 md:top-6">
                   <span className="text-base text-white/50 md:text-lg">#</span>
-                  <span className="text-2xl md:text-3xl">
+                  <span className="stat-nums text-2xl md:text-3xl">
                     {player.event_number}
                   </span>
                 </div>
@@ -141,9 +141,9 @@ export default async function PlayerProfilePage({
                 {player.name}
               </h1>
               {player.event_number !== undefined && (
-                <span className="inline-flex items-baseline gap-0.5 rounded-md border border-surface-3 bg-surface-2 px-2 py-1 font-display text-sm font-bold text-white/80">
+                <span className="inline-flex items-baseline gap-0.5 rounded-md border border-surface-3 bg-surface-2 px-2 py-1 font-numeral text-sm font-bold text-white/80">
                   <span className="text-white/50">#</span>
-                  {player.event_number}
+                  <span className="stat-nums">{player.event_number}</span>
                 </span>
               )}
             </div>
@@ -257,7 +257,7 @@ function PrimaryStat({
 }) {
   return (
     <div className="rounded-xl border border-surface-3/70 bg-surface-2/50 px-4 py-4 text-center">
-      <div className={`stat-nums font-display text-3xl font-black leading-none md:text-4xl ${accent}`}>
+      <div className={`stat-nums font-numeral text-3xl font-black leading-none md:text-4xl ${accent}`}>
         {value !== undefined ? formatStat(value) : "·"}
       </div>
       <div className="mt-1.5 text-[10px] font-semibold uppercase tracking-widest text-ink-faint">

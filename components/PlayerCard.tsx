@@ -76,9 +76,9 @@ export default function PlayerCard({
 
             {/* Jersey number badge (top-left inside the photo) */}
             {player.event_number !== undefined && (
-              <div className="absolute left-2.5 top-2.5 flex items-baseline gap-0.5 rounded-md bg-surface-0/75 px-2.5 py-1 font-display font-black leading-none tracking-tight text-white backdrop-blur-md">
+              <div className="absolute left-2.5 top-2.5 flex items-baseline gap-0.5 rounded-md bg-surface-0/75 px-2.5 py-1 font-numeral font-black leading-none tracking-tight text-white backdrop-blur-md">
                 <span className="text-sm text-white/50">#</span>
-                <span className="text-lg">{player.event_number}</span>
+                <span className="stat-nums text-lg">{player.event_number}</span>
               </div>
             )}
 
@@ -171,7 +171,7 @@ function PrimaryStat({
   // standard trading-card hierarchy (value is what coaches scan for).
   return (
     <div className="flex flex-col items-center">
-      <span className={`stat-nums font-display text-2xl font-black leading-none ${accent}`}>
+      <span className={`stat-nums font-numeral text-2xl font-black leading-none ${accent}`}>
         {value !== undefined ? formatStat(value) : "·"}
       </span>
       <span className="mt-1 text-[10px] font-semibold uppercase tracking-wider text-ink-faint">

@@ -49,7 +49,7 @@ export default async function HomePage() {
               className="flex flex-col gap-1 border-r border-surface-3/40 px-8 py-8 last:border-r-0"
             >
               <dt className="eyebrow text-ink-faint">{s.l}</dt>
-              <dd className="stat-nums font-display text-3xl font-black tracking-tight">{s.k}</dd>
+              <dd className="stat-nums font-numeral text-4xl font-black tracking-tight">{s.k}</dd>
             </div>
           ))}
         </dl>

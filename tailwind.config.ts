@@ -22,6 +22,8 @@ const config: Config = {
           1: "#10141B", // card background
           2: "#1A1F29", // elevated card / hover
           3: "#262C38", // border / divider
+          navy: "#101B2D", // court navy — data-page panels (treatment B)
+          "navy-3": "#22304A", // court-navy border
         },
         // Two-tier ancillary text system — replaces ad-hoc white/xx greys
         ink: {
@@ -32,7 +34,8 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["var(--font-inter)", "ui-sans-serif", "system-ui", "sans-serif"],
-        display: ["var(--font-anton)", "var(--font-inter)", "ui-sans-serif", "system-ui", "sans-serif"],
+        display: ["var(--font-archivo)", "var(--font-anton)", "ui-sans-serif", "system-ui", "sans-serif"],
+        numeral: ["var(--font-anton)", "var(--font-archivo)", "ui-sans-serif", "sans-serif"],
       },
       backgroundImage: {
         "brand-gradient":

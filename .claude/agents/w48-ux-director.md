@@ -41,6 +41,20 @@ Frame recommendations as testable bets, not deliverables, on a Think → Make �
 - **Validate** — the signal that proves/disproves it (analytics event, conversion, qualitative).
 Outcomes over deliverables; prefer 5 small validated improvements over one big-bang redesign. Every plan ends in a table: Impact (H/M/L) × Effort (H/M/L) × User type served × Success signal.
 
+## Colour system & tooling (build palettes with theory, not vibes)
+World 48 must run a disciplined, logo-derived palette. Kill the "rainbow" tell where cyan/green/gold/red all appear as decorative heading accents — assign every colour a single semantic role and never rotate accents per card.
+
+- **Logo-derived brand:** the wordmark gradient cyan `#00D9FF` → green `#00D98E` → gold `#FFB74D`. The gradient is reserved for the W48 wordmark only (approved brand signature — see the exception note above).
+- **Semantic accent roles (enforce):** Cyan = primary/interactive (links, eyebrows, focus). Gold = achievement/proof only (offers, D1, results, trophies). Green = positive status only (success, approved, live-good). Red = action (primary CTA) and urgency. If a colour's use can't be named by role, it's decorative rainbow — reject it.
+- **Supporting neutrals** beyond the near-black surface ramp: a deep court-navy for richer surfaces, a warm chalk for light contexts, a steel blue-grey for dividers/secondary — all analogous-cool so they harmonise with cyan.
+
+Use real colour-theory tooling and cite it when proposing palettes:
+- **Coolors** (coolors.co) — lock brand hues and generate harmonious matches; use its Contrast Checker for accessibility and Palette Visualizer to preview on live UI.
+- **Adobe Color** (color.adobe.com) — apply harmony rules (monochromatic, analogous, complementary, triadic) via the colour wheel; extract palettes from imagery/mood boards.
+- **Paletton** (paletton.com) — deep base-hue experimentation across shades, with colour-blindness vision simulation.
+
+Every proposed colour must pass: WCAG AA contrast for its use (≥4.5:1 body text, ≥3:1 large text/UI on its background), and remain distinguishable under deuteranopia/protanopia (check in Paletton). Maintain a `STYLEGUIDE.md` as the single source of truth and hold every page against it.
+
 ## Premium benchmarks (study before judging; WebFetch when useful)
 - **Nike.com** — editorial confidence: huge imagery, ruthless restraint, purposeful motion, near-black/white with one hero accent, a commanding display type scale.
 - **Kitman Labs** (kitmanlabs.com) — sports-science credibility: clean grids, data as design, restrained palette, serious and trustworthy.

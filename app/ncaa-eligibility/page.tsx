@@ -20,23 +20,17 @@ const STEPS = [
     urlLabel: "Open BBCS",
     time: "15–20 minutes",
     warning:
-      "Returning athletes: RENEW your existing account — do not create a new one.",
-    accentColor: "text-brand-cyan",
-    borderColor: "border-brand-cyan/40",
-    badgeBg: "bg-brand-cyan/10 text-brand-cyan",
+      "Returning athletes: RENEW your existing account. Do not create a new one.",
   },
   {
     num: "02",
-    title: "Verify Your Eligibility",
+    title: "Verify your eligibility",
     description:
       "Review NCAA guidelines and check the required documents. The FAQ and resource guides cover everything from amateur status to academic requirements.",
     url: "https://ncaa.egain.cloud/kb/ECAG/home",
     urlLabel: "Open FAQ & Guides",
     time: "10 minutes",
     warning: null,
-    accentColor: "text-brand-green",
-    borderColor: "border-brand-green/40",
-    badgeBg: "bg-brand-green/10 text-brand-green",
   },
   {
     num: "03",
@@ -47,9 +41,6 @@ const STEPS = [
     urlLabel: "Send Confirmation",
     time: "5 minutes",
     warning: null,
-    accentColor: "text-brand-gold",
-    borderColor: "border-brand-gold/40",
-    badgeBg: "bg-brand-gold/10 text-brand-gold",
   },
 ];
 
@@ -87,9 +78,7 @@ export default function NcaaEligibilityPage() {
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="border-b border-surface-3/60 px-6 py-16 md:py-24">
         <div className="mx-auto max-w-4xl">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-brand-cyan">
-            Players
-          </p>
+          <p className="eyebrow mb-3 text-brand-cyan">Players</p>
           <h1 className="font-display text-4xl font-black leading-[1.05] tracking-tight text-white md:text-6xl">
             NCAA Eligibility
           </h1>
@@ -133,52 +122,51 @@ export default function NcaaEligibilityPage() {
             Three steps to compete
           </h2>
 
-          <div className="grid gap-6 md:grid-cols-3">
+          {/* Court-navy editorial process — one accent, big numerals */}
+          <div className="grid gap-5 md:grid-cols-3">
             {STEPS.map((step) => (
               <div
                 key={step.num}
-                className={`flex flex-col rounded-2xl border bg-surface-1 p-6 ${step.borderColor}`}
+                className="flex flex-col overflow-hidden rounded-2xl border border-surface-navy-3 bg-surface-navy"
               >
-                {/* Step badge */}
-                <span
-                  className={`mb-4 inline-flex w-fit items-center rounded-full px-3 py-1 text-xs font-black tracking-widest uppercase ${step.badgeBg}`}
-                >
-                  Step {step.num}
-                </span>
+                <div className="h-[3px] w-full bg-brand-cyan/70" aria-hidden />
+                <div className="flex flex-1 flex-col p-6">
+                  <div className="flex items-baseline gap-3">
+                    <span className="stat-nums font-numeral text-4xl font-black leading-none text-brand-cyan/80">
+                      {step.num}
+                    </span>
+                    <h3 className="font-display text-xl font-black leading-tight tracking-tight text-white">
+                      {step.title}
+                    </h3>
+                  </div>
 
-                {/* Title */}
-                <h3 className={`font-display text-xl font-black tracking-tight ${step.accentColor}`}>
-                  {step.title}
-                </h3>
-
-                {/* Description */}
-                <p className="mt-2 flex-1 text-sm leading-relaxed text-white/70">
-                  {step.description}
-                </p>
-
-                {/* Warning */}
-                {step.warning && (
-                  <p className="mt-3 flex items-start gap-2 rounded-lg border border-brand-gold/25 bg-brand-gold/8 px-3 py-2 text-xs font-semibold text-brand-gold">
-                    <WarningMark className="mt-0.5 h-3.5 w-3.5 shrink-0" />
-                    <span>{step.warning}</span>
+                  <p className="mt-3 flex-1 text-sm leading-relaxed text-ink-muted">
+                    {step.description}
                   </p>
-                )}
 
-                {/* CTA */}
-                <a
-                  href={step.url}
-                  target={step.url.startsWith("http") ? "_blank" : undefined}
-                  rel={step.url.startsWith("http") ? "noreferrer" : undefined}
-                  className={`mt-5 inline-flex items-center justify-center rounded-lg border px-4 py-3 text-sm font-semibold transition hover:opacity-80 ${step.borderColor} ${step.accentColor}`}
-                >
-                  {step.urlLabel}
-                </a>
+                  {step.warning && (
+                    <p className="mt-4 flex items-start gap-2 rounded-lg border border-brand-gold/25 bg-brand-gold/8 px-3 py-2 text-xs font-semibold text-brand-gold">
+                      <WarningMark className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+                      <span>{step.warning}</span>
+                    </p>
+                  )}
 
-                {/* Time estimate */}
-                <p className="mt-2.5 flex items-center justify-center gap-1.5 text-[11px] text-ink-faint">
-                  <ClockMark className="h-3 w-3" />
-                  {step.time}
-                </p>
+                  <div className="mt-5 flex items-center justify-between gap-3 border-t border-surface-navy-3 pt-4">
+                    <a
+                      href={step.url}
+                      target={step.url.startsWith("http") ? "_blank" : undefined}
+                      rel={step.url.startsWith("http") ? "noreferrer" : undefined}
+                      className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-cyan transition hover:text-white"
+                    >
+                      {step.urlLabel}
+                      <ArrowUpRight className="h-3.5 w-3.5" />
+                    </a>
+                    <span className="flex items-center gap-1.5 text-[11px] text-ink-faint">
+                      <ClockMark className="h-3 w-3" />
+                      {step.time}
+                    </span>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
@@ -249,7 +237,7 @@ export default function NcaaEligibilityPage() {
       {/* ── Contact / Step 3 form ─────────────────────────────────────────── */}
       <section id="contact" className="scroll-mt-20 px-6 py-16">
         <div className="mx-auto max-w-4xl">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-brand-gold">
+          <p className="eyebrow mb-3 text-brand-cyan">
             Step 03
           </p>
           <h2 className="font-display text-3xl font-black tracking-tight text-white md:text-4xl">

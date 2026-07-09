@@ -31,19 +31,19 @@ export default function SponsorsPage() {
       {/* Partnership pillars */}
       <div className="mt-14">
         <p className="eyebrow mb-6 text-ink-faint">What Partnership Includes</p>
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid gap-8 md:grid-cols-3">
           <Pillar
-            accent="text-brand-cyan"
+            num="01"
             title="Visibility"
             body="Prominent placement across the site, player profiles, highlight reels and event-day collateral."
           />
           <Pillar
-            accent="text-brand-green"
+            num="02"
             title="Access"
             body="Direct line to top US college coaches, players and the scouts who curate the roster. Attend the showcase in person."
           />
           <Pillar
-            accent="text-brand-gold"
+            num="03"
             title="Storytelling"
             body="Co-branded content with the prospects. A uniquely ownable angle on the global development pipeline."
           />
@@ -73,18 +73,23 @@ export default function SponsorsPage() {
 }
 
 function Pillar({
-  accent,
+  num,
   title,
   body,
 }: {
-  accent: string;
+  num: string;
   title: string;
   body: string;
 }) {
   return (
-    <div className="rounded-xl border border-surface-3/70 bg-surface-1 p-6">
-      <div className={`eyebrow text-[10px] ${accent}`}>{title}</div>
-      <p className="mt-3 text-sm leading-relaxed text-white/75">{body}</p>
+    <div className="border-t border-surface-3/60 pt-5">
+      <span className="stat-nums font-numeral text-3xl font-black leading-none text-brand-cyan/30">
+        {num}
+      </span>
+      <h3 className="mt-3 font-display text-lg font-bold tracking-tight text-white">
+        {title}
+      </h3>
+      <p className="mt-2 text-sm leading-relaxed text-ink-muted">{body}</p>
     </div>
   );
 }

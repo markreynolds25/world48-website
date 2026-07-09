@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Anton } from "next/font/google";
+import { Inter, Anton, Archivo } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
@@ -12,7 +12,15 @@ const inter = Inter({
   display: "swap",
 });
 
-// Heavy condensed display face — sports-poster headlines and numerals.
+// Brand display grotesque — headlines (Nike/adidas register).
+const archivo = Archivo({
+  subsets: ["latin"],
+  weight: ["800", "900"],
+  variable: "--font-archivo",
+  display: "swap",
+});
+
+// Condensed heavy — stat numerals and jersey numbers.
 const anton = Anton({
   subsets: ["latin"],
   weight: "400",
@@ -54,7 +62,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`dark ${inter.variable} ${anton.variable}`}>
+    <html lang="en" className={`dark ${inter.variable} ${archivo.variable} ${anton.variable}`}>
       <body className="min-h-screen bg-surface-0 text-white antialiased flex flex-col font-sans">
         <Header />
         <main className="flex-1">{children}</main>

@@ -117,30 +117,31 @@ export default function NcaaEligibilityPage() {
 
       {/* ── 3-step flow ──────────────────────────────────────────────────── */}
       <section className="border-b border-surface-3/60 px-6 py-16">
-        <div className="mx-auto max-w-5xl">
+        <div className="mx-auto max-w-3xl">
           <h2 className="mb-10 font-display text-2xl font-black tracking-tight text-white md:text-3xl">
             Three steps to compete
           </h2>
 
-          {/* Court-navy editorial process — one accent, big numerals */}
-          <div className="grid gap-5 md:grid-cols-3">
-            {STEPS.map((step) => (
-              <div
-                key={step.num}
-                className="flex flex-col overflow-hidden rounded-2xl border border-surface-navy-3 bg-surface-navy"
-              >
-                <div className="h-[3px] w-full bg-brand-cyan/70" aria-hidden />
-                <div className="flex flex-1 flex-col p-6">
-                  <div className="flex items-baseline gap-3">
-                    <span className="stat-nums font-numeral text-4xl font-black leading-none text-brand-cyan/80">
-                      {step.num}
-                    </span>
-                    <h3 className="font-display text-xl font-black leading-tight tracking-tight text-white">
-                      {step.title}
-                    </h3>
-                  </div>
+          {/* Vertical numbered process — big Anton numerals, cyan connector */}
+          <div className="flex flex-col">
+            {STEPS.map((step, i) => (
+              <div key={step.num} className="flex gap-5 sm:gap-7">
+                {/* Left rail: numeral + connecting hairline */}
+                <div className="flex flex-col items-center">
+                  <span className="stat-nums font-numeral text-4xl font-black leading-none text-brand-cyan md:text-5xl">
+                    {step.num}
+                  </span>
+                  {i < STEPS.length - 1 && (
+                    <span className="mt-3 w-px flex-1 bg-gradient-to-b from-brand-cyan/40 to-surface-3" aria-hidden />
+                  )}
+                </div>
 
-                  <p className="mt-3 flex-1 text-sm leading-relaxed text-ink-muted">
+                {/* Content */}
+                <div className={i < STEPS.length - 1 ? "flex-1 pb-10" : "flex-1"}>
+                  <h3 className="font-display text-xl font-black leading-tight tracking-tight text-white md:text-2xl">
+                    {step.title}
+                  </h3>
+                  <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink-muted">
                     {step.description}
                   </p>
 
@@ -151,7 +152,7 @@ export default function NcaaEligibilityPage() {
                     </p>
                   )}
 
-                  <div className="mt-5 flex items-center justify-between gap-3 border-t border-surface-navy-3 pt-4">
+                  <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2">
                     <a
                       href={step.url}
                       target={step.url.startsWith("http") ? "_blank" : undefined}

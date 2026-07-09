@@ -156,9 +156,9 @@ export default async function PlayerProfilePage({
             {/* Primary stats — hidden entirely when none are on file */}
             {hasPrimaryStats && (
               <div className="mt-8 grid grid-cols-3 gap-3">
-                <PrimaryStat label="PPG" value={player.ppg} accent="text-brand-cyan" />
-                <PrimaryStat label="RPG" value={player.rpg} accent="text-brand-green" />
-                <PrimaryStat label="APG" value={player.apg} accent="text-brand-gold" />
+                <PrimaryStat label="PPG" value={player.ppg} accent="text-white" />
+                <PrimaryStat label="RPG" value={player.rpg} accent="text-white" />
+                <PrimaryStat label="APG" value={player.apg} accent="text-white" />
               </div>
             )}
 

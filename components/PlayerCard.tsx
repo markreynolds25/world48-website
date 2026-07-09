@@ -106,9 +106,9 @@ export default function PlayerCard({
 
           {hasStats && (
             <div className="mt-3 grid grid-cols-3 gap-2 border-t border-surface-3/60 pt-3">
-              <PrimaryStat label="PPG" value={player.ppg} accent="text-brand-cyan" />
-              <PrimaryStat label="RPG" value={player.rpg} accent="text-brand-green" />
-              <PrimaryStat label="APG" value={player.apg} accent="text-brand-gold" />
+              <PrimaryStat label="PPG" value={player.ppg} accent="text-white" />
+              <PrimaryStat label="RPG" value={player.rpg} accent="text-white" />
+              <PrimaryStat label="APG" value={player.apg} accent="text-white" />
             </div>
           )}
         </div>

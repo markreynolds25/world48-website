@@ -9,6 +9,8 @@ Single source of truth for the visual system. Every page is held against this. B
 |---|---|---|
 | Brand gradient | `#00D9FF → #00D98E → #FFB74D` | **The "World 48" wordmark only.** Mirrors the logo. Never on body copy or generic headings. |
 
+**Hero lockup rule (do not change):** in the headline "Undiscovered / World 48", the word **"Undiscovered" stays white** and only **"World 48"** takes the gradient. Never gradient the whole lockup — the white/gradient split is the intended treatment.
+
 ### Semantic accents (one role each — never decorative)
 | Token | Hex | Role — the ONLY thing it means |
 |---|---|---|

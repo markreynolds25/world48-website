@@ -4,6 +4,10 @@ import { useState } from "react";
 
 type Status = "idle" | "loading" | "success" | "error";
 
+const inputCls =
+  "w-full rounded-lg border border-surface-3 bg-surface-2/50 px-4 py-3 text-sm text-white placeholder-white/25 outline-none transition focus:border-brand-cyan focus:bg-surface-2";
+const labelCls = "mb-1.5 block text-xs font-medium uppercase tracking-wider text-ink-muted";
+
 export default function PlayerContactForm({ playerName }: { playerName: string }) {
   const [open, setOpen] = useState(false);
   const [status, setStatus] = useState<Status>("idle");
@@ -34,11 +38,11 @@ export default function PlayerContactForm({ playerName }: { playerName: string }
 
   return (
     <>
-      {/* Trigger button — red */}
+      {/* Trigger button */}
       <button
         type="button"
         onClick={() => { setOpen(true); setStatus("idle"); }}
-        className="inline-flex items-center justify-center rounded-md bg-brand-red px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#C53030] active:scale-[0.98]"
+        className="btn-primary"
       >
         Request Contact
       </button>
@@ -56,7 +60,7 @@ export default function PlayerContactForm({ playerName }: { playerName: string }
                 <h2 className="font-display text-xl font-bold text-white">
                   Request Contact
                 </h2>
-                <p className="mt-1 text-sm text-white/55">
+                <p className="mt-1 text-sm text-ink-muted">
                   Regarding <span className="text-white/80">{playerName}</span>
                 </p>
               </div>
@@ -64,7 +68,7 @@ export default function PlayerContactForm({ playerName }: { playerName: string }
                 type="button"
                 aria-label="Close"
                 onClick={() => setOpen(false)}
-                className="ml-4 flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-white/50 hover:text-white"
+                className="ml-4 flex h-9 w-9 shrink-0 items-center justify-center rounded-md text-white/50 transition hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-cyan"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5">
                   <path d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
@@ -79,11 +83,11 @@ export default function PlayerContactForm({ playerName }: { playerName: string }
                     <path fillRule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clipRule="evenodd" />
                   </svg>
                 </div>
-                <p className="font-semibold text-white">Message sent!</p>
-                <p className="text-sm text-white/60">We&apos;ll be in touch within 48 hours.</p>
+                <p className="font-semibold text-white">Message sent.</p>
+                <p className="text-sm text-ink-muted">We&apos;ll be in touch within 48 hours.</p>
                 <button
                   onClick={() => setOpen(false)}
-                  className="mt-2 text-sm text-white/50 hover:text-white"
+                  className="mt-2 text-sm text-ink-muted transition hover:text-white"
                 >
                   Close
                 </button>
@@ -91,56 +95,49 @@ export default function PlayerContactForm({ playerName }: { playerName: string }
             ) : (
               <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                 <div>
-                  <label className="mb-1.5 block text-xs font-medium uppercase tracking-wider text-white/50">
-                    Your Name
-                  </label>
+                  <label htmlFor="pc-name" className={labelCls}>Your name</label>
                   <input
+                    id="pc-name"
                     type="text"
                     required
                     value={form.name}
                     onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
                     placeholder="Coach Smith"
-                    className="w-full rounded-lg border border-surface-3 bg-surface-2 px-4 py-2.5 text-sm text-white placeholder-white/30 outline-none transition focus:border-white/30 focus:ring-1 focus:ring-white/20"
+                    className={inputCls}
                   />
                 </div>
                 <div>
-                  <label className="mb-1.5 block text-xs font-medium uppercase tracking-wider text-white/50">
-                    Email
-                  </label>
+                  <label htmlFor="pc-email" className={labelCls}>Email</label>
                   <input
+                    id="pc-email"
                     type="email"
                     required
                     value={form.email}
                     onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
                     placeholder="coach@university.edu"
-                    className="w-full rounded-lg border border-surface-3 bg-surface-2 px-4 py-2.5 text-sm text-white placeholder-white/30 outline-none transition focus:border-white/30 focus:ring-1 focus:ring-white/20"
+                    className={inputCls}
                   />
                 </div>
                 <div>
-                  <label className="mb-1.5 block text-xs font-medium uppercase tracking-wider text-white/50">
-                    Message
-                  </label>
+                  <label htmlFor="pc-message" className={labelCls}>Message</label>
                   <textarea
+                    id="pc-message"
                     required
                     rows={4}
                     value={form.message}
                     onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
                     placeholder={`I'm interested in learning more about ${playerName}…`}
-                    className="w-full resize-none rounded-lg border border-surface-3 bg-surface-2 px-4 py-2.5 text-sm text-white placeholder-white/30 outline-none transition focus:border-white/30 focus:ring-1 focus:ring-white/20"
+                    className={`${inputCls} resize-none`}
                   />
                 </div>
 
                 {status === "error" && (
-                  <p className="text-sm text-brand-red">
-                    Something went wrong — please try again or email us directly.
+                  <p role="alert" className="text-sm font-medium text-brand-red">
+                    Something went wrong. Please try again, or email us directly.
                   </p>
                 )}
 
-                <button
-                  type="submit"
-                  disabled={status === "loading"}
-                  className="mt-1 inline-flex items-center justify-center rounded-md bg-brand-red px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#C53030] disabled:opacity-60"
-                >
+                <button type="submit" disabled={status === "loading"} className="btn-primary mt-1">
                   {status === "loading" ? "Sending…" : "Send Request"}
                 </button>
               </form>

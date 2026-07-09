@@ -16,16 +16,16 @@ const SECTIONS: { heading: string; body: string[] }[] = [
   {
     heading: "What we collect and why",
     body: [
-      "Waitlist signups — name, email address and your role (fan, player, parent or coach), used solely to send you World 48 event updates such as dates, roster news and tickets.",
-      "Contact and player-contact requests — name, email address and your message, used to respond to your enquiry and, for coach requests, to facilitate contact regarding a player.",
-      "Player profiles — roster players appear with their name, country, stats, photo and highlight film. This is published with consent collected through the event registration and consent process.",
-      "Analytics — we use Vercel Analytics, which collects anonymised, aggregated usage data. No advertising cookies, no cross-site tracking.",
+      "Waitlist signups: your name, email address and role (fan, player, parent or coach), used solely to send you World 48 event updates such as dates, roster news and tickets.",
+      "Contact and player-contact requests: your name, email address and message, used to respond to your enquiry and, for coach requests, to facilitate contact regarding a player.",
+      "Player profiles: roster players appear with their name, country, stats, photo and highlight film. This is published with consent collected through the event registration and consent process.",
+      "Analytics: we use Vercel Analytics, which collects anonymised, aggregated usage data. No advertising cookies, no cross-site tracking.",
     ],
   },
   {
     heading: "Where your data lives",
     body: [
-      "Form submissions are stored in a private Google Sheet accessible only to the World 48 organising team, and — where email delivery is configured — sent to the team inbox. We do not sell or share personal data with third parties for marketing.",
+      "Form submissions are stored in a private Google Sheet accessible only to the World 48 organising team, and, where email delivery is configured, sent to the team inbox. We do not sell or share personal data with third parties for marketing.",
     ],
   },
   {

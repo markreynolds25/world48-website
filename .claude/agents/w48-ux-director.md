@@ -77,7 +77,7 @@ Target synthesis: **Nike's editorial confidence + Kitman/Hudl's data credibility
 
 **Type & colour**:
 - **Inter-everywhere with no display face on headlines** reads as a generic SaaS starter. Headlines use the display face (Anton) with intent; body is Inter.
-- **APPROVED BRAND EXCEPTION (do NOT flag):** the cyan→green→gold gradient on the "World 48" headline wordmark and `text-gradient-brand` is a deliberate, owner-approved brand choice — it mirrors the logo colours. It is NOT an AI tell in this project. Do not recommend removing it. (Owner decision, 2026-07.) Gradient text is only a violation if it spreads to non-brand body copy or unrelated headings.
+- **APPROVED BRAND EXCEPTION (do NOT flag):** the cyan→green→gold gradient on the "World 48" headline wordmark and `text-gradient-brand` is a deliberate, owner-approved brand choice — it mirrors the logo colours. It is NOT an AI tell in this project. Do not recommend removing it. (Owner decision, 2026-07.) Gradient text is only a violation if it spreads to non-brand body copy or unrelated headings. **In the hero lockup, "Undiscovered" stays white and only "World 48" is gradient — flag it if the whole lockup ever becomes gradient.**
 - **Ancillary text on autopilot** — `text-white/50`, `/40` greys applied thoughtlessly, generic tracking, inconsistent uppercase eyebrows. Every eyebrow, caption, meta line, form label and footnote must be deliberately and consistently styled, not a default grey wash. Call out each lazy grey with the promoted token.
 - Rainbow-gradient overuse, more than one accent competing, default Tailwind blue/indigo, unmotivated gradient text.
 

@@ -1,16 +1,24 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Image from "next/image";
 import { InstagramMark, PlayBadge } from "@/components/icons";
 
 const INSTAGRAM_URL = "https://www.instagram.com/undiscoveredworld48/";
 
+export interface PhotoItem {
+  src: string;
+  year: string; // e.g. "2026"
+  day: string; // "1" | "2" | "" (unassigned)
+}
+
 export interface MediaVideo {
   title: string;
   url: string;
-  player?: string; // optional linked player name
-  playerId?: string; // optional /players/[id] slug
+  year?: string;
+  day?: string;
+  player?: string;
+  playerId?: string;
 }
 
 function youtubeId(raw: string): string | null {
@@ -42,13 +50,47 @@ export default function MediaHub({
   photos,
   videos,
 }: {
-  photos: string[];
+  photos: PhotoItem[];
   videos: MediaVideo[];
 }) {
   const hasPhotos = photos.length > 0;
   const hasVideos = videos.length > 0;
   const [tab, setTab] = useState<"photos" | "film">(
     hasPhotos ? "photos" : hasVideos ? "film" : "photos"
+  );
+
+  const years = useMemo(() => {
+    const set = new Set<string>();
+    photos.forEach((p) => p.year && set.add(p.year));
+    videos.forEach((v) => v.year && set.add(v.year));
+    return Array.from(set).sort((a, b) => b.localeCompare(a));
+  }, [photos, videos]);
+
+  const [year, setYear] = useState<string>(years[0] ?? "");
+  const [day, setDay] = useState<string>("all");
+
+  // Which days exist for the selected year (across photos + videos).
+  const days = useMemo(() => {
+    const set = new Set<string>();
+    photos.forEach((p) => p.year === year && p.day && set.add(p.day));
+    videos.forEach((v) => v.year === year && v.day && set.add(v.day));
+    return Array.from(set).sort();
+  }, [photos, videos, year]);
+
+  const shownPhotos = useMemo(
+    () =>
+      photos.filter(
+        (p) => p.year === year && (day === "all" || p.day === day)
+      ),
+    [photos, year, day]
+  );
+
+  const shownVideos = useMemo(
+    () =>
+      videos.filter(
+        (v) => (!v.year || v.year === year) && (day === "all" || !v.day || v.day === day)
+      ),
+    [videos, year, day]
   );
 
   return (
@@ -62,38 +104,83 @@ export default function MediaHub({
         that turns a weekend into 13 college placements.
       </p>
 
-      {/* Segmented Photos / Film */}
-      <div className="mt-8 flex gap-2">
-        <button type="button" onClick={() => setTab("photos")} aria-pressed={tab === "photos"} className={pillCls(tab === "photos")}>
-          Photos
-        </button>
-        <button type="button" onClick={() => setTab("film")} aria-pressed={tab === "film"} className={pillCls(tab === "film")}>
-          Film
-        </button>
+      {/* Filters */}
+      <div className="mt-8 flex flex-col gap-4 border-y border-surface-3/60 py-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-wrap items-center gap-2">
+          {/* Year (only if more than one) */}
+          {years.length > 1 &&
+            years.map((y) => (
+              <button
+                key={y}
+                type="button"
+                onClick={() => { setYear(y); setDay("all"); }}
+                aria-pressed={year === y}
+                className={pillCls(year === y)}
+              >
+                <span className="stat-nums">{y}</span>
+              </button>
+            ))}
+
+          {/* Day (only if the year has day-tagged media) */}
+          {days.length > 0 && (
+            <>
+              {years.length > 1 && <span className="mx-1 h-5 w-px bg-surface-3" aria-hidden />}
+              <button type="button" onClick={() => setDay("all")} aria-pressed={day === "all"} className={pillCls(day === "all")}>
+                All days
+              </button>
+              {days.map((d) => (
+                <button key={d} type="button" onClick={() => setDay(d)} aria-pressed={day === d} className={pillCls(day === d)}>
+                  Day {d}
+                </button>
+              ))}
+            </>
+          )}
+        </div>
+
+        {/* Photos / Film */}
+        <div className="flex gap-2">
+          <button type="button" onClick={() => setTab("photos")} aria-pressed={tab === "photos"} className={pillCls(tab === "photos")}>
+            Photos
+          </button>
+          <button type="button" onClick={() => setTab("film")} aria-pressed={tab === "film"} className={pillCls(tab === "film")}>
+            Film
+          </button>
+        </div>
       </div>
 
       {tab === "photos" && (
         <div className="mt-8">
           {hasPhotos ? (
-            <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
-              {photos.map((src, i) => (
-                <div
-                  key={src}
-                  className={`card-in relative overflow-hidden rounded-xl border border-surface-3/60 bg-surface-1 ${
-                    i % 5 === 0 ? "row-span-2 aspect-[3/4]" : "aspect-square"
-                  }`}
-                  style={{ animationDelay: `${Math.min(i, 12) * 25}ms` }}
-                >
-                  <Image
-                    src={src}
-                    alt={`World 48 2026 event photo ${i + 1}`}
-                    fill
-                    sizes="(max-width: 768px) 50vw, 25vw"
-                    className="object-cover transition duration-500 hover:scale-105"
-                  />
+            shownPhotos.length > 0 ? (
+              <>
+                <p className="eyebrow mb-5 text-ink-faint">
+                  <span className="stat-nums">{shownPhotos.length}</span> photos
+                </p>
+                <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+                  {shownPhotos.map((p, i) => (
+                    <div
+                      key={p.src}
+                      className={`card-in relative overflow-hidden rounded-xl border border-surface-3/60 bg-surface-1 ${
+                        i % 5 === 0 ? "row-span-2 aspect-[3/4]" : "aspect-square"
+                      }`}
+                      style={{ animationDelay: `${Math.min(i, 12) * 25}ms` }}
+                    >
+                      <Image
+                        src={p.src}
+                        alt={`World 48 ${p.year}${p.day ? ` day ${p.day}` : ""} event photo`}
+                        fill
+                        sizes="(max-width: 768px) 50vw, 25vw"
+                        className="object-cover transition duration-500 hover:scale-105"
+                      />
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </>
+            ) : (
+              <p className="py-12 text-center text-sm text-ink-muted">
+                No photos for this selection yet.
+              </p>
+            )
           ) : (
             <HoldingState label="Photography from both days is being edited now." />
           )}
@@ -102,9 +189,9 @@ export default function MediaHub({
 
       {tab === "film" && (
         <div className="mt-8">
-          {hasVideos ? (
+          {shownVideos.length > 0 ? (
             <div className="grid gap-4 md:grid-cols-2">
-              {videos.map((v) => (
+              {shownVideos.map((v) => (
                 <LazyVideo key={v.url} video={v} />
               ))}
             </div>

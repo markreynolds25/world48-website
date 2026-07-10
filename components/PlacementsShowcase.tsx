@@ -2,14 +2,6 @@ import type { Placement } from "@/lib/googleSheets";
 import { countryFlag } from "@/lib/country";
 import { TrophyMark } from "@/components/icons";
 
-const LEVEL_STYLES: Record<string, string> = {
-  D1: "border-brand-gold/40 bg-brand-gold/10 text-brand-gold",
-  D2: "border-brand-cyan/40 bg-brand-cyan/10 text-brand-cyan",
-  JUCO: "border-brand-green/40 bg-brand-green/10 text-brand-green",
-  NAIA: "border-brand-red/40 bg-brand-red/10 text-brand-red",
-  PREP: "border-white/25 bg-white/10 text-white/80",
-};
-
 const LEVEL_LABELS: Record<string, string> = {
   D1: "NCAA D1",
   D2: "NCAA D2",
@@ -92,30 +84,34 @@ export default function PlacementsShowcase({
               </div>
             )}
 
-            {/* Everything else — compact rows */}
+            {/* Everything else — a clean results ledger (no coloured tags) */}
             {rest.length > 0 && (
               <div className="mt-6 overflow-hidden rounded-xl border border-surface-3/70 bg-surface-1">
+                {/* Column header */}
+                <div className="hidden grid-cols-[76px_1fr_auto] items-center gap-4 border-b border-surface-3/60 px-6 py-3 sm:grid">
+                  <span className="eyebrow text-[10px] text-ink-faint">Level</span>
+                  <span className="eyebrow text-[10px] text-ink-faint">Player &amp; program</span>
+                  <span className="eyebrow text-right text-[10px] text-ink-faint">Country</span>
+                </div>
+
                 {rest.map((p, i) => (
                   <div
                     key={`${p.player}-${p.school}`}
-                    className={`flex flex-wrap items-center gap-x-4 gap-y-1 px-6 py-4 ${
+                    className={`grid grid-cols-[64px_1fr] items-center gap-4 px-6 py-4 transition hover:bg-surface-2/30 sm:grid-cols-[76px_1fr_auto] ${
                       i > 0 ? "border-t border-surface-3/40" : ""
                     }`}
                   >
-                    <span
-                      className={`inline-flex w-16 justify-center rounded-full border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${
-                        LEVEL_STYLES[levelKey(p.level)] ??
-                        "border-white/25 bg-white/10 text-white/80"
-                      }`}
-                    >
+                    <span className="stat-nums text-xs font-bold uppercase tracking-[0.08em] text-ink-muted">
                       {LEVEL_LABELS[levelKey(p.level)] ?? p.level}
                     </span>
-                    <span className="font-display text-base font-bold text-white">
-                      {p.player}
-                    </span>
-                    <span className="text-sm text-white/60">{p.school}</span>
+                    <div className="min-w-0">
+                      <p className="truncate font-display text-base font-bold leading-tight text-white">
+                        {p.player}
+                      </p>
+                      <p className="truncate text-sm text-ink-muted">{p.school}</p>
+                    </div>
                     {p.country && (
-                      <span className="ml-auto text-xs font-medium uppercase tracking-wider text-ink-faint">
+                      <span className="col-span-2 text-xs font-medium uppercase tracking-wider text-ink-faint sm:col-span-1 sm:text-right">
                         {countryFlag(p.country) ? countryFlag(p.country) + " " : ""}
                         {p.country}
                       </span>

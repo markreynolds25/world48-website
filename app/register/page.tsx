@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function RegisterLandingPage() {
   return (
     <div className="mx-auto max-w-5xl px-6 py-16 md:py-24">
-      <p className="eyebrow mb-3 text-brand-red">World 48 · 2027</p>
+      <p className="kicker mb-3">World 48 · 2027</p>
       <h1 className="font-display text-4xl font-black leading-[1.02] tracking-tight md:text-6xl">
         Be part of <span className="text-gradient-brand">the next 48.</span>
       </h1>
@@ -23,7 +23,7 @@ export default function RegisterLandingPage() {
       <div className="mt-12 grid gap-6 md:grid-cols-2">
         {/* Player */}
         <div className="flex flex-col rounded-2xl border border-surface-3/70 bg-surface-1 p-8">
-          <p className="eyebrow text-brand-cyan">Players</p>
+          <p className="kicker">Players</p>
           <h2 className="mt-3 font-display text-2xl font-black tracking-tight text-white">
             Apply to play
           </h2>
@@ -39,7 +39,7 @@ export default function RegisterLandingPage() {
 
         {/* Coach */}
         <div className="flex flex-col rounded-2xl border border-surface-3/70 bg-surface-1 p-8">
-          <p className="eyebrow text-brand-gold">Coaches &amp; Scouts</p>
+          <p className="kicker">Coaches &amp; Scouts</p>
           <h2 className="mt-3 font-display text-2xl font-black tracking-tight text-white">
             Coach registration
           </h2>

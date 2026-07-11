@@ -152,7 +152,7 @@ export default function HeroSection() {
           <div className="w-full md:max-w-[46%]">
 
             {/* Eyebrow — driven by the lifecycle phase (pre / live / post) */}
-            <p className="eyebrow mb-4 flex items-center gap-2 text-brand-cyan">
+            <p className="kicker mb-4">
               {phase === "live" && (
                 <span className="relative flex h-2 w-2" aria-hidden>
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-red opacity-75 motion-reduce:hidden" />

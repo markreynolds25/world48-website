@@ -58,7 +58,8 @@ Contrast: ink-muted ≈ 8.6:1, ink-faint ≈ 3.9:1 (large/decorative only). Load
 - **Numerals:** `.stat-nums` (tabular) on every stat, count and jersey number.
 
 ## Components
-- **Buttons:** `.btn-primary` (red) / `.btn-secondary` (outlined). One geometry, one `cubic-bezier(0.22,1,0.36,1)` lift-on-hover, focus-visible rings. No white or ad-hoc buttons.
+- **Buttons (CTA):** `.btn-primary` (red **pill**, `rounded-full`) / `.btn-secondary` (transparent outline **pill**). Nike-style fully-rounded shape, one `cubic-bezier(0.22,1,0.36,1)` lift-on-hover, focus-visible rings. `.btn-sm` for header. No white, rectangular, or ad-hoc buttons. (Owner decision "Option B", 2026-07: keep red = action, adopt Nike pill.)
+- **Section kicker:** `.kicker` — the label above a page/section headline (e.g. "2026 Results", "Contact"). White, uppercase, 11px/600, `0.14em` tracking, led by a single cyan rule (`::before`). ONE unified treatment on every page — never per-page colours (that was the "rainbow" tell). Gold/green/red never appear on a kicker; cyan is the only kicker accent. Small micro-labels (stat labels, counts, footnotes) use `.eyebrow` in `ink-faint`, not `.kicker`.
 - **Icons:** bespoke set in `components/icons.tsx` (24px grid, 2.25px stroke, squared terminals). No Unicode arrows, no stock icon paths, no emoji as UI.
 - **Motion:** `.card-in` staggered entrance; shared easing `cubic-bezier(0.22,1,0.36,1)`.
 

@@ -80,7 +80,7 @@ export default function RosterExplorer({
   return (
     <div className="mx-auto max-w-7xl px-6 py-12 md:py-16">
       <div>
-        <p className="eyebrow mb-3 text-brand-cyan">The Roster</p>
+        <p className="kicker mb-3">The Roster</p>
         <h1 className="font-display text-4xl font-black leading-[1.02] tracking-tight md:text-6xl">
           {players.length > 0 ? players.length : 48} prospects.
           <span className="text-gradient-brand"> One shortlist.</span>

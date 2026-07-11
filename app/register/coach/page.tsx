@@ -109,7 +109,7 @@ export default function CoachRegisterPage() {
 
   return (
     <div className="mx-auto max-w-xl px-6 py-16 md:py-20">
-      <p className="eyebrow mb-3 text-brand-gold">
+      <p className="kicker mb-3">
         World 48 · 2027 · Coaches
       </p>
       <h1 className="font-display text-4xl font-black leading-[1.05] tracking-tight text-white md:text-5xl">

@@ -80,23 +80,34 @@ body {
 
 /* ─── Premium design system: one button set, one eyebrow, sitewide ───────── */
 @layer components {
-  /* Consistent eyebrow: 11px, 0.22em tracking, uppercase, semibold */
+  /* Small ancillary label: 11px, uppercase, semibold. For micro-labels
+     (stat labels, counts, footnotes) — NOT section kickers. */
   .eyebrow {
     @apply text-[11px] font-semibold uppercase tracking-[0.22em];
   }
 
-  /* Primary CTA — confident red pill with a designed lift-on-hover micro-interaction */
-  .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-brand-red px-6 py-3 text-sm font-semibold tracking-tight text-white shadow-lg shadow-brand-red/20 transition-all duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-[#F0524F] hover:shadow-xl hover:shadow-brand-red/30 active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red focus-visible:ring-offset-2 focus-visible:ring-offset-surface-0 disabled:pointer-events-none disabled:opacity-60;
+  /* Section kicker — one unified treatment sitewide: white, tighter tracking,
+     led by a single cyan rule. Replaces the per-page rainbow eyebrows. */
+  .kicker {
+    @apply inline-flex items-center gap-2.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-white;
+  }
+  .kicker::before {
+    content: "";
+    @apply h-[2px] w-5 shrink-0 bg-brand-cyan;
   }
 
-  /* Secondary CTA — outlined, same geometry and motion as primary */
+  /* Primary CTA — confident red pill (Nike shape) with a designed lift-on-hover */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-brand-red px-7 py-3 text-sm font-semibold tracking-tight text-white shadow-lg shadow-brand-red/20 transition-all duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-[#F0524F] hover:shadow-xl hover:shadow-brand-red/30 active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red focus-visible:ring-offset-2 focus-visible:ring-offset-surface-0 disabled:pointer-events-none disabled:opacity-60;
+  }
+
+  /* Secondary CTA — outline pill, same geometry and motion as primary */
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-surface-3 bg-surface-2/60 px-6 py-3 text-sm font-semibold tracking-tight text-white/85 transition-all duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-white/30 hover:bg-surface-2 hover:text-white active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-0 disabled:pointer-events-none disabled:opacity-60;
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/25 bg-transparent px-7 py-3 text-sm font-semibold tracking-tight text-white/90 transition-all duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-white/50 hover:bg-white/[0.06] active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-0 disabled:pointer-events-none disabled:opacity-60;
   }
 
   /* Compact variant for header / inline use */
   .btn-sm {
-    @apply px-4 py-2 text-xs;
+    @apply px-5 py-2 text-xs;
   }
 }

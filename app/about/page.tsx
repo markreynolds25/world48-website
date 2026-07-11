@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <div className="mx-auto max-w-4xl px-6 py-16 md:py-24">
-      <p className="eyebrow mb-3 text-brand-cyan">About</p>
+      <p className="kicker mb-3">About</p>
       <h1 className="font-display text-4xl font-black leading-[1.05] tracking-tight md:text-6xl">
         Elite international talent,{" "}
         <span className="text-gradient-brand">one shortlist.</span>

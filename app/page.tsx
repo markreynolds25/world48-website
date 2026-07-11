@@ -64,7 +64,7 @@ export default async function HomePage() {
       {/* ─── 2027 CTA BAND ─────────────────────────────────────────────── */}
       <section className="mx-auto max-w-7xl px-6 py-16 md:py-24">
         <div className="overflow-hidden rounded-2xl border border-brand-red/25 bg-gradient-to-br from-surface-1 via-surface-1 to-surface-2 p-8 md:p-12">
-          <p className="eyebrow text-brand-red">World 48 · 2027</p>
+          <p className="kicker">World 48 · 2027</p>
           <h2 className="mt-3 font-display text-3xl font-black tracking-tight md:text-4xl">
             The next 48 are coming.
           </h2>

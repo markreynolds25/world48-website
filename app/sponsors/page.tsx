@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function SponsorsPage() {
   return (
     <div className="mx-auto max-w-5xl px-6 py-16 md:py-24">
-      <p className="eyebrow mb-3 text-brand-cyan">Partners</p>
+      <p className="kicker mb-3">Partners</p>
       <h1 className="font-display text-4xl font-black leading-[1.05] tracking-tight md:text-6xl">
         Put your brand in front of the{" "}
         <span className="text-gradient-brand">next wave.</span>

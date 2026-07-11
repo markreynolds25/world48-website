@@ -95,7 +95,7 @@ export default function MediaHub({
 
   return (
     <div className="mx-auto max-w-7xl px-6 py-12 md:py-16">
-      <p className="eyebrow mb-3 text-brand-cyan">The 2026 Event</p>
+      <p className="kicker mb-3">The 2026 Event</p>
       <h1 className="font-display text-4xl font-black leading-[1.02] tracking-tight md:text-6xl">
         Two days in <span className="text-gradient-brand">Dublin.</span>
       </h1>

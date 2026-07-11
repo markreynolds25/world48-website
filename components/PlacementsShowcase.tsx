@@ -34,7 +34,7 @@ export default function PlacementsShowcase({
   return (
     <section id="results" className="scroll-mt-20 border-b border-surface-3/60">
       <div className="mx-auto max-w-7xl px-6 py-16 md:py-24">
-        <p className="eyebrow mb-3 text-brand-gold">2026 Results</p>
+        <p className="kicker mb-3">2026 Results</p>
         <h2 className="font-display text-4xl font-black leading-[1.02] tracking-tight md:text-6xl">
           Dublin to <span className="text-gradient-brand">Division I.</span>
         </h2>

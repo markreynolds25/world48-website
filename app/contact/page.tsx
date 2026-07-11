@@ -18,7 +18,7 @@ const LANES: { title: string; body: string }[] = [
 export default function ContactPage() {
   return (
     <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">
-      <p className="eyebrow mb-3 text-brand-cyan">Contact</p>
+      <p className="kicker mb-3">Contact</p>
       <h1 className="font-display text-4xl font-black leading-[1.05] tracking-tight md:text-6xl">
         Let&apos;s talk.
       </h1>
@@ -38,7 +38,7 @@ export default function ContactPage() {
 
         {/* Reassurance rail — single accent, no rainbow */}
         <aside className="flex flex-col gap-6 md:border-l md:border-surface-3/60 md:pl-10">
-          <p className="eyebrow text-brand-cyan">Who to write</p>
+          <p className="kicker">Who to write</p>
           <div className="flex flex-col gap-5">
             {LANES.map((lane) => (
               <div key={lane.title} className="border-l-2 border-brand-cyan/40 pl-4">

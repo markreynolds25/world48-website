@@ -78,7 +78,7 @@ export default function NcaaEligibilityPage() {
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="border-b border-surface-3/60 px-6 py-16 md:py-24">
         <div className="mx-auto max-w-4xl">
-          <p className="eyebrow mb-3 text-brand-cyan">Players</p>
+          <p className="kicker mb-3">Players</p>
           <h1 className="font-display text-4xl font-black leading-[1.05] tracking-tight text-white md:text-6xl">
             NCAA Eligibility
           </h1>
@@ -238,7 +238,7 @@ export default function NcaaEligibilityPage() {
       {/* ── Contact / Step 3 form ─────────────────────────────────────────── */}
       <section id="contact" className="scroll-mt-20 px-6 py-16">
         <div className="mx-auto max-w-4xl">
-          <p className="eyebrow mb-3 text-brand-cyan">
+          <p className="kicker mb-3">
             Step 03
           </p>
           <h2 className="font-display text-3xl font-black tracking-tight text-white md:text-4xl">
